@@ -1,1 +1,20 @@
-<h2>Language</h2>
+<section ng-controller="languageController">
+
+    <div>
+        <label>Language </label>
+        <input type="text" ng-model="language.name">
+    </div>
+
+    <div>
+        <label>code</label>
+        <input type="text" ng-model="language.code">
+    </div>
+
+    <div>
+        <label>RTL</label>
+        <input type="checkbox" ng-model="language.isRtl">
+    </div>
+
+    <button class="btn btn-sm btn-default" ng-click="save(language)">Submit</button>
+
+</section>
