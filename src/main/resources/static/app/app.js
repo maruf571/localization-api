@@ -13,4 +13,34 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('dynamicState1', {
+            url: '/:part1',
+            views:{
+                'content@':{
+                    templateUrl: function(urlAttr){
+                        return  "/html/" + urlAttr.part1 + ".html";
+                    }
+                }
+            }
+        })
+        .state('dynamicState2', {
+            url: '/:part1/:part2',
+            views:{
+                'content@':{
+                    templateUrl: function(urlAttr){
+                        return "/html/" + urlAttr.part1 + "/" + urlAttr.part2 + ".html";
+                    }
+                }
+            }
+        })
+        .state('dynamicState3', {
+            url: '/:part1/:part2/:part3',
+            views:{
+                'content@':{
+                    templateUrl: function(urlAttr){
+                        return "/html/" + urlAttr.part1 + "/" + urlAttr.part2 + urlAttr.part3 + ".html";
+                    }
+                }
+            }
+        })
 });
