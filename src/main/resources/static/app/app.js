@@ -9,7 +9,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/',
             views:{
                 'content@':{
-                    templateUrl: '/view/home.html'
+                    templateUrl: '/html/home.html'
                 }
             }
         })
