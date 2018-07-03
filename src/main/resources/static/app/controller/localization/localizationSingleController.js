@@ -1,7 +1,13 @@
 app.controller("localizationSingleController",
-    function($rootScope, $scope, $http, $location, $timeout , localizationService, languageService) {
+    function($scope, $http, $location, $element, localizationService, languageService, localization) {
 
     function init(){
+
+        $scope.localization = {};
+        if(localization){
+            $scope.localization = localization;
+        }
+
         languageService.findAll()
         .then(function(resp){
             $scope.languages = resp.content;
@@ -12,7 +18,10 @@ app.controller("localizationSingleController",
         localizationService.save(localization)
         .then(function(resp){
             console.log(resp);
+            close(resp, 500);
+            $element.modal('hide');
          })
     }
+
     init();
 });

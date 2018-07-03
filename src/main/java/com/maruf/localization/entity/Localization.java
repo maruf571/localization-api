@@ -32,7 +32,6 @@ public class Localization extends BaseEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String value;
 
-    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     private Language language;
 

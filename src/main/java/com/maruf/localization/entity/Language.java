@@ -34,7 +34,4 @@ public class Language extends BaseEntity {
     @Column(columnDefinition = "TINYINT", length = 1)
     private Boolean isActive;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "language")
-    private List<Localization> localizations;
 }

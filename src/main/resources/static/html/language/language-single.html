@@ -1,18 +1,36 @@
-<section ng-controller="languageSingleController">
-    <div>
-        <label>Language </label>
-        <input type="text" ng-model="language.name">
-    </div>
+<div class="modal fade" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
 
-    <div>
-        <label>code</label>
-        <input type="text" ng-model="language.code">
-    </div>
+            <div class="modal-header">
+                <h4 class="modal-title">Add language</h4>
+                <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
 
-    <div>
-        <label>RTL</label>
-        <input type="checkbox" ng-model="language.isRtl">
-    </div>
+            <div class="modal-body">
+                <div>
+                    <label>Language </label>
+                    <input type="text" ng-model="language.name">
+                </div>
 
-    <button class="btn btn-sm btn-default" ng-click="save(language)">Submit</button>
-</section>
+                <div>
+                    <label>code</label>
+                    <input type="text" ng-model="language.code">
+                </div>
+
+                <div>
+                    <label>RTL</label>
+                    <input type="checkbox" ng-model="language.isRtl">
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" ng-click="cancel()" class="btn" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" ng-click="save(language)">OK</button>
+            </div>
+
+        </div>
+    </div>
+</div>

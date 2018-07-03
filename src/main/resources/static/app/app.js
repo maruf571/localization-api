@@ -1,5 +1,6 @@
 var app = angular.module("localizationApp", [
  'ui.router',
+ 'angularModalService'
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider) {

@@ -1,14 +1,25 @@
+/**
+* We injected 'language' from languageListController
+*/
 app.controller("languageSingleController",
-    function($rootScope, $scope, $http, $location, $timeout , languageService) {
+    function($scope, $element, close, language, languageService) {
 
-    function init(){
-    }
+      function init(){
+
+          $scope.language = {};
+          if(language){
+              $scope.language = brand;
+          }
+      }
 
     $scope.save = function(language){
         languageService.save(language)
         .then(function(resp){
             console.log(resp);
+            close(resp, 500);
+            $element.modal('hide');
          })
     }
+
     init();
 });
