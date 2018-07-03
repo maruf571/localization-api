@@ -33,23 +33,28 @@ public class LanguageApi {
 
     @GetMapping("/{languageId}")
     public ResponseEntity findById(@PathVariable Long languageId){
-        return null;
+        return ResponseEntity
+                .ok()
+                .body(languageService.findById(languageId));
     }
 
     @PostMapping
     public ResponseEntity create(@RequestBody Language language){
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
                 .body(languageService.create(language));
     }
 
     @PutMapping
     public ResponseEntity update(@RequestBody Language language){
-        return null;
+        return ResponseEntity
+                .ok()
+                .body(languageService.update(language));
     }
 
     @DeleteMapping("/{languageId}")
     public void delete(@RequestParam Long languageId){
-
+        languageService.delete(languageId);
     }
 
 }

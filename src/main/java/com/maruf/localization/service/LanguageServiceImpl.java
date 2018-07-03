@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service(value = "languageService")
@@ -23,27 +24,22 @@ public class LanguageServiceImpl implements LanguageService{
 
     @Override
     public Language update(Language language) {
-        Optional<Language> found = languageRepository.findById(language.getId());
-        if(!found.isPresent()){
-            //throw exception
-        }
+        Language found = languageRepository
+                .findById(language.getId())
+                .orElseThrow(() -> new EntityNotFoundException("language not found"));
 
-        Language existingLanguage = found.get();
-        existingLanguage.setIsActive(language.getIsActive());
-        existingLanguage.setIsRtl(language.getIsRtl());
-        existingLanguage.setCode(language.getCode());
-        existingLanguage.setName(language.getName());
-        return languageRepository.save(existingLanguage);
+        found.setIsActive(language.getIsActive());
+        found.setIsRtl(language.getIsRtl());
+        found.setCode(language.getCode());
+        found.setName(language.getName());
+        return languageRepository.save(found);
     }
 
     @Override
     public Language findById(Long languageId) {
-        //TODO: use java8 syntax
-        Optional<Language> found = languageRepository.findById(languageId);
-        if(!found.isPresent()){
-            //throw exception
-        }
-        return found.get();
+        return languageRepository
+                .findById(languageId)
+                .orElseThrow(() -> new EntityNotFoundException("language not found for the id " + languageId));
     }
 
     @Override
@@ -58,6 +54,6 @@ public class LanguageServiceImpl implements LanguageService{
 
     @Override
     public void delete(Long languageId) {
-
+        languageRepository.deleteById(languageId);
     }
 }

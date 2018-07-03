@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service(value = "localizationService")
@@ -14,6 +15,23 @@ public class LocalizationServiceImpl implements LocalizationService {
     private final LocalizationRepository localizationRepository;
     public LocalizationServiceImpl(LocalizationRepository localizationRepository) {
         this.localizationRepository = localizationRepository;
+    }
+
+    @Override
+    public Localization findById(Long localizationId) {
+        return  localizationRepository
+                .findById(localizationId)
+                .orElseThrow(() -> new EntityNotFoundException("localization not found for the id " + localizationId));
+    }
+
+    @Override
+    public Page<Localization> findByLanguageId(Long languageId) {
+        return null;
+    }
+
+    @Override
+    public Page<Localization> findAll(Pageable pageable) {
+        return localizationRepository.findAll(pageable);
     }
 
     @Override
@@ -35,23 +53,9 @@ public class LocalizationServiceImpl implements LocalizationService {
         return localizationRepository.save(existingLocalization);
     }
 
-    @Override
-    public Localization findById(Long localizationId) {
-        return null;
-    }
-
-    @Override
-    public Page<Localization> findByLanguageId(Long languageId) {
-        return null;
-    }
-
-    @Override
-    public Page<Localization> findAll(Pageable pageable) {
-        return null;
-    }
 
     @Override
     public void delete(Long localizationId) {
-
+        localizationRepository.deleteById(localizationId);
     }
 }

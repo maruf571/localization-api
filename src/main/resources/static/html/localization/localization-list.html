@@ -1,0 +1,22 @@
+<section ng-controller="localizationListController">
+
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Code</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="localization in localizations">
+            <th scope="row">{{$index + 1}}</th>
+            <td>{{localization.langKey}}</td>
+            <td>{{localization.value}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</section>

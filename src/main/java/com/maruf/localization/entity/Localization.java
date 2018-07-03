@@ -1,5 +1,7 @@
 package com.maruf.localization.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +32,7 @@ public class Localization extends BaseEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String value;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     private Language language;
 

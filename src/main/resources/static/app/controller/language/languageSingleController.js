@@ -1,4 +1,4 @@
-app.controller("languageController",
+app.controller("languageSingleController",
     function($rootScope, $scope, $http, $location, $timeout , languageService) {
 
     function init(){

@@ -25,13 +25,17 @@ public class LocalizationApi {
     }
 
     @GetMapping
-    public ResponseEntity findAll(@RequestParam(required = false) String name, Pageable pageable){
-        return null;
+    public ResponseEntity findAll(Pageable pageable){
+        return ResponseEntity
+                .ok()
+                .body(localizationService.findAll(pageable));
     }
 
     @GetMapping("/{localizationId}")
     public ResponseEntity findById(@PathVariable Long localizationId){
-        return null;
+        return ResponseEntity
+                .ok()
+                .body(localizationService.findById(localizationId));
     }
 
     @PostMapping
@@ -43,11 +47,13 @@ public class LocalizationApi {
 
     @PutMapping
     public ResponseEntity update(@RequestBody Localization localization){
-        return null;
+        return ResponseEntity
+                .ok()
+                .body(localizationService.update(localization));
     }
 
     @DeleteMapping("/{localizationId}")
     public void delete(@RequestParam Long localizationId){
-
+        localizationService.delete(localizationId);
     }
 }
