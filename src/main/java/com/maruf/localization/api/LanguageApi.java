@@ -1,7 +1,9 @@
 package com.maruf.localization.api;
 
 import com.maruf.localization.entity.Language;
+import com.maruf.localization.service.LanguageService;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/languages")
 public class LanguageApi {
 
+    private final LanguageService languageService;
+    public LanguageApi(LanguageService languageService) {
+        this.languageService = languageService;
+    }
+
     @GetMapping
-    public ResponseEntity findAll(@RequestParam(required = false) String name, Pageable pageable){
-        return null;
+    public ResponseEntity findAll(Pageable pageable){
+        return ResponseEntity.
+                ok()
+                .body(languageService.findAll(pageable));
     }
 
     @GetMapping("/{languageId}")
@@ -29,7 +38,8 @@ public class LanguageApi {
 
     @PostMapping
     public ResponseEntity create(@RequestBody Language language){
-        return null;
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(languageService.create(language));
     }
 
     @PutMapping

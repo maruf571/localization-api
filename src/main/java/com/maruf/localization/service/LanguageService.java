@@ -6,15 +6,15 @@ import org.springframework.data.domain.Pageable;
 
 public interface LanguageService {
 
-    Language create(Language language);
-
-    Language update(Language language);
+    Page<Language> findAll(Pageable pageable);
 
     Language findById(Long languageId);
 
     Language findByLangCode(String langCode);
 
-    Page<Language> findAll(Pageable pageable);
+    Language create(Language language);
+
+    Language update(Language language);
 
     void delete(Long languageId);
 }

@@ -14,9 +14,9 @@ import javax.persistence.Table;
 @Table(name = "LANGUAGE")
 public class Language extends BaseEntity {
 
-    private String langKey;
+    private String name;
 
-    private String langCode;
+    private String code;
 
     @Column(columnDefinition = "TINYINT", length = 1)
     private Boolean isRtl;

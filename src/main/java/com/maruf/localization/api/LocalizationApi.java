@@ -1,7 +1,9 @@
 package com.maruf.localization.api;
 
 import com.maruf.localization.entity.Localization;
+import com.maruf.localization.service.LocalizationService;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/localizations")
 public class LocalizationApi {
 
+    private final LocalizationService localizationService;
+    public LocalizationApi(LocalizationService localizationService) {
+        this.localizationService = localizationService;
+    }
+
     @GetMapping
     public ResponseEntity findAll(@RequestParam(required = false) String name, Pageable pageable){
         return null;
@@ -29,7 +36,9 @@ public class LocalizationApi {
 
     @PostMapping
     public ResponseEntity create(@RequestBody Localization localization){
-        return null;
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(localizationService.create(localization));
     }
 
     @PutMapping

@@ -1,1 +1,22 @@
-<h2>Localization</h2>
+<section ng-controller="localizationController">
+
+    <div>
+        <label>Language key</label>
+        <input type="text" ng-model="localization.langKey" class="form-control">
+    </div>
+
+    <div>
+        <label>Value</label>
+        <input type="text" ng-model="localization.value" class="form-control">
+    </div>
+
+    <div>
+        <label>Value</label>
+        <select ng-model="localization.language"
+                ng-options="language as language.name for language in languages track by language.id"
+                class="form-control">
+        </select>
+    </div>
+
+    <button class="" ng-click="save(localization)">Submit</button>
+</section>

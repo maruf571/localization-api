@@ -31,8 +31,8 @@ public class LanguageServiceImpl implements LanguageService{
         Language existingLanguage = found.get();
         existingLanguage.setIsActive(language.getIsActive());
         existingLanguage.setIsRtl(language.getIsRtl());
-        existingLanguage.setLangCode(language.getLangCode());
-        existingLanguage.setLangKey(language.getLangKey());
+        existingLanguage.setCode(language.getCode());
+        existingLanguage.setName(language.getName());
         return languageRepository.save(existingLanguage);
     }
 
@@ -53,7 +53,7 @@ public class LanguageServiceImpl implements LanguageService{
 
     @Override
     public Page<Language> findAll(Pageable pageable) {
-        return null;
+        return languageRepository.findAll(pageable);
     }
 
     @Override
