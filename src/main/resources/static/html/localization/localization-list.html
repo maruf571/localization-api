@@ -1,7 +1,7 @@
 <section ng-controller="localizationListController">
 
-    <button type="button" class="btn btn-primary" ng-click="showAModal()">Add new language</button>
-    <table class="table table-bordered">
+    <button type="button" class="btn btn-primary" ng-click="showAModal()">Add new localization</button>
+    <table class="table table-bordered table-hover mt-2">
         <thead class="thead-light">
         <tr>
             <th scope="col">#</th>
@@ -11,7 +11,7 @@
         </thead>
 
         <tbody>
-        <tr ng-repeat="localization in localizations">
+        <tr ng-repeat="localization in localizations" ng-click="showAModal(localization)">
             <th scope="row">{{$index + 1}}</th>
             <td>{{localization.langKey}}</td>
             <td>{{localization.value}}</td>

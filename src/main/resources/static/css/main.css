@@ -4,3 +4,8 @@ body {
 .main-template {
   padding: 2rem 1rem;
 }
+
+.table-hover tr:hover {
+    background:#00ff00;
+    cursor: pointer;
+}
