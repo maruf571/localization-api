@@ -25,31 +25,26 @@ public class LanguageApi {
     }
 
     @GetMapping
-    public ResponseEntity findAll(@RequestParam Long projectId,
-                                  Pageable pageable){
-        return ResponseEntity.
-                ok()
+    public ResponseEntity findAll(@RequestParam Long projectId, Pageable pageable){
+        return ResponseEntity.ok()
                 .body(languageService.findAll(projectId, pageable));
     }
 
     @GetMapping("/{languageId}")
     public ResponseEntity findById(@PathVariable Long languageId){
-        return ResponseEntity
-                .ok()
+        return ResponseEntity.ok()
                 .body(languageService.findById(languageId));
     }
 
     @PostMapping
     public ResponseEntity create(@RequestBody Language language){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.CREATED)
                 .body(languageService.create(language));
     }
 
     @PutMapping
     public ResponseEntity update(@RequestBody Language language){
-        return ResponseEntity
-                .ok()
+        return ResponseEntity.ok()
                 .body(languageService.update(language));
     }
 

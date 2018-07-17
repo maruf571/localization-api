@@ -4,6 +4,11 @@ app.controller("localizationListController",
     var languageId = getParameterByName("languageId");
 
     function init(){
+
+        languageService.findOne(languageId).then(function(resp){
+            $scope.language = resp;
+        })
+
         localizationService.findAll("?languageId="+languageId)
         .then(function(resp){
             $scope.localizations = resp;
@@ -18,21 +23,30 @@ app.controller("localizationListController",
               inputs: {localization: localization, languageId:languageId}
             })
             .then(function(modal) {
+                  modal.element.modal();
+                  modal.close.then(function(result) {
+                        if(localization){
+                            localization = result;
 
-              modal.element.modal();
-              modal.close.then(function(result) {
-                    if(localization.id){
-                        localization = result;
-                        //var index = $scope.localizations.index(localization);
-
-                    }else{
-                        $scope.localizations.push(result);
-                    }
-              });
+                        }else{
+                            $scope.localizations.push(result);
+                        }
+                  });
             });
+    };
 
-          };
 
+    $scope.confirmCallbackMethod = function(localization){
+        localizationService.delete(localization.id)
+        .then(function(resp){
+            var index =  $scope.localizations.indexOf(localization)
+            $scope.localizations.splice(index, 1);
+        })
+    }
 
+    $scope.goLanguage = function(){
+        $location.path("language/language-list")
+            .search({projectId: getParameterByName("projectId")});
+    }
     init();
 });

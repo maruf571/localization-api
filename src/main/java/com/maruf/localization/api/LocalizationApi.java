@@ -1,8 +1,6 @@
 package com.maruf.localization.api;
 
 import com.maruf.localization.dto.LocalizationDto;
-import com.maruf.localization.entity.Localization;
-import com.maruf.localization.entity.LocalizationValue;
 import com.maruf.localization.service.LocalizationService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -17,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/localizations")
 public class LocalizationApi {
@@ -27,30 +28,25 @@ public class LocalizationApi {
     }
 
     @GetMapping
-    public ResponseEntity findAll(@RequestParam Long languageId,
-                                  Pageable pageable){
-        return ResponseEntity
-                .ok()
+    public ResponseEntity<List<Map<String, Object>>> findAll(@RequestParam Long languageId, Pageable pageable){
+        return ResponseEntity.ok()
                 .body(localizationService.findAll(languageId, pageable));
     }
 
-
     @PostMapping
-    public ResponseEntity create(@RequestBody LocalizationDto localizationDto){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
+    public ResponseEntity<LocalizationDto> create(@RequestBody LocalizationDto localizationDto){
+        return ResponseEntity.status(HttpStatus.CREATED)
                 .body(localizationService.create(localizationDto));
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody LocalizationDto localizationDto){
-        return ResponseEntity
-                .ok()
+    public ResponseEntity<LocalizationDto> update(@RequestBody LocalizationDto localizationDto){
+        return ResponseEntity.ok()
                 .body(localizationService.update(localizationDto));
     }
 
     @DeleteMapping("/{localizationId}")
-    public void delete(@RequestParam Long localizationId){
+    public void delete(@PathVariable Long localizationId){
         localizationService.delete(localizationId);
     }
 }

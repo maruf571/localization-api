@@ -58,10 +58,12 @@ public class LocalizationServiceImpl implements LocalizationService {
         localizationRepository.save(localization);
 
         LocalizationValue localizationValue = new LocalizationValue();
-        localizationValue.setValue(localizationDto.getValue());
-        localizationValue.setLocalization(localization);
-        localizationValue.setLanguage(language);
-        localizationValueRepository.save(localizationValue);
+        if(localizationDto.getValue() != null ) {
+            localizationValue.setValue(localizationDto.getValue());
+            localizationValue.setLocalization(localization);
+            localizationValue.setLanguage(language);
+            localizationValueRepository.save(localizationValue);
+        }
 
         return new LocalizationDto(localization.getId(), language.getId(), localization.getLangKey(), localizationValue.getValue());
 
@@ -86,6 +88,7 @@ public class LocalizationServiceImpl implements LocalizationService {
         localizationValue.setLocalization(localization);
         localizationValue.setLanguage(language);
         localizationValue.setValue(localizationDto.getValue());
+        localizationValueRepository.save(localizationValue);
 
         return new LocalizationDto(localization.getId(), language.getId(), localization.getLangKey(), localizationValue.getValue());
 
@@ -94,6 +97,6 @@ public class LocalizationServiceImpl implements LocalizationService {
 
     @Override
     public void delete(Long localizationId) {
-        localizationValueRepository.deleteById(localizationId);
+        localizationRepository.deleteById(localizationId);
     }
 }

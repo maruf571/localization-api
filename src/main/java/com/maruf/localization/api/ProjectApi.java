@@ -26,29 +26,25 @@ public class ProjectApi {
 
     @GetMapping
     public ResponseEntity findAll(Pageable pageable){
-        return ResponseEntity.
-                ok()
+        return ResponseEntity.ok()
                 .body(projectService.findAll(pageable));
     }
 
     @GetMapping("/{projectId}")
     public ResponseEntity findById(@PathVariable Long projectId){
-        return ResponseEntity
-                .ok()
+        return ResponseEntity.ok()
                 .body(projectService.findById(projectId));
     }
 
     @PostMapping
     public ResponseEntity create(@RequestBody Project project){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.CREATED)
                 .body(projectService.create(project));
     }
 
     @PutMapping
     public ResponseEntity update(@RequestBody Project project){
-        return ResponseEntity
-                .ok()
+        return ResponseEntity.ok()
                 .body(projectService.update(project));
     }
 

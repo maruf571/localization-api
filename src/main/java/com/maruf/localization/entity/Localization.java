@@ -3,6 +3,7 @@ package com.maruf.localization.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,7 +24,7 @@ public class Localization extends BaseEntity {
     private Project project;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "localization", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "localization", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<LocalizationValue> localizationValues;
 
 }

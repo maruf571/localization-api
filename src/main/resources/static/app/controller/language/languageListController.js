@@ -27,7 +27,12 @@ app.controller("languageListController",
           });
         });
 
-      };
+    };
+
+    $scope.goLocalization = function(language){
+        $location.path("/localization/localization-list")
+            .search({projectId: projectId, languageId:language.id})
+    }
 
     init();
 });

@@ -1,6 +1,7 @@
 var app = angular.module("localizationApp", [
  'ui.router',
- 'angularModalService'
+ 'angularModalService',
+ 'ngBootbox'
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
