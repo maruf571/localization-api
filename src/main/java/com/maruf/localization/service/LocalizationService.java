@@ -15,7 +15,7 @@ public interface LocalizationService {
 
     LocalizationDto update(LocalizationDto localizationDto);
 
-    List<Map<String, Object>> findAll(Long languageId, Pageable pageable);
+    List<Map<String, Object>> findAll(Long projectId, Long languageId);
 
     void delete(Long localizationId);
 }

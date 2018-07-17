@@ -8,6 +8,7 @@
             <th scope="col">Name</th>
             <th scope="col">Code</th>
             <th scope="col">&nbsp;</th>
+            <th></th>
         </tr>
         </thead>
 
@@ -17,6 +18,7 @@
             <td>{{language.name}}</td>
             <td>{{language.code}}</td>
             <td><a href="" ng-click="goLocalization(language)">Go to Translation</a></td>
+            <td><button ng-click="showAModal(language)" class="btn btn-default">Edit</button></td>
         </tr>
         </tbody>
     </table>

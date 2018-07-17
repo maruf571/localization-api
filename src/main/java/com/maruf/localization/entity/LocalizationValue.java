@@ -19,7 +19,9 @@ import javax.persistence.UniqueConstraint;
  */
 @Data
 @Entity
-@Table(name = "LOCALIZATION_VALUE")
+@Table( name = "LOCALIZATION_VALUE",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"localization_id", "language_id"}),
+        indexes = {@Index(name = "idx_localization_value", columnList = "language_id")})
 public class LocalizationValue extends BaseEntity {
 
     @Column(columnDefinition = "TEXT", nullable = false)

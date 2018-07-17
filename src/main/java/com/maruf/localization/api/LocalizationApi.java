@@ -27,10 +27,10 @@ public class LocalizationApi {
         this.localizationService = localizationService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Map<String, Object>>> findAll(@RequestParam Long languageId, Pageable pageable){
+    @GetMapping("/project/{projectId}/language/{languageId}")
+    public ResponseEntity<List<Map<String, Object>>> findAll(@PathVariable Long projectId, @PathVariable Long languageId){
         return ResponseEntity.ok()
-                .body(localizationService.findAll(languageId, pageable));
+                .body(localizationService.findAll(projectId, languageId));
     }
 
     @PostMapping

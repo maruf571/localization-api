@@ -23,7 +23,12 @@ app.controller("languageListController",
 
           modal.element.modal();
           modal.close.then(function(result) {
-               $scope.languages.push(result);
+                if(language){
+                    language = result;
+                }
+                else{
+                    $scope.languages.push(result);
+               }
           });
         });
 

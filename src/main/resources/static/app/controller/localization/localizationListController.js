@@ -1,7 +1,8 @@
 app.controller("localizationListController",
-    function($rootScope, $scope, $http, $location, $timeout , localizationService, languageService, ModalService) {
+    function($rootScope, $scope, $httpParamSerializer, $http, $location, $timeout , localizationService, languageService, ModalService) {
 
     var languageId = getParameterByName("languageId");
+    var projectId = getParameterByName("projectId")
 
     function init(){
 
@@ -9,7 +10,9 @@ app.controller("localizationListController",
             $scope.language = resp;
         })
 
-        localizationService.findAll("?languageId="+languageId)
+        //var qs = $httpParamSerializer({projectId: projectId, languageId: languageId});
+
+        localizationService.findAll("project/"+projectId+"/language/"+languageId)
         .then(function(resp){
             $scope.localizations = resp;
         });
@@ -46,7 +49,7 @@ app.controller("localizationListController",
 
     $scope.goLanguage = function(){
         $location.path("language/language-list")
-            .search({projectId: getParameterByName("projectId")});
+            .search({projectId: projectId});
     }
     init();
 });

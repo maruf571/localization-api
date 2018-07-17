@@ -42,9 +42,8 @@ public class LocalizationServiceImpl implements LocalizationService {
 
 
     @Override
-    public List<Map<String, Object>> findAll(Long languageId, Pageable pageable) {
-        Language language = languageRepository.findById(languageId).orElseThrow(() -> new EntityNotFoundException("Language not found"));
-        return  localizationDao.findAllLocalizationBylanguage(language.getProject().getId(), language.getId());
+    public List<Map<String, Object>> findAll(Long projectId, Long languageId) {
+        return  localizationDao.findAllLocalizationBylanguage(projectId, languageId);
     }
 
     @Override
