@@ -1,21 +1,21 @@
 package com.maruf.localization.service;
 
-import com.maruf.localization.entity.Language;
+import com.maruf.localization.dto.LocalizationDto;
 import com.maruf.localization.entity.Localization;
+import com.maruf.localization.entity.LocalizationValue;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+import java.util.Map;
+
 public interface LocalizationService {
 
-    Localization create(Localization localization);
+    LocalizationDto create(LocalizationDto localizationDto);
 
-    Localization update(Localization localization);
+    LocalizationDto update(LocalizationDto localizationDto);
 
-    Localization findById(Long localizationId);
-
-    Page<Localization> findByLanguageId(Long languageId);
-
-    Page<Localization> findAll(Pageable pageable);
+    List<Map<String, Object>> findAll(Long languageId, Pageable pageable);
 
     void delete(Long localizationId);
 }

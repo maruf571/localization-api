@@ -1,7 +1,8 @@
-package com.maruf.localization.service;
+package com.maruf.localization.service.impl;
 
 import com.maruf.localization.entity.Language;
 import com.maruf.localization.repository.LanguageRepository;
+import com.maruf.localization.service.LanguageService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service(value = "languageService")
-public class LanguageServiceImpl implements LanguageService{
+public class LanguageServiceImpl implements LanguageService {
 
     private final LanguageRepository languageRepository;
     public LanguageServiceImpl(LanguageRepository languageRepository) {
@@ -48,8 +49,9 @@ public class LanguageServiceImpl implements LanguageService{
     }
 
     @Override
-    public Page<Language> findAll(Pageable pageable) {
-        return languageRepository.findAll(pageable);
+    public Page<Language> findAll(Long projectId, Pageable pageable) {
+
+        return languageRepository.findByProjectId(projectId, pageable);
     }
 
     @Override

@@ -19,28 +19,28 @@
 <body>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#!/">Localization</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <a class="navbar-brand" href="#!/">Localization</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#!/language/language-list">Language</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#!/localization/localization-list">Localization</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/project/project-list">Project</a>
+                </li>
+                <!--<li class="nav-item">
+                    <a class="nav-link" href="#!/localizationValue/localizationValue-list">LocalizationValue</a>
+                </li>-->
+            </ul>
+        </div>
+    </nav>
 
     <main role="main" class="container main-template">
         <div ui-view="content"></div>
     </main>
 
-    <!--bootdtrap-->
+    <!--jquery & bootdtrap-->
     <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.slim.min.js"></script>
     <script type="text/javascript" src="/lib/bootstrap/bootstrap.min.js"></script>
 
@@ -53,12 +53,17 @@
     <script type="text/javascript" src="/app/app.js"></script>
     <script type="text/javascript" src="/app/controller/language/languageListController.js"></script>
     <script type="text/javascript" src="/app/controller/language/languageSingleController.js"></script>
+
     <script type="text/javascript" src="/app/controller/localization/localizationListController.js"></script>
     <script type="text/javascript" src="/app/controller/localization/localizationSingleController.js"></script>
+
+    <script type="text/javascript" src="/app/controller/project/projectListController.js"></script>
+    <script type="text/javascript" src="/app/controller/project/projectSingleController.js"></script>
 
     <!-- service -->
     <script type="text/javascript" src="/app/service/localizationService.js"></script>
     <script type="text/javascript" src="/app/service/languageService.js"></script>
+    <script type="text/javascript" src="/app/service/projectService.js"></script>
 
 </body>
 </html>

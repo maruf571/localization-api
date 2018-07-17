@@ -1,28 +1,30 @@
-<div class="modal fade" data-backdrop="static"> <!-- localizationSingleController.js-->
+<div class="modal fade" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h4 class="modal-title">Add language</h4>
+                <h4 class="modal-title">Add project</h4>
                 <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
 
             <div class="modal-body">
                 <div>
-                    <label>Language key</label>
-                    <input type="text" ng-model="localization.langKey" class="form-control">
+                    <label>Name</label>
+                    <input type="text" ng-model="project.name" class="form-control">
                 </div>
 
                 <div>
-                    <label>Value</label>
-                    <input type="text" ng-model="localization.value" class="form-control">
+                    <label>url</label>
+                    <input type="text" ng-model="project.url" class="form-control">
                 </div>
+
 
             </div>
 
+
             <div class="modal-footer">
                 <button type="button" ng-click="cancel()" class="btn" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary"  ng-click="save(localization)">OK</button>
+                <button type="button" class="btn btn-primary" ng-click="save(project)">OK</button>
             </div>
 
         </div>

@@ -1,7 +1,7 @@
 package com.maruf.localization.api;
 
-import com.maruf.localization.entity.Language;
-import com.maruf.localization.service.LanguageService;
+import com.maruf.localization.entity.Project;
+import com.maruf.localization.service.ProjectService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,46 +16,45 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/languages")
-public class LanguageApi {
+@RequestMapping("/api/projects")
+public class ProjectApi {
 
-    private final LanguageService languageService;
-    public LanguageApi(LanguageService languageService) {
-        this.languageService = languageService;
+    private final ProjectService projectService;
+    public ProjectApi(ProjectService projectService) {
+        this.projectService = projectService;
     }
 
     @GetMapping
-    public ResponseEntity findAll(@RequestParam Long projectId,
-                                  Pageable pageable){
+    public ResponseEntity findAll(Pageable pageable){
         return ResponseEntity.
                 ok()
-                .body(languageService.findAll(projectId, pageable));
+                .body(projectService.findAll(pageable));
     }
 
-    @GetMapping("/{languageId}")
-    public ResponseEntity findById(@PathVariable Long languageId){
+    @GetMapping("/{projectId}")
+    public ResponseEntity findById(@PathVariable Long projectId){
         return ResponseEntity
                 .ok()
-                .body(languageService.findById(languageId));
+                .body(projectService.findById(projectId));
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Language language){
+    public ResponseEntity create(@RequestBody Project project){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(languageService.create(language));
+                .body(projectService.create(project));
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody Language language){
+    public ResponseEntity update(@RequestBody Project project){
         return ResponseEntity
                 .ok()
-                .body(languageService.update(language));
+                .body(projectService.update(project));
     }
 
-    @DeleteMapping("/{languageId}")
-    public void delete(@RequestParam Long languageId){
-        languageService.delete(languageId);
+    @DeleteMapping("/{projectId}")
+    public void delete(@RequestParam Long projectId){
+        projectService.delete(projectId);
     }
 
 }

@@ -10,8 +10,6 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 @Configuration
 public class JacksonConfig {
 
-
-
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer addCustomBigDecimalDeserialization() {
         return new Jackson2ObjectMapperBuilderCustomizer() {
@@ -20,7 +18,6 @@ public class JacksonConfig {
                 jacksonObjectMapperBuilder.featuresToDisable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
                 jacksonObjectMapperBuilder.modules(new Hibernate5Module());
             }
-
         };
     }
 }

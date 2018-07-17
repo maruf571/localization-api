@@ -1,10 +1,12 @@
 app.controller("localizationListController",
     function($rootScope, $scope, $http, $location, $timeout , localizationService, languageService, ModalService) {
 
+    var languageId = getParameterByName("languageId");
+
     function init(){
-        localizationService.findAll()
+        localizationService.findAll("?languageId="+languageId)
         .then(function(resp){
-            $scope.localizations = resp.content;
+            $scope.localizations = resp;
         });
     }
 
@@ -13,13 +15,19 @@ app.controller("localizationListController",
             ModalService.showModal({
               templateUrl: "/html/localization/localization-single.html",
               controller: "localizationSingleController",
-              inputs: {localization: localization}
+              inputs: {localization: localization, languageId:languageId}
             })
             .then(function(modal) {
 
               modal.element.modal();
               modal.close.then(function(result) {
+                    if(localization.id){
+                        localization = result;
+                        //var index = $scope.localizations.index(localization);
 
+                    }else{
+                        $scope.localizations.push(result);
+                    }
               });
             });
 

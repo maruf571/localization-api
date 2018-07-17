@@ -2,22 +2,25 @@
 * We injected 'language' from languageListController
 */
 app.controller("languageSingleController",
-    function($scope, $element, close, language, languageService) {
+    function($scope, $element, close, language, projectId, languageService) {
 
       function init(){
 
           $scope.language = {};
           if(language){
-              $scope.language = brand;
+              $scope.language = language;
           }
       }
 
     $scope.save = function(language){
-        languageService.save(language)
+
+        $scope.language.project = {id: projectId};
+
+        languageService.submit(language)
         .then(function(resp){
             console.log(resp);
-            close(resp, 500);
             $element.modal('hide');
+             close(resp, 500);
          })
     }
 

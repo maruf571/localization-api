@@ -1,6 +1,8 @@
 package com.maruf.localization.api;
 
+import com.maruf.localization.dto.LocalizationDto;
 import com.maruf.localization.entity.Localization;
+import com.maruf.localization.entity.LocalizationValue;
 import com.maruf.localization.service.LocalizationService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -25,31 +27,26 @@ public class LocalizationApi {
     }
 
     @GetMapping
-    public ResponseEntity findAll(Pageable pageable){
+    public ResponseEntity findAll(@RequestParam Long languageId,
+                                  Pageable pageable){
         return ResponseEntity
                 .ok()
-                .body(localizationService.findAll(pageable));
+                .body(localizationService.findAll(languageId, pageable));
     }
 
-    @GetMapping("/{localizationId}")
-    public ResponseEntity findById(@PathVariable Long localizationId){
-        return ResponseEntity
-                .ok()
-                .body(localizationService.findById(localizationId));
-    }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Localization localization){
+    public ResponseEntity create(@RequestBody LocalizationDto localizationDto){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(localizationService.create(localization));
+                .body(localizationService.create(localizationDto));
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody Localization localization){
+    public ResponseEntity update(@RequestBody LocalizationDto localizationDto){
         return ResponseEntity
                 .ok()
-                .body(localizationService.update(localization));
+                .body(localizationService.update(localizationDto));
     }
 
     @DeleteMapping("/{localizationId}")

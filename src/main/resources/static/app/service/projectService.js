@@ -1,19 +1,19 @@
-app.service('localizationService',
+app.service('projectService',
     function($http) {
 
-    var localizationApi = "/api/localizations";
+    var projectApi = "/api/projects";
 
     this.findAll = function(query) {
      if(query == undefined)
         query = '';
 
-     return $http.get(localizationApi +'/'+ query).then(function(resp){
+     return $http.get(projectApi +'/'+ query).then(function(resp){
            return resp.data;
      });
     };
 
     this.findOne = function(id) {
-     return $http.get(localizationApi + '/' + id).then(function(resp){
+     return $http.get(projectApi + '/' + id).then(function(resp){
            return resp.data;
      });
     };
@@ -23,19 +23,19 @@ app.service('localizationService',
 
         if(data.id){
             //edit
-            return $http.put(localizationApi, data).then(function(resp){
+            return $http.put(projectApi, data).then(function(resp){
                 return resp.data;
             });
         }else{
             //new
-            return $http.post(localizationApi, data).then(function(resp){
+            return $http.post(projectApi, data).then(function(resp){
                return resp.data;
             });
         }
     };
 
     this.delete = function(id) {
-     return $http.delete(localizationApi + '/' + id).then(function(resp){
+     return $http.delete(projectApi + '/' + id).then(function(resp){
            return resp.data;
      });
     };

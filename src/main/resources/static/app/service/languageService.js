@@ -19,7 +19,7 @@ app.service('languageService',
     };
 
 
-    this.save = function(data) {
+    this.submit = function(data) {
 
         if(data.id){
             //edit

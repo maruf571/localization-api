@@ -1,5 +1,5 @@
 app.controller("localizationSingleController",
-    function($scope, $http, $location, $element, localizationService, languageService, localization) {
+    function($scope, $http, $location, $element, close, localizationService, languageService, localization, languageId) {
 
     function init(){
 
@@ -7,19 +7,17 @@ app.controller("localizationSingleController",
         if(localization){
             $scope.localization = localization;
         }
-
-        languageService.findAll()
-        .then(function(resp){
-            $scope.languages = resp.content;
-        });
     }
 
     $scope.save = function(localization){
-        localizationService.save(localization)
+
+        localization.languageId = languageId;
+
+        localizationService.submit(localization)
         .then(function(resp){
             console.log(resp);
-            close(resp, 500);
             $element.modal('hide');
+            close(resp, 500);
          })
     }
 

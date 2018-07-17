@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface LanguageService {
 
-    Page<Language> findAll(Pageable pageable);
+    Page<Language> findAll(Long projectId, Pageable pageable);
 
     Language findById(Long languageId);
 
