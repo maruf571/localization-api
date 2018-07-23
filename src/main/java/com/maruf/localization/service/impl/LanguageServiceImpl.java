@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Optional;
 
 @Service(value = "languageService")
@@ -49,9 +50,9 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    public Page<Language> findAll(Long projectId, Pageable pageable) {
+    public List<Language> findAll(Long projectId) {
 
-        return languageRepository.findByProjectId(projectId, pageable);
+        return languageRepository.findByProjectId(projectId);
     }
 
     @Override

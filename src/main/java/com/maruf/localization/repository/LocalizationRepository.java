@@ -10,12 +10,4 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface LocalizationRepository extends JpaRepository<Localization, Long> {
 
-    Localization findByLangKeyAndProjectId(String langKey, Long projectId);
-
-    @Query("SELECT l FROM Localization l " +
-            "left join l.localizationValues lv ON (lv.language = ?2 and lv.localization = l) " +
-            "WHERE l.project = ?1")
-    Page<Localization> findByProjectId(Project project, Language language,  Pageable pageable);
-
-
 }

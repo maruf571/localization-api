@@ -25,9 +25,9 @@ public class LanguageApi {
     }
 
     @GetMapping
-    public ResponseEntity findAll(@RequestParam Long projectId, Pageable pageable){
+    public ResponseEntity findAll(@RequestParam Long projectId){
         return ResponseEntity.ok()
-                .body(languageService.findAll(projectId, pageable));
+                .body(languageService.findAll(projectId));
     }
 
     @GetMapping("/{languageId}")

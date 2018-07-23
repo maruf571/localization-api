@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface LanguageRepository extends JpaRepository<Language, Long> {
 
-    Page<Language> findByProjectId(Long projectId,  Pageable pageable);
+    List<Language> findByProjectId(Long projectId);
 }

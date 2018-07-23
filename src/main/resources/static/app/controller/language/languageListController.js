@@ -8,7 +8,7 @@ app.controller("languageListController",
 
         languageService.findAll('?projectId='+projectId)
         .then(function(resp){
-            $scope.languages = resp.content;
+            $scope.languages = resp;
         })
     }
 
