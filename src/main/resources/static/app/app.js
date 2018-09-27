@@ -11,7 +11,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/',
             views:{
                 'content@':{
-                    templateUrl: '/html/home.html'
+                    templateUrl: '/app/home/home.html'
                 }
             }
         })
@@ -20,7 +20,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             views:{
                 'content@':{
                     templateUrl: function(urlAttr){
-                        return  "/html/" + urlAttr.part1 + ".html";
+                        return  "/app/" + urlAttr.part1 + ".html";
                     }
                 }
             }
@@ -30,7 +30,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             views:{
                 'content@':{
                     templateUrl: function(urlAttr){
-                        return "/html/" + urlAttr.part1 + "/" + urlAttr.part2 + ".html";
+                        return "/app/" + urlAttr.part1 + "/" + urlAttr.part2 + ".html";
                     }
                 }
             }
@@ -40,7 +40,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             views:{
                 'content@':{
                     templateUrl: function(urlAttr){
-                        return "/html/" + urlAttr.part1 + "/" + urlAttr.part2 + urlAttr.part3 + ".html";
+                        return "/app/" + urlAttr.part1 + "/" + urlAttr.part2 + urlAttr.part3 + ".html";
                     }
                 }
             }
