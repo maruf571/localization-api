@@ -18,7 +18,10 @@
             <td>{{language.name}}</td>
             <td>{{language.code}}</td>
             <td><a href="" ng-click="goLocalization(language)">Go to Translation</a></td>
-            <td><button ng-click="showAModal(language)" class="btn btn-default">Edit</button></td>
+            <td>
+                <a href="/api/project-id/{{projectId}}/language-id/{{language.id}}" target="_blank" class="btn btn-success">Public Api</a>
+                <button ng-click="showAModal(language)" class="btn btn-default">Edit</button>
+            </td>
         </tr>
         </tbody>
     </table>

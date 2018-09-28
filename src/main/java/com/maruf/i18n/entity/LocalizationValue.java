@@ -1,7 +1,8 @@
 package com.maruf.i18n.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,8 @@ import javax.persistence.UniqueConstraint;
 /**
  * @author maruf
  */
-@Data
+@Setter
+@Getter
 @Entity
 @Table( name = "LOCALIZATION_VALUE",
         uniqueConstraints = @UniqueConstraint(columnNames = {"localizationKey_id", "language_id"}),

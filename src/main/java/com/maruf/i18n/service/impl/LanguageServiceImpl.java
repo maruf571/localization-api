@@ -42,13 +42,7 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    public Language findByLangCode(String langCode) {
-        return null;
-    }
-
-    @Override
     public List<Language> findAll(Long projectId) {
-
         return languageRepository.findByProjectId(projectId);
     }
 

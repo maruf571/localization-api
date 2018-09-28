@@ -5,14 +5,17 @@ import com.maruf.i18n.dto.LocalizationDto;
 import com.maruf.i18n.entity.Language;
 import com.maruf.i18n.entity.LocalizationKey;
 import com.maruf.i18n.entity.LocalizationValue;
+import com.maruf.i18n.entity.Project;
 import com.maruf.i18n.repository.LanguageRepository;
 import com.maruf.i18n.repository.LocalizationKeyRepository;
 import com.maruf.i18n.repository.LocalizationValueRepository;
+import com.maruf.i18n.repository.ProjectRepository;
 import com.maruf.i18n.service.LocalizationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,20 +27,41 @@ public class LocalizationServiceImpl implements LocalizationService {
     private final LocalizationValueRepository localizationValueRepository;
     private final LanguageRepository languageRepository;
     private final LocalizationDao localizationDao;
+    private final ProjectRepository projectRepository;
     public LocalizationServiceImpl(LocalizationKeyRepository localizationKeyRepository,
                                    LocalizationValueRepository localizationValueRepository,
                                    LanguageRepository languageRepository,
-                                   LocalizationDao localizationDao) {
+                                   LocalizationDao localizationDao,
+                                   ProjectRepository projectRepository) {
         this.localizationValueRepository = localizationValueRepository;
         this.localizationKeyRepository = localizationKeyRepository;
         this.languageRepository = languageRepository;
         this.localizationDao = localizationDao;
+        this.projectRepository = projectRepository;
     }
 
 
     @Override
     public List<Map<String, Object>> findAll(Long projectId, Long languageId) {
-        return  localizationDao.findAllLocalizationBylanguage(projectId, languageId);
+        return  localizationDao.findAllLocalizationByProjectIdAndLanguageId(projectId, languageId);
+    }
+
+    @Override
+    public Map<Object, Object> findLocalizationByProjectAndLanguageCode(String projectName, String languageCode) {
+        log.debug("projectName: {}, languageCode: {}", projectName, languageCode);
+
+        Language language = languageRepository.findByCode(languageCode).orElseThrow(() -> new EntityNotFoundException("language not found"));
+        Project project = projectRepository.findByName(projectName).orElseThrow(() ->new EntityNotFoundException("Project name not found"));
+        return findLocalizationByProjectAndLanguageCode(project.getId(), language.getId());
+    }
+
+
+    @Override
+    public Map<Object, Object> findLocalizationByProjectAndLanguageCode(Long  projectId, Long languageId) {
+        log.debug("projectName: {}, languageCode: {}", projectId, languageId);
+
+        List<Map<String, Object>> list = localizationDao.findAllLocalizationByProjectIdAndLanguageId(projectId, languageId);
+        return convertListToMap(list);
     }
 
     @Override
@@ -84,9 +108,7 @@ public class LocalizationServiceImpl implements LocalizationService {
         localizationValueRepository.save(localizationValue);
 
         return new LocalizationDto(localizationKey.getId(), language.getId(), localizationKey.getLangKey(), localizationValue.getValue());
-
     }
-
 
     @Override
     public void delete(Long localizationId) {
@@ -94,12 +116,6 @@ public class LocalizationServiceImpl implements LocalizationService {
         localizationKeyRepository.deleteById(localizationId);
     }
 
-
-    @Override
-    public List<Map<String, Object>> findLocalizationByProjectAndLanguageCode(String projectName, String languageCode) {
-        log.debug("projectName: {}, languageCode: {}", projectName, languageCode);
-        return null;
-    }
 
     @Override
     public List<String> findLocalizationKeyByProject(String projectName) {
@@ -111,5 +127,14 @@ public class LocalizationServiceImpl implements LocalizationService {
     public LocalizationKey findLocalizationValueByKey(String projectName, String key) {
         log.debug("projectName: {}, key: {}", projectName, key);
         return localizationKeyRepository.findByProjectNameAndKey(projectName, key);
+    }
+
+
+    private Map<Object, Object> convertListToMap(List<Map<String, Object>> mapList){
+        Map<Object, Object> map = new HashMap<>();
+        for(Map<String, Object> languageMap: mapList){
+            map.put(languageMap.get("langKey"), languageMap.get("value"));
+        }
+        return map;
     }
 }

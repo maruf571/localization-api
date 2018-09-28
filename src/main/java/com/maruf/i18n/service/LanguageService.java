@@ -10,8 +10,6 @@ public interface LanguageService {
 
     Language findById(Long languageId);
 
-    Language findByLangCode(String langCode);
-
     Language create(Language language);
 
     Language update(Language language);

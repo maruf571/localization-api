@@ -5,5 +5,6 @@ import java.util.Map;
 
 public interface LocalizationDao {
 
-    List<Map<String, Object>> findAllLocalizationBylanguage(Long project, Long language);
+    List<Map<String, Object>> findAllLocalizationByProjectIdAndLanguageId(Long project, Long language);
+
 }
