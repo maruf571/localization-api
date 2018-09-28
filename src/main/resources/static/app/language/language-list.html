@@ -7,7 +7,6 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Code</th>
-            <th scope="col">&nbsp;</th>
             <th></th>
         </tr>
         </thead>
@@ -17,8 +16,8 @@
             <th scope="row">{{$index + 1}}</th>
             <td>{{language.name}}</td>
             <td>{{language.code}}</td>
-            <td><a href="" ng-click="goLocalization(language)">Go to Translation</a></td>
             <td>
+                <a href="" ng-click="goLocalization(language)" class="btn btn-primary">Go to Translation</a>
                 <a href="/api/project-id/{{projectId}}/language-id/{{language.id}}" target="_blank" class="btn btn-success">Public Api</a>
                 <button ng-click="showAModal(language)" class="btn btn-default">Edit</button>
             </td>

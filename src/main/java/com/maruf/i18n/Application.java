@@ -14,10 +14,11 @@ public class Application {
 		Environment env = app.run(args).getEnvironment();
 		String protocol = "http";
 		log.info("\n----------------------------------------------------------\n\t" +
-						"Application '{}' is running :) \n\t" +
+						"Application '{} v{}' is running :) \n\t" +
 						"Access URL: \t{}://localhost:{}\n\t" +
 						"Profile(s): \t{}\n----------------------------------------------------------",
 				env.getProperty("app.name"),
+				env.getProperty("app.version"),
 				protocol,
 				env.getProperty("server.port"),
 				env.getActiveProfiles());

@@ -28,9 +28,8 @@ app.controller("localizationListController",
             .then(function(modal) {
                   modal.element.modal();
                   modal.close.then(function(result) {
-                        if(localization){
-                            localization = result;
-
+                        if(localizationKey){
+                            localizationKey = result;
                         }else{
                             $scope.localizations.push(result);
                         }
