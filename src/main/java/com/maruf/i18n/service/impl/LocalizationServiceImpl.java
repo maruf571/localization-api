@@ -18,6 +18,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Service(value = "localizationService")
@@ -80,9 +81,15 @@ public class LocalizationServiceImpl implements LocalizationService {
             localizationValueRepository.save(localizationValue);
         }
 
-        return new LocalizationDto(localizationKey.getId(), language.getId(), localizationKey.getLangKey(), localizationValue.getValue());
 
+        return LocalizationDto.builder()
+                .id(localizationKey.getId())
+                .langKey(localizationKey.getLangKey())
+                .value(localizationValue.getValue())
+                .languageId(language.getId())
+                .build();
     }
+
 
     @Override
     public LocalizationDto update(LocalizationDto localizationDto) {
@@ -105,7 +112,13 @@ public class LocalizationServiceImpl implements LocalizationService {
         localizationValue.setValue(localizationDto.getValue());
         localizationValueRepository.save(localizationValue);
 
-        return new LocalizationDto(localizationKey.getId(), language.getId(), localizationKey.getLangKey(), localizationValue.getValue());
+        return LocalizationDto
+                .builder()
+                .id(localizationKey.getId())
+                .langKey(localizationKey.getLangKey())
+                .value(localizationValue.getValue())
+                .languageId(language.getId())
+                .build();
     }
 
     @Override
@@ -127,4 +140,39 @@ public class LocalizationServiceImpl implements LocalizationService {
         return localizationKeyRepository.findByProjectNameAndKey(projectName, key);
     }
 
+    @Override
+    public void importToLocalization(List<LocalizationDto> localizationDtoList) {
+
+        //cehck if key exist or not
+        Project project = projectRepository.findById(localizationDtoList.get(0).getProjectId()).orElseThrow(EntityNotFoundException::new);
+        Language language = languageRepository.findById(localizationDtoList.get(0).getLanguageId()).orElseThrow(EntityNotFoundException::new);
+
+        for(LocalizationDto localizationDto: localizationDtoList) {
+            Optional<LocalizationKey> localizationKey = localizationKeyRepository.findByProjectIdAndKey(localizationDto.getProjectId(), localizationDto.getLangKey());
+            if (localizationKey.isPresent()) {
+                //update existing value
+                LocalizationValue localizationValue = localizationValueRepository.findByLanguageAndLocalizationKey(language, localizationKey.get());
+                if(localizationValue == null){
+                    localizationValue = new LocalizationValue();
+                    localizationValue.setLanguage(language);
+                    localizationValue.setLocalizationKey(localizationKey.get());
+                }
+                localizationValue.setValue(localizationDto.getValue());
+                localizationValueRepository.save(localizationValue);
+
+            } else {
+                //add new key and value
+                LocalizationKey newKey = new LocalizationKey();
+                newKey.setLangKey(localizationDto.getLangKey());
+                newKey.setProject(project);
+                localizationKeyRepository.save(newKey);
+
+                LocalizationValue newValue = new LocalizationValue();
+                newValue.setLanguage(language);
+                newValue.setLocalizationKey(newKey);
+                newValue.setValue(localizationDto.getValue());
+                localizationValueRepository.save(newValue);
+            }
+        }
+    }
 }

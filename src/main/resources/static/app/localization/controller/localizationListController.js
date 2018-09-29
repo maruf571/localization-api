@@ -1,8 +1,9 @@
 app.controller("localizationListController",
-    function($rootScope, $scope, $httpParamSerializer, $http, $location, $timeout , localizationService, languageService, ModalService) {
+    function($rootScope, $scope, $q, $httpParamSerializer, $http, $location, $timeout , localizationService, languageService, ModalService) {
 
     var languageId = getParameterByName("languageId");
     var projectId = getParameterByName("projectId")
+    $scope.projectId = projectId;
 
     function init(){
 
@@ -50,5 +51,45 @@ app.controller("localizationListController",
         $location.path("language/language-list")
             .search({projectId: projectId});
     }
+
+    $scope.export = function(projectId, languageId){
+        console.log("projectId: " + projectId + " languageId: " + languageId);
+    }
+
+    $scope.export = function(projectId, languageId){
+        console.log("projectId: " + projectId + " languageId: " + languageId);
+
+        var self = this;
+        var deferred = $q.defer();
+        var defaultFileName = $scope.language.name +"_localization.xlsx";
+        $http.get("/api/localizations/project/"+projectId+"/language/"+languageId+"/export", { responseType: "blob" })
+        .then(function (data) {
+          saveAs(data.data, defaultFileName)
+          deferred.resolve(defaultFileName);
+        },
+        function (data) {
+           var e = "download fail";
+           deferred.reject(e);
+        });
+        return deferred.promise;
+    }
+
+
+    $scope.fileAutoUpload = function(element){
+            console.log("projectId: " + projectId + " languageId: " + languageId);
+            if(element.files.length == 0){
+                return;
+            }
+
+            var fd = new FormData();
+            fd.append('file', element.files[0]);
+            $http.post("/api/localizations/project/"+projectId+"/language/"+languageId+"/import", fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).then(function(resp){
+                console.log("File upload successfull");
+            });
+        }
+
     init();
 });

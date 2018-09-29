@@ -12,6 +12,8 @@ public interface LocalizationService {
 
     LocalizationDto update(LocalizationDto localizationDto);
 
+    void importToLocalization(List<LocalizationDto> localizationDtoList);
+
     List<Map<String, Object>> findAll(Long projectId, Long languageId);
 
     void delete(Long localizationId);

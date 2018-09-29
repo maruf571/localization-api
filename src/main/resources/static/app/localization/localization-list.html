@@ -6,6 +6,15 @@
 
     <a href="" class="btn btn-primary" ng-click="goLanguage()">Back to language</a>
     <button type="button" class="btn btn-primary" ng-click="showAModal()">Add new localizationKey</button>
+    <button type="button" class="btn btn-primary" ng-click="export(projectId, language.id)">Export as excel</button>
+    <button type="button" class="btn btn-primary" onclick="document.getElementById('selectedFile').click();"> Import</button>
+    <input class="btn btn-primary"
+           id="selectedFile"
+           style="display:none"
+           type="file"
+           file-model="localization"
+           onchange="angular.element(this).scope().fileAutoUpload(this)">
+
     <table class="table table-bordered table-hover mt-2">
         <thead class="thead-light">
         <tr>

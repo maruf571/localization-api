@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface LocalizationKeyRepository extends CrudRepository<LocalizationKey, Long> {
 
@@ -13,6 +14,12 @@ public interface LocalizationKeyRepository extends CrudRepository<LocalizationKe
             " LEFT JOIN FETCH l.localizationValues " +
             " WHERE l.project.name=?1 AND l.langKey=?2")
     LocalizationKey findByProjectNameAndKey(String projectName, String key);
+
+
+    @Query("SELECT l FROM LocalizationKey l " +
+            " LEFT JOIN FETCH l.localizationValues " +
+            " WHERE l.project.id=?1 AND l.langKey=?2")
+    Optional<LocalizationKey> findByProjectIdAndKey(Long projectId, String key);
 
 
     @Query(value = "SELECT l.langKey from LOCALIZATION_KEY l" +
