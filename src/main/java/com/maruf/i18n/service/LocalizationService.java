@@ -16,9 +16,9 @@ public interface LocalizationService {
 
     void delete(Long localizationId);
 
-    Map<Object, Object> findLocalizationByProjectAndLanguageCode(String projectName, String languageCode);
+    Map<String, Object> findLocalizationByProjectAndLanguageCode(String projectName, String languageCode);
 
-    Map<Object, Object> findLocalizationByProjectAndLanguageCode(Long  projectId, Long languageId);
+    Map<String, Object> findLocalizationByProjectAndLanguageCode(Long  projectId, Long languageId);
 
     List<String> findLocalizationKeyByProject(String projectName);
 

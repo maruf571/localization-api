@@ -47,7 +47,7 @@ public class LocalizationServiceImpl implements LocalizationService {
     }
 
     @Override
-    public Map<Object, Object> findLocalizationByProjectAndLanguageCode(String projectName, String languageCode) {
+    public Map<String, Object> findLocalizationByProjectAndLanguageCode(String projectName, String languageCode) {
         log.debug("projectName: {}, languageCode: {}", projectName, languageCode);
 
         Language language = languageRepository.findByCode(languageCode).orElseThrow(() -> new EntityNotFoundException("language not found"));
@@ -57,11 +57,9 @@ public class LocalizationServiceImpl implements LocalizationService {
 
 
     @Override
-    public Map<Object, Object> findLocalizationByProjectAndLanguageCode(Long  projectId, Long languageId) {
+    public Map<String, Object> findLocalizationByProjectAndLanguageCode(Long  projectId, Long languageId) {
         log.debug("projectName: {}, languageCode: {}", projectId, languageId);
-
-        List<Map<String, Object>> list = localizationDao.findAllLocalizationByProjectIdAndLanguageId(projectId, languageId);
-        return convertListToMap(list);
+         return  localizationDao.findLocalization(projectId, languageId);
     }
 
     @Override
@@ -129,12 +127,4 @@ public class LocalizationServiceImpl implements LocalizationService {
         return localizationKeyRepository.findByProjectNameAndKey(projectName, key);
     }
 
-
-    private Map<Object, Object> convertListToMap(List<Map<String, Object>> mapList){
-        Map<Object, Object> map = new HashMap<>();
-        for(Map<String, Object> languageMap: mapList){
-            map.put(languageMap.get("langKey"), languageMap.get("value"));
-        }
-        return map;
-    }
 }
