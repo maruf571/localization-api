@@ -7,13 +7,13 @@ import { AppRouteModule } from './app.route';
 import { HomeModule } from './home/home.module';
 import { AuthModule } from './auth/auth.module';
 import { PostModule } from './post/post.module';
-import { CustomerModule } from './language/customer.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { LanguageModule } from './language/language.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     HomeModule,
     AuthModule,
     PostModule,
-    CustomerModule,
+    LanguageModule,
     DashboardModule,
     AppRouteModule,
   ],

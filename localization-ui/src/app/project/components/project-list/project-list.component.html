@@ -1,13 +1,14 @@
 <section class="card">
 
     <div class="card-body">
-    <button type="button" class="btn btn-primary" routerLink="/project/project-single">Add new project</button>
+    <button type="button" class="btn btn-primary" routerLink="/project/project-single">Add New Project</button>
     <table class="table table-bordered table-hover mt-2">
         <thead class="thead-light">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Project Name</th>
+                <th scope="col">Project name</th>
                 <th scope="col">Description</th>
+                <th scope="col">URL </th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -18,7 +19,8 @@
                 <td scope="row">
                     {{project.name}}
                 </td>
-                <td>{{project.description}}</td>
+                <td innerHTML="{{project.description}}"></td>
+                <td>{{project.url}}</td>
                 <td>
                     <a  [routerLink]="['/project/project-single']" 
                         [queryParams]="{projectId: project.id}">Edit</a>

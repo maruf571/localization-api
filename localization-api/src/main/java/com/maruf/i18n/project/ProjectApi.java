@@ -2,9 +2,11 @@ package com.maruf.i18n.project;
 
 import com.maruf.i18n.project.entity.Project;
 import com.maruf.i18n.project.service.ProjectService;
+import com.maruf.i18n.security.model.UserContext;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/projects")
+@RequestMapping("/api/protected/projects")
 public class ProjectApi {
 
     private final ProjectService projectService;
@@ -37,7 +39,8 @@ public class ProjectApi {
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Project project){
+    public ResponseEntity create(@RequestBody Project project, @AuthenticationPrincipal UserContext userContext){
+        project.setTenant(userContext.getTenant());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(projectService.create(project));
     }

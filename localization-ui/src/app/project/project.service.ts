@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ProjectService {
 
-  private api = environment.REST_API_URL + 'projects/';
+  private api = environment.REST_API_URL + 'protected/projects';
   
   constructor(private http: HttpClient) {
   }

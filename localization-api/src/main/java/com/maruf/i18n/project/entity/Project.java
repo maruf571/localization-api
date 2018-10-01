@@ -7,17 +7,22 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Setter
 @Getter
 @Entity
-@Table(name = "PROJECT")
+@Table(name = "PROJECT",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"tenant", "name"}))
 public class Project extends BaseEntity {
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private String name;
 
-    @Column(unique = true)
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "url")
     private String url;
 
 }

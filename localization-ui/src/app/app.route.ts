@@ -8,8 +8,8 @@ const appRoutes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomeModule' },
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
   { path: 'project', loadChildren: './project/project.module#ProjectModule' },
-  { path: 'language', loadChildren: './post/post.module#PostModule' },
-  { path: 'localization', loadChildren: './customer/customer.module#CustomerModule' },
+  { path: 'language', loadChildren: './language/language.module#LanguageModule' },
+  { path: 'localization', loadChildren: './localization/localization.module#LocalizationModule' },
 
 ];
 

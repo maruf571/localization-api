@@ -2,6 +2,7 @@ package com.maruf.i18n.project.service;
 
 import com.maruf.i18n.project.entity.Project;
 import com.maruf.i18n.project.repository.ProjectRepository;
+import com.maruf.i18n.tenant.TenantContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,17 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project create(Project project) {
+        project.setTenant(TenantContext.getCurrentTenant());
         return projectRepository.save(project);
     }
 
     @Override
     public Project update(Project project) {
         projectRepository
-                .findById(project.getId())
+                .findById(
+                        TenantContext.getCurrentTenant(),
+                        project.getId()
+                )
                 .orElseThrow(() -> new EntityNotFoundException("project not found"));
 
         return projectRepository.save(project);
@@ -33,17 +38,26 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project findById(Long projectId) {
         return projectRepository
-                .findById(projectId)
+                .findById(
+                        TenantContext.getCurrentTenant(),
+                        projectId
+                )
                 .orElseThrow(() -> new EntityNotFoundException("project not found"));
     }
 
     @Override
     public Page<Project> findAll(Pageable pageable) {
-        return projectRepository.findAll(pageable);
+        return projectRepository.findAll(
+                TenantContext.getCurrentTenant(),
+                pageable
+        );
     }
 
     @Override
     public void delete(Long projectId) {
-        projectRepository.deleteById(projectId);
+        projectRepository.deleteById(
+                TenantContext.getCurrentTenant(),
+                projectId
+        );
     }
 }

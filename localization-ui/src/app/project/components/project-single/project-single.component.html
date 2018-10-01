@@ -1,16 +1,16 @@
-<section class="card">
+<section>
     <div class="row">
-        <div class="col-sm-9 col-md-7  mx-auto">
+        <div class="card col-xs-12 col-md-7  mx-auto">
             <div class="card-body">
                 <div class="fieldset">
                         <legend>New project</legend>
 
                         <div class="form-group">
                             <label>
-                                Name
+                                Name*
                             </label>
                             <input type="text" [(ngModel)]="project.name" class="form-control" />
-
+                            <small>Do not use exising project name.</small>
                         </div>
 
                         <div class="form-group">
@@ -44,16 +44,9 @@
 
                         <div class="form-group">
                             <label>
-                                Purchase Price
+                                URL
                             </label>
-                            <input type="number" [(ngModel)]="project.purchasePrice" class="form-control" />
-                        </div>
-
-                        <div class="form-group">
-                            <label>
-                                Sale Price
-                            </label>
-                            <input type="number" [(ngModel)]="project.salePrice" class="form-control" />
+                            <input type="text" [(ngModel)]="project.url" class="form-control" />
                         </div>
 
                     </div>

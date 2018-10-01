@@ -10,6 +10,7 @@ import com.maruf.i18n.language.repository.LanguageRepository;
 import com.maruf.i18n.localization.repository.LocalizationKeyRepository;
 import com.maruf.i18n.localization.repository.LocalizationValueRepository;
 import com.maruf.i18n.project.repository.ProjectRepository;
+import com.maruf.i18n.tenant.TenantContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,7 @@ public class LocalizationServiceImpl implements LocalizationService {
         log.debug("projectName: {}, languageCode: {}", projectName, languageCode);
 
         Language language = languageRepository.findByCode(languageCode).orElseThrow(() -> new EntityNotFoundException("language not found"));
-        Project project = projectRepository.findByName(projectName).orElseThrow(() ->new EntityNotFoundException("Project name not found"));
+        Project project = projectRepository.findByName(TenantContext.getCurrentTenant(), projectName).orElseThrow(() ->new EntityNotFoundException("Project name not found"));
         return findLocalizationByProjectAndLanguageCode(project.getId(), language.getId());
     }
 

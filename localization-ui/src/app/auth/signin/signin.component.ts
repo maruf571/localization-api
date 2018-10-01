@@ -1,7 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 
@@ -18,7 +17,6 @@ export class SigninComponent implements OnInit {
     error = '';
 
     constructor(
-        private formBuilder: FormBuilder,
         private activeRoute: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthService) {}
