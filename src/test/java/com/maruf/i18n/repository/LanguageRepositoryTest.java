@@ -1,7 +1,8 @@
 package com.maruf.i18n.repository;
 
-import com.maruf.i18n.entity.Language;
-import com.maruf.i18n.entity.Project;
+import com.maruf.i18n.language.entity.Language;
+import com.maruf.i18n.project.entity.Project;
+import com.maruf.i18n.language.repository.LanguageRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,5 +1,6 @@
 package com.maruf.i18n.repository;
 
+import com.maruf.i18n.localization.repository.LocalizationKeyRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

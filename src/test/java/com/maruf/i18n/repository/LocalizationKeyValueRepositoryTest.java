@@ -1,9 +1,10 @@
 package com.maruf.i18n.repository;
 
-import com.maruf.i18n.entity.Language;
-import com.maruf.i18n.entity.LocalizationKey;
-import com.maruf.i18n.entity.LocalizationValue;
-import com.maruf.i18n.entity.Project;
+import com.maruf.i18n.language.entity.Language;
+import com.maruf.i18n.localization.entity.LocalizationKey;
+import com.maruf.i18n.localization.entity.LocalizationValue;
+import com.maruf.i18n.project.entity.Project;
+import com.maruf.i18n.localization.repository.LocalizationValueRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
