@@ -1,0 +1,26 @@
+<section class="card">
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" routerLink="/customer/customer-single">Add new customer</button>
+    <table class="table table-bordered table-hover mt-2">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Mobile</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let customer of customers">
+                <td scope="row">{{customer.id}}</td>
+                <td>{{customer.name}}</td>
+                <td>{{customer.mobile}}</td>
+                <td>
+                    <a [routerLink]="['/customer/customer-single']" [queryParams]="{customerId: customer.id}">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</section>

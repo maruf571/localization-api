@@ -1,0 +1,68 @@
+<section class="card">
+    <div class="row">
+        <div class="col-sm-9 col-md-7  mx-auto">
+            <div class="card-body">
+                <div class="fieldset">
+                        <legend>New project</legend>
+
+                        <div class="form-group">
+                            <label>
+                                Name
+                            </label>
+                            <input type="text" [(ngModel)]="project.name" class="form-control" />
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Description
+                            </label>
+                            <quill-editor [(ngModel)]="project.description" placeholder="" >
+                                <div quill-editor-toolbar>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold" [title]="'Bold'"></button>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-align" [title]="'Aligment'">
+                                            <option selected></option>
+                                            <option value="center"></option>
+                                            <option value="right"></option>
+                                            <option value="justify"></option>
+                                        </select>
+                                        <select class="ql-align" [title]="'Aligment2'">
+                                            <option selected></option>
+                                            <option value="center"></option>
+                                            <option value="right"></option>
+                                            <option value="justify"></option>
+                                        </select>
+                                    </span>
+                                </div>
+                            </quill-editor>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>
+                                Purchase Price
+                            </label>
+                            <input type="number" [(ngModel)]="project.purchasePrice" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Sale Price
+                            </label>
+                            <input type="number" [(ngModel)]="project.salePrice" class="form-control" />
+                        </div>
+
+                    </div>
+                    <div class="float-right">
+                        <button type="button" class="mr-2 btn btn-danger" routerLink="/project/">Cancel</button>
+                        <button type="button" class="btn btn-success" (click)="submit(project)">Submit</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</section>
