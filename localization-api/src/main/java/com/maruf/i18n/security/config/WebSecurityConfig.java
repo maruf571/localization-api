@@ -1,14 +1,15 @@
-package com.maruf.i18n.config;
+package com.maruf.i18n.security.config;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.maruf.i18n.config.CorsConfigFilter;
 import com.maruf.i18n.security.RestAuthenticationEntryPoint;
-import com.maruf.i18n.security.ajax.AjaxAuthenticationProvider;
-import com.maruf.i18n.security.ajax.AjaxLoginProcessingFilter;
-import com.maruf.i18n.security.jwt.JwtAuthenticationProvider;
-import com.maruf.i18n.security.jwt.JwtTokenAuthenticationProcessingFilter;
-import com.maruf.i18n.security.jwt.SkipPathRequestMatcher;
-import com.maruf.i18n.security.jwt.extractor.TokenExtractor;
+import com.maruf.i18n.security.auth.ajax.AjaxAuthenticationProvider;
+import com.maruf.i18n.security.auth.ajax.AjaxLoginProcessingFilter;
+import com.maruf.i18n.security.auth.jwt.JwtAuthenticationProvider;
+import com.maruf.i18n.security.auth.jwt.JwtTokenAuthenticationProcessingFilter;
+import com.maruf.i18n.security.auth.jwt.SkipPathRequestMatcher;
+import com.maruf.i18n.security.auth.jwt.extractor.TokenExtractor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,6 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.context.request.RequestContextListener;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;

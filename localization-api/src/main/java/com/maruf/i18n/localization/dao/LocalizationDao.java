@@ -1,5 +1,7 @@
 package com.maruf.i18n.localization.dao;
 
+import com.maruf.i18n.localization.dto.LocalizationDto;
+
 import java.util.List;
 import java.util.Map;
 

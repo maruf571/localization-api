@@ -13,7 +13,8 @@ export class LanguageSingleComponent implements OnInit {
   @ViewChild('languageName')
   private elementRef: ElementRef;
 
-  private language = {};
+  language = {};
+  projectId = "";
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -24,7 +25,10 @@ export class LanguageSingleComponent implements OnInit {
     this.elementRef.nativeElement.focus();
 
     const languageId = this.activeRoute.snapshot.queryParamMap.get('languageId');
+    const projectId = this.activeRoute.snapshot.queryParamMap.get('projectId');
+    this.projectId = projectId;
     console.log(languageId);
+    console.log(projectId);
     if (languageId != null) {
       this.languageService.findOne(languageId).subscribe(resp => {
         this.language = resp;
@@ -33,11 +37,18 @@ export class LanguageSingleComponent implements OnInit {
   }
 
   submit(entity) {
+    //add project id
+    entity.project = {id: this.projectId};
     
     console.log(entity);
-
     this.languageService.submit(entity).subscribe(resp => {
-      this.router.navigate(['/language/language-list']);
+      this.router.navigate(
+        ['/language/language-list'], 
+        {
+          queryParams:{projectId: this.projectId}
+        }
+      );
+
     });
   }
 }

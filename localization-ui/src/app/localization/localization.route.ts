@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CustomerSingleComponent } from './components/customer-single/customer-single.component';
-import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { AdminLayoutComponent } from '../layout/admin-layout/admin-layout.component';
 import { AuthGuard } from '../auth/auth-guard';
+import { LocalizationListComponent } from './components/localization-list/localization-list.component';
+import { LocalizationSingleComponent } from './components/localization-single/localization-single.component';
 //import { AppAuthGuard } from '../../auth/app.auth-guard';
 
 const routes: Routes = [
@@ -12,12 +12,12 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     canActivate:[AuthGuard],
     data:{
-      requiredRoles:["ROLE_ADMIN", "ROLE_MANAGER"]
+      requiredRoles:["ROLE_ADMIN"]
     },
     children:[
-      { path: '', redirectTo: 'customer-list', pathMatch: 'full' },
-      { path: 'customer-list', component: CustomerListComponent },
-      { path: 'customer-single', component: CustomerSingleComponent }
+      { path: '', redirectTo: 'localization-list', pathMatch: 'full' },
+      { path: 'localization-list', component: LocalizationListComponent },
+      { path: 'localization-single', component: LocalizationSingleComponent }
     ],
 }
 ];
@@ -26,4 +26,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CustomerRouteModule { }
+export class LocalizationRouteModule { }

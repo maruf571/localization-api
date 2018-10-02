@@ -9,19 +9,49 @@ import { LanguageService } from '../../language.service';
 })
 export class LanguageListComponent implements OnInit {
 
-  private customers = [];
+  languages = [];
+  projectId = '';
   constructor(
     private router: Router,
-    private route: ActivatedRoute, 
+    private activeRoute: ActivatedRoute,
     private languageService: LanguageService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.languageService.findAll("").subscribe(resp => { 
-      console.log(resp.content);
-      this.customers = resp.content;
-    });
-    
+    const projectId = this.activeRoute.snapshot.queryParamMap.get('projectId');
+    this.projectId = projectId;
+    console.log(projectId);
+    if (projectId != null) {
+      this.languageService.findAll("?projectId=" + projectId).subscribe(resp => {
+        console.log(resp);
+        this.languages = resp;
+      });
+    }
   }
+
+
+  addOrEdit(languageId) {
+    this.router.navigate(
+      ['/language/language-single'], {
+        queryParams: {
+          projectId: this.projectId,
+          languageId: languageId
+        }
+      }
+    );
+  }
+
+
+  navigateToLocalization(languageId) {
+    this.router.navigate(
+      ['/localization/localization-list'], {
+        queryParams: {
+          languageId: languageId,
+          projectId: this.projectId
+        }
+      }
+    );
+  }
+
 
 }

@@ -1,8 +1,8 @@
 package com.maruf.i18n.tenant;
 
-import com.maruf.i18n.config.WebSecurityConfig;
+import com.maruf.i18n.security.auth.jwt.extractor.TokenExtractor;
 import com.maruf.i18n.security.config.JwtSettings;
-import com.maruf.i18n.security.jwt.extractor.TokenExtractor;
+import com.maruf.i18n.security.config.WebSecurityConfig;
 import com.maruf.i18n.security.model.token.RawAccessJwtToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

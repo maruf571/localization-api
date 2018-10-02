@@ -1,5 +1,6 @@
-package com.maruf.i18n.security.jwt;
+package com.maruf.i18n.security.auth.jwt;
 
+import com.maruf.i18n.security.auth.JwtAuthenticationToken;
 import com.maruf.i18n.security.config.JwtSettings;
 import com.maruf.i18n.security.model.UserContext;
 import com.maruf.i18n.security.model.token.RawAccessJwtToken;
@@ -43,7 +44,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
                 .collect(Collectors.toList());
 
         // null if not acting on behalf of anyone
-        Map<String, Object> details = jwsClaims.getBody().get("act", Map.class);
+        //Map<String, Object> details = jwsClaims.getBody().get("act", Map.class);
 
         UserContext context = UserContext.create(subject, authorities, tenant);
         return new JwtAuthenticationToken(context, context.getAuthorities());

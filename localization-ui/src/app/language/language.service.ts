@@ -6,7 +6,7 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class LanguageService {
 
-  private api = environment.REST_API_URL + 'customers/';
+  private api = environment.REST_API_URL + 'protected/languages/';
   constructor(private http: HttpClient) {
   }
 

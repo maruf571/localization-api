@@ -1,4 +1,4 @@
-package com.maruf.i18n.security.jwt.verifier;
+package com.maruf.i18n.security.auth.jwt.verifier;
 
 import org.springframework.stereotype.Component;
 

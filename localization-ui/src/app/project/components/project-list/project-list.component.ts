@@ -20,7 +20,27 @@ export class ProjectListComponent implements OnInit {
     this.service.findAll("").subscribe(resp => { 
       this.projects = resp.content;
     });
-    
+  }
+
+
+  addOrEdit(projectId){    
+    this.router.navigate(
+      ['/project/project-single'], {
+        queryParams:{ 
+          projectId: projectId,
+        }
+      }
+  );
+}
+
+  navigateToLanguage(projectId){
+    this.router.navigate(
+      ['/language/language-list'], {
+        queryParams:{ 
+          projectId: projectId,
+        }
+      }
+    );
   }
 
 }

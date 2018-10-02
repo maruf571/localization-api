@@ -1,0 +1,26 @@
+<section class="card">
+    <div class="card-body">
+    <button type="button" class="btn btn-primary" (click)="addOrEdit()">Add new localization</button>
+    <table class="table table-bordered table-hover mt-2">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Key</th>
+                <th scope="col">Value</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let localization of localizations">
+                <td scope="row">{{localization.id}}</td>
+                <td>{{localization.langKey}}</td>
+                <td>{{localization.value}}</td>
+                <td>
+                    <a [routerLink]="" (click)="addOrEdit(localization.id)">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</section>

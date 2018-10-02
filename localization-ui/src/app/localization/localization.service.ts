@@ -4,9 +4,9 @@ import { environment } from '../../environments/environment';
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
-export class CustomerService {
+export class LocalizationService {
 
-  private api = environment.REST_API_URL + 'customers/';
+  private api = environment.REST_API_URL + 'protected/localizations/';
   constructor(private http: HttpClient) {
   }
 

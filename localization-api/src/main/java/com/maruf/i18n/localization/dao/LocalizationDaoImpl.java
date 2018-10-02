@@ -1,5 +1,6 @@
 package com.maruf.i18n.localization.dao;
 
+import com.maruf.i18n.localization.dto.LocalizationDto;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -53,7 +54,7 @@ public class LocalizationDaoImpl implements LocalizationDao  {
         });
 
         return map;
-
     }
+
 
 }

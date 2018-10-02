@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/languages")
+@RequestMapping("/api/protected/languages")
 public class LanguageApi {
 
     private final LanguageService languageService;
@@ -24,25 +26,25 @@ public class LanguageApi {
     }
 
     @GetMapping
-    public ResponseEntity findAll(@RequestParam Long projectId){
+    public ResponseEntity<List<Language>> findAll(@RequestParam Long projectId){
         return ResponseEntity.ok()
                 .body(languageService.findAll(projectId));
     }
 
     @GetMapping("/{languageId}")
-    public ResponseEntity findById(@PathVariable Long languageId){
+    public ResponseEntity<Language> findById(@PathVariable Long languageId){
         return ResponseEntity.ok()
                 .body(languageService.findById(languageId));
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Language language){
+    public ResponseEntity<Language> create(@RequestBody Language language){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(languageService.create(language));
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody Language language){
+    public ResponseEntity<Language> update(@RequestBody Language language){
         return ResponseEntity.ok()
                 .body(languageService.update(language));
     }

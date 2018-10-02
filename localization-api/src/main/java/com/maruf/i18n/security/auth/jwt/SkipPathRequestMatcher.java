@@ -1,4 +1,4 @@
-package com.maruf.i18n.security.jwt;
+package com.maruf.i18n.security.auth.jwt;
 
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;

@@ -1,4 +1,4 @@
-package com.maruf.i18n.security.jwt.extractor;
+package com.maruf.i18n.security.auth.jwt.extractor;
 
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.stereotype.Component;

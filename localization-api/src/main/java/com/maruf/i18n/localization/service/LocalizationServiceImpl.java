@@ -63,6 +63,26 @@ public class LocalizationServiceImpl implements LocalizationService {
     }
 
     @Override
+    public LocalizationDto findOne(Long projectId, Long languageId, Long localizationId) {
+        log.debug("projectId: {}, languageId: {}, localization: {}", projectId, languageId, localizationId);
+
+        LocalizationKey lk = localizationKeyRepository.findByProjectNameAndKey(projectId, localizationId);
+        String value = "";
+        for(LocalizationValue lv : lk.getLocalizationValues()){
+            if(lv.getLanguage().getId().equals(languageId)){
+                value = lv.getValue();
+            }
+        }
+        return LocalizationDto.builder()
+                .id(lk.getId())
+                .langKey(lk.getLangKey())
+                .value(value)
+                .projectId(projectId)
+                .languageId(languageId)
+                .build();
+    }
+
+    @Override
     public LocalizationDto create(LocalizationDto localizationDto) {
 
         Language language = languageRepository.findById(localizationDto.getLanguageId()).orElseThrow(()-> new EntityNotFoundException("language not found"));

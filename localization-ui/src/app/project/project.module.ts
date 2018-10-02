@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '../layout/layout.module';
-import { QuillModule } from 'ngx-quill';
 import { ProjectRouteModule } from './project.route';
 import { ProjectService } from './project.service';
 import { ProjectListComponent } from './components/project-list/project-list.component';
@@ -16,7 +15,6 @@ import { ProjectSingleComponent } from './components/project-single/project-sing
     FormsModule,
     ReactiveFormsModule,
     ProjectRouteModule,
-    QuillModule,
     LayoutModule,
   ],
   declarations: [

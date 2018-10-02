@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/businesses")
+@RequestMapping("/api/protected/tenant")
 public class TenantApi {
 
     private final TenantService tenantService;
@@ -30,7 +30,7 @@ public class TenantApi {
                 .body(tenantService.findAll(pageable));
     }
 
-    @GetMapping("/{businessId}")
+    @GetMapping("/{tenantId}")
     public ResponseEntity findById(@PathVariable Long businessId){
         return ResponseEntity.ok()
                 .body(tenantService.findById(businessId));
@@ -48,7 +48,7 @@ public class TenantApi {
                 .body(tenantService.update(tenant));
     }
 
-    @DeleteMapping("/{businessId}")
+    @DeleteMapping("/{tenantId}")
     public void delete(@RequestParam Long businessId){
         tenantService.delete(businessId);
     }

@@ -1,4 +1,4 @@
-package com.maruf.i18n.security.jwt;
+package com.maruf.i18n.security.auth;
 
 import com.maruf.i18n.security.model.UserContext;
 import com.maruf.i18n.security.model.token.RawAccessJwtToken;

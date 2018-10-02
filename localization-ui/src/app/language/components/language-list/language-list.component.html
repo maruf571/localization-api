@@ -1,23 +1,25 @@
 <section class="card">
     <div class="card-body">
-    <button type="button" class="btn btn-primary" routerLink="/customer/customer-single">Add new customer</button>
+    <button type="button" class="btn btn-primary" (click)="addOrEdit()">Add new language</button>
     <table class="table table-bordered table-hover mt-2">
         <thead class="thead-light">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Mobile</th>
+                <th scope="col">Code</th>
+                <th scope="col">Is RTL</th>
                 <th scope="col"></th>
             </tr>
         </thead>
 
         <tbody>
-            <tr *ngFor="let customer of customers">
-                <td scope="row">{{customer.id}}</td>
-                <td>{{customer.name}}</td>
-                <td>{{customer.mobile}}</td>
+            <tr *ngFor="let language of languages">
+                <td scope="row">{{language.id}}</td>
+                <td><a [routerLink]="" (click)="navigateToLocalization(language.id)">{{language.name}}</a></td>
+                <td>{{language.code}}</td>
+                <td>{{language.isRtl}}</td>
                 <td>
-                    <a [routerLink]="['/customer/customer-single']" [queryParams]="{customerId: customer.id}">Edit</a>
+                    <a [routerLink]="" (click)="addOrEdit(language.id)">Edit</a>
                 </td>
             </tr>
         </tbody>

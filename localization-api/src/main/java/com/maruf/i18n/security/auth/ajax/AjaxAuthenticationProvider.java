@@ -1,4 +1,4 @@
-package com.maruf.i18n.security.ajax;
+package com.maruf.i18n.security.auth.ajax;
 
 import com.maruf.i18n.security.entity.User;
 import com.maruf.i18n.security.model.UserContext;

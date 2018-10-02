@@ -8,8 +8,8 @@ import { OnInit, Component } from '@angular/core';
   styleUrls: ['./project-single.component.css']
 })
 export class ProjectSingleComponent implements OnInit {
-
-  private project:any = {};
+  
+  project = {};
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -35,8 +35,16 @@ export class ProjectSingleComponent implements OnInit {
     })
   }   
 
-  compareFn(obj1: any, obj2: any): boolean {
-    return obj1 && obj2 ? obj1.id === obj2.id : obj1 === obj2;
+  addOrEdit(projectId){
+    this.router.navigate(
+      ['/project/project-single'], {
+        queryParams:{ 
+          projectId: projectId,
+        }
+      }
+    );
   }
+
+
 
 }

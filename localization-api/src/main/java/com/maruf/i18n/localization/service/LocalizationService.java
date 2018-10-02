@@ -16,6 +16,8 @@ public interface LocalizationService {
 
     List<Map<String, Object>> findAll(Long projectId, Long languageId);
 
+    LocalizationDto findOne(Long projectId, Long languageId, Long localization);
+
     void delete(Long localizationId);
 
     Map<String, Object> findLocalizationByProjectAndLanguageCode(String projectName, String languageCode);

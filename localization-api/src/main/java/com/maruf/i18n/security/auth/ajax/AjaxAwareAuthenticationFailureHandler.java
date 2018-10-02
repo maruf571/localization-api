@@ -1,4 +1,4 @@
-package com.maruf.i18n.security.ajax;
+package com.maruf.i18n.security.auth.ajax;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maruf.i18n.security.exceptions.AuthMethodNotSupportedException;

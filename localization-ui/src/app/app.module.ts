@@ -10,10 +10,9 @@ import { PostModule } from './post/post.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { LanguageModule } from './language/language.module';
+import { LocalizationModule } from './localization/localization.module';
 
 @NgModule({
   declarations: [
@@ -25,12 +24,11 @@ import { LanguageModule } from './language/language.module';
     HttpModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    TypeaheadModule.forRoot(),
-    BsDatepickerModule.forRoot(),
     HomeModule,
     AuthModule,
     PostModule,
     LanguageModule,
+    LocalizationModule,
     DashboardModule,
     AppRouteModule,
   ],

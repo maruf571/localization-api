@@ -25,7 +25,7 @@ import java.io.InputStream;
 import java.util.*;
 
 @RestController
-@RequestMapping("/api/localizations")
+@RequestMapping("/api/protected/localizations")
 public class LocalizationApi {
 
     private final LocalizationService localizationService;
@@ -39,6 +39,32 @@ public class LocalizationApi {
                 .body(localizationService.findAll(projectId, languageId));
     }
 
+    @GetMapping("/project/{projectId}/language/{languageId}/localization/{localizationId}")
+    public ResponseEntity findAll(@PathVariable Long projectId,
+                                                   @PathVariable Long languageId,
+                                                   @PathVariable Long localizationId){
+        return ResponseEntity.ok()
+                .body(localizationService.findOne(projectId, languageId, localizationId));
+    }
+
+    @PostMapping
+    public ResponseEntity<LocalizationDto> create(@RequestBody LocalizationDto localizationDto){
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(localizationService.create(localizationDto));
+    }
+
+    @PutMapping
+    public ResponseEntity<LocalizationDto> update(@RequestBody LocalizationDto localizationDto){
+        return ResponseEntity.ok()
+                .body(localizationService.update(localizationDto));
+    }
+
+    @DeleteMapping("/{localizationId}")
+    public void delete(@PathVariable Long localizationId){
+        localizationService.delete(localizationId);
+    }
+
+
     @GetMapping("/project/{projectId}/language/{languageId}/export")
     public ModelAndView exportLocalization(@PathVariable Long projectId, @PathVariable Long languageId){
 
@@ -47,6 +73,7 @@ public class LocalizationApi {
         data.put("localizationList", localizationList);
         return new ModelAndView(new LocalizationExcelBuilder(), "data", data);
     }
+
 
     @PostMapping("/project/{projectId}/language/{languageId}/import")
     public ResponseEntity importLocalization(@PathVariable Long projectId, @PathVariable Long languageId, MultipartFile file){
@@ -71,37 +98,20 @@ public class LocalizationApi {
                 Row currentRow = iterator.next();
                 localizationDtoList.add(
                         LocalizationDto.builder()
-                        .langKey(currentRow.getCell(0).getStringCellValue())
-                        .value(currentRow.getCell(1).getStringCellValue())
-                        .languageId(languageId)
-                         .projectId(projectId)
-                        .build()
+                                .langKey(currentRow.getCell(0).getStringCellValue())
+                                .value(currentRow.getCell(1).getStringCellValue())
+                                .languageId(languageId)
+                                .projectId(projectId)
+                                .build()
                 );
             }
 
             localizationService.importToLocalization(localizationDtoList);
 
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    @PostMapping
-    public ResponseEntity<LocalizationDto> create(@RequestBody LocalizationDto localizationDto){
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(localizationService.create(localizationDto));
-    }
-
-    @PutMapping
-    public ResponseEntity<LocalizationDto> update(@RequestBody LocalizationDto localizationDto){
-        return ResponseEntity.ok()
-                .body(localizationService.update(localizationDto));
-    }
-
-    @DeleteMapping("/{localizationId}")
-    public void delete(@PathVariable Long localizationId){
-        localizationService.delete(localizationId);
     }
 }

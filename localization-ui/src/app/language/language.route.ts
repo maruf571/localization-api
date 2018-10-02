@@ -12,12 +12,12 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     canActivate:[AuthGuard],
     data:{
-      requiredRoles:["ROLE_ADMIN", "ROLE_MANAGER"]
+      requiredRoles:["ROLE_ADMIN"]
     },
     children:[
-      { path: '', redirectTo: 'customer-list', pathMatch: 'full' },
-      { path: 'customer-list', component: LanguageListComponent },
-      { path: 'customer-single', component: LanguageSingleComponent }
+      { path: '', redirectTo: 'language-list', pathMatch: 'full' },
+      { path: 'language-list', component: LanguageListComponent },
+      { path: 'language-single', component: LanguageSingleComponent }
     ],
 }
 ];

@@ -1,7 +1,7 @@
 <section class="card">
 
     <div class="card-body">
-    <button type="button" class="btn btn-primary" routerLink="/project/project-single">Add New Project</button>
+    <button type="button" class="btn btn-primary" (click)="addOrEdit()" >Add New Project</button>
     <table class="table table-bordered table-hover mt-2">
         <thead class="thead-light">
             <tr>
@@ -17,13 +17,11 @@
             <tr *ngFor="let project of projects">
                 <td scope="row">{{project.id}}</td>
                 <td scope="row">
-                    {{project.name}}
-                </td>
+                <a (click)="navigateToLanguage(project.id)" [routerLink]=""> {{project.name}}</a></td>
                 <td innerHTML="{{project.description}}"></td>
                 <td>{{project.url}}</td>
                 <td>
-                    <a  [routerLink]="['/project/project-single']" 
-                        [queryParams]="{projectId: project.id}">Edit</a>
+                    <button class="btn btn-primary" (click)="addOrEdit(project.id)" >Edit</button>
                 </td>
             </tr>
         </tbody>
