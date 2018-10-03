@@ -21,7 +21,7 @@ public class LocalizationPublicApi {
     }
 
     @GetMapping("/api/project-name/{projectName}/language-code/{languageCode}")
-    public ResponseEntity getAllLocalizationByProjectnameAndCode(@PathVariable String projectName, @PathVariable String languageCode){
+    public ResponseEntity getAllLocalizationByProjectNameAndCode(@PathVariable String projectName, @PathVariable String languageCode){
         log.debug("projectName: {}, languageCode: {}", projectName, languageCode);
         return ResponseEntity.ok().body(
                 localizationService.findLocalizationByProjectNameAndLanguageCode(projectName, languageCode)

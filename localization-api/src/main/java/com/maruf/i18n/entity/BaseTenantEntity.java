@@ -1,17 +1,24 @@
 package com.maruf.i18n.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author maruf
  */
-@Data
+@Setter
+@Getter
 @MappedSuperclass
 public class BaseTenantEntity extends BaseEntity{
 
-    @Column(updatable = false)
+    @NotBlank
+    @NotEmpty
+    @Column(updatable = false, nullable = false)
     private String tenant;
 }

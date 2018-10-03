@@ -33,18 +33,16 @@ public class LocalizationApi {
         this.localizationService = localizationService;
     }
 
-    @GetMapping("/project/{projectId}/language/{languageId}")
-    public ResponseEntity<List<Map<String, Object>>> findAll(@PathVariable String projectId, @PathVariable String languageId){
+    @GetMapping("/language/{languageId}")
+    public ResponseEntity<List<Map<String, Object>>> findAll(@PathVariable String languageId){
         return ResponseEntity.ok()
-                .body(localizationService.findAll(projectId, languageId));
+                .body(localizationService.findAll(languageId));
     }
 
-    @GetMapping("/project/{projectId}/language/{languageId}/localization/{localizationId}")
-    public ResponseEntity findAll(@PathVariable String projectId,
-                                                   @PathVariable String languageId,
-                                                   @PathVariable String localizationId){
+    @GetMapping("/{localizationId}/language/{languageId}")
+    public ResponseEntity findOne(@PathVariable String languageId, @PathVariable String localizationId){
         return ResponseEntity.ok()
-                .body(localizationService.findOne(projectId, languageId, localizationId));
+                .body(localizationService.findOne(localizationId, languageId));
     }
 
     @PostMapping
@@ -65,10 +63,10 @@ public class LocalizationApi {
     }
 
 
-    @GetMapping("/project/{projectId}/language/{languageId}/export")
-    public ModelAndView exportLocalization(@PathVariable String projectId, @PathVariable String languageId){
+    @GetMapping("/language/{languageId}/export")
+    public ModelAndView exportLocalization(@PathVariable String languageId){
 
-        List<Map<String, Object>> localizationList = localizationService.findAll(projectId, languageId);
+        List<Map<String, Object>> localizationList = localizationService.findAll(languageId);
         Map<String, Object> data = new HashMap<>();
         data.put("localizationList", localizationList);
         return new ModelAndView(new LocalizationExcelBuilder(), "data", data);

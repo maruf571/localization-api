@@ -14,8 +14,8 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let project of projects">
-                <td scope="row">{{project.id}}</td>
+            <tr *ngFor="let project of projects; let i=index">
+                <td scope="row">{{i + 1}}</td>
                 <td scope="row">
                 <a (click)="navigateToLanguage(project.id)" [routerLink]=""> {{project.name}}</a></td>
                 <td innerHTML="{{project.description}}"></td>

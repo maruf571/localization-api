@@ -16,10 +16,11 @@ public class LocalizationExcelBuilder extends AbstractXlsxView {
 
 
     @Override
+    @SuppressWarnings(value="unchecked")
     protected void buildExcelDocument(Map<String, Object> map,
                                       Workbook workbook,
                                       HttpServletRequest httpServletRequest,
-                                      HttpServletResponse httpServletResponse) throws Exception {
+                                      HttpServletResponse httpServletResponse){
 
         //get data back from controller
         Map<String, Object> data = (Map<String, Object>) map.get("data");
@@ -39,7 +40,7 @@ public class LocalizationExcelBuilder extends AbstractXlsxView {
         int cellNumber = 0;
         Row header = sheet.createRow(0);
         header.createCell(cellNumber++).setCellValue("Language Key");
-        header.createCell(cellNumber++).setCellValue("Language Value");
+        header.createCell(cellNumber).setCellValue("Language Value");
 
 
 

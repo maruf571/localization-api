@@ -20,4 +20,5 @@ public class BaseEntity implements Serializable{
     @Column(length = 32)
     protected String id;
 
+
 }

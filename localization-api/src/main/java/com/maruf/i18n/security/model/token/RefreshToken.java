@@ -20,7 +20,7 @@ public class RefreshToken implements JwtToken {
 
         List<String> scopes = claims.getBody().get("roles", List.class);
         if (scopes == null || scopes.isEmpty() 
-                || !scopes.stream().filter(scope -> Scopes.REFRESH_TOKEN.authority().equals(scope)).findFirst().isPresent()) {
+                || !scopes.stream().anyMatch(scope -> Scopes.REFRESH_TOKEN.authority().equals(scope))) {
             return Optional.empty();
         }
 

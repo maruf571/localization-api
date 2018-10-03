@@ -25,12 +25,12 @@ export class LanguageSingleComponent implements OnInit {
     this.elementRef.nativeElement.focus();
 
     const languageId = this.activeRoute.snapshot.queryParamMap.get('languageId');
-    const projectId = this.activeRoute.snapshot.queryParamMap.get('projectId');
-    this.projectId = projectId;
+    this.projectId = this.activeRoute.snapshot.queryParamMap.get('projectId');
+    console.log(this.projectId);
     console.log(languageId);
-    console.log(projectId);
     if (languageId != null) {
       this.languageService.findOne(languageId).subscribe(resp => {
+        console.log(resp);
         this.language = resp;
       });
     }

@@ -1,6 +1,9 @@
 package com.maruf.i18n.audit;
 
+import com.maruf.i18n.security.model.UserContext;
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 /*import org.springframework.entity.core.Authentication;
@@ -16,14 +19,10 @@ public class AuditorAwareImpl implements AuditorAware<String> {
     @Override
     public Optional<String> getCurrentAuditor() {
 
-        /*Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated() || authentication.getPrincipal() == "anonymousUser") {
-            return null;
+            return Optional.empty();
         }
-
-        return ((UserContext) authentication.getPrincipal()).getUsername();*/
-
-        return Optional.of("admin");
+        return Optional.of(((UserContext) authentication.getPrincipal()).getUsername());
     }
 }

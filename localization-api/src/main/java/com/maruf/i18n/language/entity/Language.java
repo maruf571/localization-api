@@ -34,7 +34,6 @@ public class Language extends BaseTenantEntity {
     @Column(columnDefinition = "TINYINT", length = 1)
     private Boolean isActive;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY)
     private Project project;
 

@@ -2,6 +2,7 @@ package com.maruf.i18n.language.service;
 
 import com.maruf.i18n.language.entity.Language;
 import com.maruf.i18n.language.repository.LanguageRepository;
+import com.maruf.i18n.tenant.TenantContext;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -17,6 +18,7 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public Language create(Language language) {
+        language.setTenant(TenantContext.getCurrentTenant());
         return languageRepository.save(language);
     }
 
@@ -36,7 +38,10 @@ public class LanguageServiceImpl implements LanguageService {
     @Override
     public Language findById(String languageId) {
         return languageRepository
-                .findById(languageId)
+                .findById(
+                        TenantContext.getCurrentTenant(),
+                        languageId
+                )
                 .orElseThrow(() -> new EntityNotFoundException("language not found for the id " + languageId));
     }
 

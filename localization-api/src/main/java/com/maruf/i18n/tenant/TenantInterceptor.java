@@ -27,7 +27,7 @@ public class TenantInterceptor  extends HandlerInterceptorAdapter {
     private JwtSettings jwtSettings;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
         boolean tenantSet = false;
         String tokenPayload = request.getHeader(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM);

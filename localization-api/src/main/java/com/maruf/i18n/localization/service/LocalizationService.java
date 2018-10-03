@@ -14,9 +14,9 @@ public interface LocalizationService {
 
     void importToLocalization(List<LocalizationDto> localizationDtoList);
 
-    List<Map<String, Object>> findAll(String projectId, String languageId);
+    List<Map<String, Object>> findAll(String languageId);
 
-    LocalizationDto findOne(String projectId, String languageId, String localization);
+    LocalizationDto findOne(String localization, String languageId);
 
     void delete(String localizationId);
 

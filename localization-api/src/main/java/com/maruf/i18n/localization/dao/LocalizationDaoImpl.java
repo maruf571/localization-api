@@ -16,19 +16,16 @@ public class LocalizationDaoImpl implements LocalizationDao  {
     }
 
     @Override
-    public List<Map<String, Object>> findAllLocalizationByProjectIdAndLanguageId(String projectId, String languageId) {
+    public List<Map<String, Object>> findAllLocalizationByProjectIdAndLanguageId(String languageId) {
 
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("projectId", projectId);
         parameters.put("languageId", languageId);
 
         String sql =
                 " SELECT l.id, l.langKey, lv.value " +
                 " FROM LOCALIZATION_KEY l " +
                 " LEFT JOIN LOCALIZATION_VALUE lv " +
-                " ON (lv.localizationKey_id = l.id and lv.language_id = :languageId) " +
-                " WHERE " +
-                        " l.project_id = :projectId ";
+                " ON (lv.localizationKey_id = l.id and lv.language_id = :languageId) " ;
         return jdbcTemplate.queryForList(sql, parameters);
     }
 

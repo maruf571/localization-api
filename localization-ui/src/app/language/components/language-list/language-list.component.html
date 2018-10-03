@@ -13,8 +13,8 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let language of languages">
-                <td scope="row">{{language.id}}</td>
+            <tr *ngFor="let language of languages; let i=index">
+                <td scope="row">{{i + 1}}</td>
                 <td><a [routerLink]="" (click)="navigateToLocalization(language.id)">{{language.name}}</a></td>
                 <td>{{language.code}}</td>
                 <td>{{language.isRtl}}</td>

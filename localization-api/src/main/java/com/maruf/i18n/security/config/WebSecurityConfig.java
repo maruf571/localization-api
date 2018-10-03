@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired private ObjectMapper objectMapper;
 
 
-    protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter() throws Exception {
+    protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter() {
         AjaxLoginProcessingFilter filter = new AjaxLoginProcessingFilter(
                 FORM_BASED_LOGIN_ENTRY_POINT,
                 successHandler,

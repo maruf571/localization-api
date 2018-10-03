@@ -46,8 +46,7 @@ export class LanguageListComponent implements OnInit {
     this.router.navigate(
       ['/localization/localization-list'], {
         queryParams: {
-          languageId: languageId,
-          projectId: this.projectId
+          languageId: languageId
         }
       }
     );

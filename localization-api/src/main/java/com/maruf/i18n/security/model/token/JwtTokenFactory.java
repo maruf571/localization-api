@@ -12,7 +12,7 @@ import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -42,7 +42,7 @@ public class JwtTokenFactory {
 
         Claims claims = Jwts.claims().setSubject(userContext.getUsername());
         claims.put("tenant", userContext.getTenant());
-        claims.put("roles", userContext.getAuthorities().stream().map(s -> s.toString()).collect(Collectors.toList()));
+        claims.put("roles", userContext.getAuthorities().stream().map(Object::toString).collect(Collectors.toList()));
 
         LocalDateTime currentTime = LocalDateTime.now();
         
@@ -68,7 +68,7 @@ public class JwtTokenFactory {
         LocalDateTime currentTime = LocalDateTime.now();
 
         Claims claims = Jwts.claims().setSubject(userContext.getUsername());
-        claims.put("roles", Arrays.asList(Scopes.REFRESH_TOKEN.authority()));
+        claims.put("roles", Collections.singletonList(Scopes.REFRESH_TOKEN.authority()));
         
         String token = Jwts.builder()
           .setClaims(claims)

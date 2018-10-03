@@ -11,9 +11,11 @@ public interface LocalizationKeyRepository extends CrudRepository<LocalizationKe
 
 
     @Query("SELECT l FROM LocalizationKey l " +
-            " LEFT JOIN FETCH l.localizationValues " +
-            " WHERE l.project.name=?1 AND l.langKey=?2")
-    LocalizationKey findByProjectNameAndKey(String projectName, String key);
+            " LEFT JOIN FETCH l.localizationValues lv" +
+            " WHERE l.tenant=?1 " +
+            " AND " +
+            " l.id=?2 ")
+    LocalizationKey findById(String tenant, String localizationId);
 
     @Query("SELECT l FROM LocalizationKey l " +
             " LEFT JOIN FETCH l.localizationValues lv " +

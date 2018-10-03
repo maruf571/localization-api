@@ -21,7 +21,7 @@ export class LocalizationListComponent implements OnInit {
   ngOnInit() {
     this.languageId = this.activeRoute.snapshot.queryParamMap.get('languageId');
     this.projectId = this.activeRoute.snapshot.queryParamMap.get('projectId');
-    this.localizationService.findAll("project/" + this.projectId + "/language/" + this.languageId).subscribe(resp => { 
+    this.localizationService.findAll("language/" + this.languageId).subscribe(resp => { 
       console.log(resp);
       this.localizations = resp;
     });

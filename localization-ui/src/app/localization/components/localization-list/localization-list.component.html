@@ -12,8 +12,8 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let localization of localizations">
-                <td scope="row">{{localization.id}}</td>
+            <tr *ngFor="let localization of localizations; let i=index">
+                <td scope="row">{{i + 1}}</td>
                 <td>{{localization.langKey}}</td>
                 <td>{{localization.value}}</td>
                 <td>
