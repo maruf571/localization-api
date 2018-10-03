@@ -1,6 +1,5 @@
 package com.maruf.i18n.localization.dao;
 
-import com.maruf.i18n.localization.dto.LocalizationDto;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +16,7 @@ public class LocalizationDaoImpl implements LocalizationDao  {
     }
 
     @Override
-    public List<Map<String, Object>> findAllLocalizationByProjectIdAndLanguageId(Long projectId, Long languageId) {
+    public List<Map<String, Object>> findAllLocalizationByProjectIdAndLanguageId(String projectId, String languageId) {
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("projectId", projectId);
@@ -34,7 +33,7 @@ public class LocalizationDaoImpl implements LocalizationDao  {
     }
 
 
-    public Map<String, Object> findLocalization(Long projectId, Long languageId){
+    public Map<String, Object> findLocalization(String projectId, String languageId){
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("projectId", projectId);

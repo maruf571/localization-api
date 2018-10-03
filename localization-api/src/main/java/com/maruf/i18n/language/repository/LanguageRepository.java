@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-public interface LanguageRepository extends JpaRepository<Language, Long> {
+public interface LanguageRepository extends JpaRepository<Language, String> {
 
-    List<Language> findByProjectId(Long projectId);
+    List<Language> findByProjectId(String projectId);
 
     List<Language> findByProjectName(String projectName);
 

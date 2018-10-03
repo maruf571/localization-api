@@ -26,13 +26,13 @@ public class LanguageApi {
     }
 
     @GetMapping
-    public ResponseEntity<List<Language>> findAll(@RequestParam Long projectId){
+    public ResponseEntity<List<Language>> findAll(@RequestParam String projectId){
         return ResponseEntity.ok()
                 .body(languageService.findAll(projectId));
     }
 
     @GetMapping("/{languageId}")
-    public ResponseEntity<Language> findById(@PathVariable Long languageId){
+    public ResponseEntity<Language> findById(@PathVariable String languageId){
         return ResponseEntity.ok()
                 .body(languageService.findById(languageId));
     }
@@ -50,7 +50,7 @@ public class LanguageApi {
     }
 
     @DeleteMapping("/{languageId}")
-    public void delete(@RequestParam Long languageId){
+    public void delete(@RequestParam String languageId){
         languageService.delete(languageId);
     }
 

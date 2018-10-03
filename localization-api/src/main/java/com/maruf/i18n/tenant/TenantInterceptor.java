@@ -32,7 +32,7 @@ public class TenantInterceptor  extends HandlerInterceptorAdapter {
         boolean tenantSet = false;
         String tokenPayload = request.getHeader(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM);
         RawAccessJwtToken token = new RawAccessJwtToken(tokenExtractor.extract(tokenPayload));
-        Long tenant = Long.parseLong( token.parseClaims(jwtSettings.getTokenSigningKey()).getBody().get("tenant").toString());
+        String tenant = token.parseClaims(jwtSettings.getTokenSigningKey()).getBody().get("tenant").toString();
         log.debug("Current tenant {}", tenant);
 
         if(tenant != null) {

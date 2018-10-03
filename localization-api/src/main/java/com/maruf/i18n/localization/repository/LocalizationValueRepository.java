@@ -5,7 +5,7 @@ import com.maruf.i18n.localization.entity.LocalizationKey;
 import com.maruf.i18n.localization.entity.LocalizationValue;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LocalizationValueRepository extends JpaRepository<LocalizationValue, Long> {
+public interface LocalizationValueRepository extends JpaRepository<LocalizationValue, String> {
 
     LocalizationValue findByLanguageAndLocalizationKey(Language language, LocalizationKey localizationKey);
 }

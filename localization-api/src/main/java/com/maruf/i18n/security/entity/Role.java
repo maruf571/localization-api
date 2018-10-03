@@ -1,23 +1,17 @@
 package com.maruf.i18n.security.entity;
 
+import com.maruf.i18n.entity.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Setter
 @Getter
 @Entity
 @Table(name = "ROLE")
-public class Role implements Serializable {
-
-    static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+public class Role extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private RoleName name;

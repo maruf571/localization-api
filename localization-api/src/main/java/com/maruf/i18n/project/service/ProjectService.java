@@ -10,9 +10,9 @@ public interface ProjectService {
 
     Project update(Project project);
 
-    Project findById(Long projectId);
+    Project findById(String projectId);
 
     Page<Project> findAll(Pageable pageable);
 
-    void delete(Long projectId);
+    void delete(String projectId);
 }

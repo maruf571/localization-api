@@ -33,7 +33,7 @@ public class ProjectApi {
     }
 
     @GetMapping("/{projectId}")
-    public ResponseEntity findById(@PathVariable Long projectId){
+    public ResponseEntity findById(@PathVariable String projectId){
         return ResponseEntity.ok()
                 .body(projectService.findById(projectId));
     }
@@ -52,7 +52,7 @@ public class ProjectApi {
     }
 
     @DeleteMapping("/{projectId}")
-    public void delete(@RequestParam Long projectId){
+    public void delete(@RequestParam String projectId){
         projectService.delete(projectId);
     }
 

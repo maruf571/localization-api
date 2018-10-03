@@ -5,13 +5,13 @@ package com.maruf.i18n.tenant;
  */
 public class TenantContext {
 
-    private static final ThreadLocal<Long> currentTenant = new ThreadLocal<>();
+    private static final ThreadLocal<String> currentTenant = new ThreadLocal<>();
 
-    public static void setCurrentTenant(Long tenant) {
+    public static void setCurrentTenant(String tenant) {
         currentTenant.set(tenant);
     }
 
-    public static Long getCurrentTenant() {
+    public static String getCurrentTenant() {
         return currentTenant.get();
     }
 

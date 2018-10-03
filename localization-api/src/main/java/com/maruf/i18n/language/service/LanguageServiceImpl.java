@@ -34,19 +34,19 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    public Language findById(Long languageId) {
+    public Language findById(String languageId) {
         return languageRepository
                 .findById(languageId)
                 .orElseThrow(() -> new EntityNotFoundException("language not found for the id " + languageId));
     }
 
     @Override
-    public List<Language> findAll(Long projectId) {
+    public List<Language> findAll(String projectId) {
         return languageRepository.findByProjectId(projectId);
     }
 
     @Override
-    public void delete(Long languageId) {
+    public void delete(String languageId) {
         languageRepository.deleteById(languageId);
     }
 

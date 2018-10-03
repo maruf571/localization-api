@@ -21,18 +21,18 @@ public class LocalizationPublicApi {
     }
 
     @GetMapping("/api/project-name/{projectName}/language-code/{languageCode}")
-    public ResponseEntity getAllLocalization(@PathVariable String projectName, @PathVariable String languageCode){
+    public ResponseEntity getAllLocalizationByProjectnameAndCode(@PathVariable String projectName, @PathVariable String languageCode){
         log.debug("projectName: {}, languageCode: {}", projectName, languageCode);
         return ResponseEntity.ok().body(
-                localizationService.findLocalizationByProjectAndLanguageCode(projectName, languageCode)
+                localizationService.findLocalizationByProjectNameAndLanguageCode(projectName, languageCode)
         );
     }
 
     @GetMapping("/api/project-id/{projectId}/language-id/{languageId}")
-    public ResponseEntity getAllLocalization(@PathVariable Long projectId, @PathVariable Long languageId){
+    public ResponseEntity getAllLocalizationByProjectIdAndCode(@PathVariable String projectId, @PathVariable String languageId){
         log.debug("projectId: {}, languageId: {}", projectId, languageId);
         return ResponseEntity.ok().body(
-                localizationService.findLocalizationByProjectAndLanguageCode(projectId, languageId)
+                localizationService.findLocalizationByProjectIdAndLanguageCode(projectId, languageId)
         );
     }
 

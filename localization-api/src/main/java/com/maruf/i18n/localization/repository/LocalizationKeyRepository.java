@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface LocalizationKeyRepository extends CrudRepository<LocalizationKey, Long> {
+public interface LocalizationKeyRepository extends CrudRepository<LocalizationKey, String> {
 
 
     @Query("SELECT l FROM LocalizationKey l " +
@@ -18,12 +18,12 @@ public interface LocalizationKeyRepository extends CrudRepository<LocalizationKe
     @Query("SELECT l FROM LocalizationKey l " +
             " LEFT JOIN FETCH l.localizationValues lv " +
             " WHERE l.project.id=?1  AND l.id=?2")
-    LocalizationKey findByProjectNameAndKey(Long projectId, Long localizationId);
+    LocalizationKey findByProjectIdAndLocalizatoinId(String projectId, String localizationId);
 
     @Query("SELECT l FROM LocalizationKey l " +
             " LEFT JOIN FETCH l.localizationValues " +
             " WHERE l.project.id=?1 AND l.langKey=?2")
-    Optional<LocalizationKey> findByProjectIdAndKey(Long projectId, String key);
+    Optional<LocalizationKey> findByProjectIdAndKey(String projectId, String key);
 
 
     @Query(value = "SELECT l.langKey from LOCALIZATION_KEY l" +

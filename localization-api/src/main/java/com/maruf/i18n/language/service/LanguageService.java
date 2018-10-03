@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface LanguageService {
 
-    List<Language> findAll(Long projectId);
+    List<Language> findAll(String projectId);
 
-    Language findById(Long languageId);
+    Language findById(String languageId);
 
     Language create(Language language);
 
     Language update(Language language);
 
-    void delete(Long languageId);
+    void delete(String languageId);
 
     List<Language> findLanguageByProject(String projectName);
 }

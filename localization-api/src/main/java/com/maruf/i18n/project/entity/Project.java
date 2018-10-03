@@ -1,6 +1,6 @@
 package com.maruf.i18n.project.entity;
 
-import com.maruf.i18n.entity.BaseEntity;
+import com.maruf.i18n.entity.BaseTenantEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "PROJECT",
         uniqueConstraints = @UniqueConstraint(columnNames = {"tenant", "name"}))
-public class Project extends BaseEntity {
+public class Project extends BaseTenantEntity {
 
     @Column(nullable = false)
     private String name;

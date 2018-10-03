@@ -1,6 +1,6 @@
 package com.maruf.i18n.security.entity;
 
-import com.maruf.i18n.entity.BaseEntity;
+import com.maruf.i18n.entity.BaseTenantEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +20,7 @@ import java.util.Set;
 @Getter
 @Entity
 @Table(name = "USER")
-public class User extends BaseEntity {
+public class User extends BaseTenantEntity {
 
     @Column(length = 50, unique = true)
     private String email;

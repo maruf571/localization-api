@@ -14,15 +14,15 @@ public interface LocalizationService {
 
     void importToLocalization(List<LocalizationDto> localizationDtoList);
 
-    List<Map<String, Object>> findAll(Long projectId, Long languageId);
+    List<Map<String, Object>> findAll(String projectId, String languageId);
 
-    LocalizationDto findOne(Long projectId, Long languageId, Long localization);
+    LocalizationDto findOne(String projectId, String languageId, String localization);
 
-    void delete(Long localizationId);
+    void delete(String localizationId);
 
-    Map<String, Object> findLocalizationByProjectAndLanguageCode(String projectName, String languageCode);
+    Map<String, Object> findLocalizationByProjectNameAndLanguageCode(String projectName, String languageCode);
 
-    Map<String, Object> findLocalizationByProjectAndLanguageCode(Long  projectId, Long languageId);
+    Map<String, Object> findLocalizationByProjectIdAndLanguageCode(String  projectId, String languageId);
 
     List<String> findLocalizationKeyByProject(String projectName);
 

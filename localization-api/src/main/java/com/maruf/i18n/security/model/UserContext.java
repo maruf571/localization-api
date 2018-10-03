@@ -18,15 +18,15 @@ public class UserContext{
 
     private final List<GrantedAuthority> authorities;
 
-    private final Long tenant;
+    private final String tenant;
 
-    private UserContext(String username, List<GrantedAuthority> authorities, Long tenant) {
+    private UserContext(String username, List<GrantedAuthority> authorities, String tenant) {
         this.username = username;
         this.authorities = authorities;
         this.tenant = tenant;
     }
     
-    public static UserContext create(String username, List<GrantedAuthority> authorities, Long tenant) {
+    public static UserContext create(String username, List<GrantedAuthority> authorities, String tenant) {
         if (StringUtils.isEmpty(username)) throw new IllegalArgumentException("Username is blank: " + username);
         return new UserContext(username, authorities, tenant);
     }

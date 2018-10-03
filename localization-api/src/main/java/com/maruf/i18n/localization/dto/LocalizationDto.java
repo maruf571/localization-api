@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LocalizationDto {
 
-    private Long id;
+    private String id;
 
     private String langKey;
 
     private String value;
 
-    private Long languageId;
+    private String languageId;
 
-    private Long projectId;
+    private String projectId;
 }

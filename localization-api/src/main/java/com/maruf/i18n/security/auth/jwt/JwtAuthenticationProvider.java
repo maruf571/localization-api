@@ -16,7 +16,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -37,7 +36,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
         Jws<Claims> jwsClaims = rawAccessToken.parseClaims(jwtSettings.getTokenSigningKey());
         String subject = jwsClaims.getBody().getSubject();
-        Long tenant =  Long.parseLong(jwsClaims.getBody().get("tenant").toString());
+        String tenant =  jwsClaims.getBody().get("tenant").toString();
         List<String> scopes = jwsClaims.getBody().get("roles", List.class);
         List<GrantedAuthority> authorities = scopes.stream()
                 .map(authority -> new SimpleGrantedAuthority(authority))

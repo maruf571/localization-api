@@ -10,9 +10,9 @@ public interface TenantService {
 
     Tenant update(Tenant tenant);
 
-    Tenant findById(Long projectId);
+    Tenant findById(String projectId);
 
     Page<Tenant> findAll(Pageable pageable);
 
-    void delete(Long projectId);
+    void delete(String projectId);
 }

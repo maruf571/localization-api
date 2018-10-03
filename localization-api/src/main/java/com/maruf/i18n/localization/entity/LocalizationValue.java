@@ -1,7 +1,7 @@
 package com.maruf.i18n.localization.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.maruf.i18n.entity.BaseEntity;
+import com.maruf.i18n.entity.BaseTenantEntity;
 import com.maruf.i18n.language.entity.Language;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +23,7 @@ import javax.persistence.UniqueConstraint;
 @Table( name = "LOCALIZATION_VALUE",
         uniqueConstraints = @UniqueConstraint(columnNames = {"localizationKey_id", "language_id"}),
         indexes = {@Index(name = "idx_localization_value", columnList = "language_id")})
-public class LocalizationValue extends BaseEntity {
+public class LocalizationValue extends BaseTenantEntity {
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String value;

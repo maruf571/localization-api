@@ -1,13 +1,11 @@
 package com.maruf.i18n.localization.dao;
 
-import com.maruf.i18n.localization.dto.LocalizationDto;
-
 import java.util.List;
 import java.util.Map;
 
 public interface LocalizationDao {
 
-    List<Map<String, Object>> findAllLocalizationByProjectIdAndLanguageId(Long project, Long language);
+    List<Map<String, Object>> findAllLocalizationByProjectIdAndLanguageId(String project, String language);
 
-    Map<String, Object> findLocalization(Long projectId, Long languageId);
+    Map<String, Object> findLocalization(String projectId, String languageId);
 }

@@ -42,28 +42,28 @@ public class LocalizationServiceImpl implements LocalizationService {
 
 
     @Override
-    public List<Map<String, Object>> findAll(Long projectId, Long languageId) {
+    public List<Map<String, Object>> findAll(String projectId, String languageId) {
         return  localizationDao.findAllLocalizationByProjectIdAndLanguageId(projectId, languageId);
     }
 
     @Override
-    public Map<String, Object> findLocalizationByProjectAndLanguageCode(String projectName, String languageCode) {
+    public Map<String, Object> findLocalizationByProjectNameAndLanguageCode(String projectName, String languageCode) {
         log.debug("projectName: {}, languageCode: {}", projectName, languageCode);
 
         Language language = languageRepository.findByCode(languageCode).orElseThrow(() -> new EntityNotFoundException("language not found"));
         Project project = projectRepository.findByName(TenantContext.getCurrentTenant(), projectName).orElseThrow(() ->new EntityNotFoundException("Project name not found"));
-        return findLocalizationByProjectAndLanguageCode(project.getId(), language.getId());
+        return findLocalizationByProjectIdAndLanguageCode(project.getId(), language.getId());
     }
 
 
     @Override
-    public Map<String, Object> findLocalizationByProjectAndLanguageCode(Long  projectId, Long languageId) {
+    public Map<String, Object> findLocalizationByProjectIdAndLanguageCode(String  projectId, String languageId) {
         log.debug("projectName: {}, languageCode: {}", projectId, languageId);
          return  localizationDao.findLocalization(projectId, languageId);
     }
 
     @Override
-    public LocalizationDto findOne(Long projectId, Long languageId, Long localizationId) {
+    public LocalizationDto findOne(String projectId, String languageId, String localizationId) {
         log.debug("projectId: {}, languageId: {}, localization: {}", projectId, languageId, localizationId);
 
         LocalizationKey lk = localizationKeyRepository.findByProjectNameAndKey(projectId, localizationId);
@@ -141,7 +141,7 @@ public class LocalizationServiceImpl implements LocalizationService {
     }
 
     @Override
-    public void delete(Long localizationId) {
+    public void delete(String localizationId) {
         log.debug("localizationId: {}", localizationId);
         localizationKeyRepository.deleteById(localizationId);
     }

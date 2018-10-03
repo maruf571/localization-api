@@ -34,15 +34,15 @@ public class LocalizationApi {
     }
 
     @GetMapping("/project/{projectId}/language/{languageId}")
-    public ResponseEntity<List<Map<String, Object>>> findAll(@PathVariable Long projectId, @PathVariable Long languageId){
+    public ResponseEntity<List<Map<String, Object>>> findAll(@PathVariable String projectId, @PathVariable String languageId){
         return ResponseEntity.ok()
                 .body(localizationService.findAll(projectId, languageId));
     }
 
     @GetMapping("/project/{projectId}/language/{languageId}/localization/{localizationId}")
-    public ResponseEntity findAll(@PathVariable Long projectId,
-                                                   @PathVariable Long languageId,
-                                                   @PathVariable Long localizationId){
+    public ResponseEntity findAll(@PathVariable String projectId,
+                                                   @PathVariable String languageId,
+                                                   @PathVariable String localizationId){
         return ResponseEntity.ok()
                 .body(localizationService.findOne(projectId, languageId, localizationId));
     }
@@ -60,13 +60,13 @@ public class LocalizationApi {
     }
 
     @DeleteMapping("/{localizationId}")
-    public void delete(@PathVariable Long localizationId){
+    public void delete(@PathVariable String localizationId){
         localizationService.delete(localizationId);
     }
 
 
     @GetMapping("/project/{projectId}/language/{languageId}/export")
-    public ModelAndView exportLocalization(@PathVariable Long projectId, @PathVariable Long languageId){
+    public ModelAndView exportLocalization(@PathVariable String projectId, @PathVariable String languageId){
 
         List<Map<String, Object>> localizationList = localizationService.findAll(projectId, languageId);
         Map<String, Object> data = new HashMap<>();
@@ -76,7 +76,7 @@ public class LocalizationApi {
 
 
     @PostMapping("/project/{projectId}/language/{languageId}/import")
-    public ResponseEntity importLocalization(@PathVariable Long projectId, @PathVariable Long languageId, MultipartFile file){
+    public ResponseEntity importLocalization(@PathVariable String projectId, @PathVariable String languageId, MultipartFile file){
 
         try {
             InputStream in = file.getInputStream();

@@ -31,7 +31,7 @@ public class TenantServiceImpl implements TenantService {
     }
 
     @Override
-    public Tenant findById(Long projectId) {
+    public Tenant findById(String projectId) {
         return tenantRepository
                 .findById(projectId)
                 .orElseThrow(() -> new EntityNotFoundException("tenant not found"));
@@ -43,7 +43,7 @@ public class TenantServiceImpl implements TenantService {
     }
 
     @Override
-    public void delete(Long projectId) {
+    public void delete(String projectId) {
         tenantRepository.deleteById(projectId);
     }
 }

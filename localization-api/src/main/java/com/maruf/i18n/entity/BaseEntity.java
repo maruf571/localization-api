@@ -1,6 +1,7 @@
 package com.maruf.i18n.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,10 +15,9 @@ public class BaseEntity implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(length = 32)
+    protected String id;
 
-    @Column(updatable = false)
-    private Long tenant;
 }

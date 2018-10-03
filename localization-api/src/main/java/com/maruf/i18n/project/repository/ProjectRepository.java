@@ -9,18 +9,18 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
-public interface ProjectRepository extends JpaRepository<Project, Long> {
+public interface ProjectRepository extends JpaRepository<Project, String> {
 
     @Query("SELECT p FROM Project p WHERE p.tenant=?1 AND p.id=?2")
-    Optional<Project> findById(Long tenant, Long id);
+    Optional<Project> findById(String tenant, String id);
 
     @Query("SELECT p FROM Project p WHERE p.tenant=?1 AND p.name=?2")
-    Optional<Project> findByName(Long tenant, String name);
+    Optional<Project> findByName(String tenant, String name);
 
     @Query("SELECT p FROM Project p WHERE p.tenant=?1")
-    Page<Project> findAll(Long tenant, Pageable pageable);
+    Page<Project> findAll(String tenant, Pageable pageable);
 
     @Modifying
     @Query("DELETE FROM Project p WHERE p.tenant=?1 AND p.id=?2")
-    void deleteById(Long tenant, Long id);
+    void deleteById(String tenant, String id);
 }

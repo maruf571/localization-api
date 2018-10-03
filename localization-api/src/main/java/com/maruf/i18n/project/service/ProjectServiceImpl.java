@@ -36,7 +36,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project findById(Long projectId) {
+    public Project findById(String projectId) {
         return projectRepository
                 .findById(
                         TenantContext.getCurrentTenant(),
@@ -54,7 +54,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void delete(Long projectId) {
+    public void delete(String projectId) {
         projectRepository.deleteById(
                 TenantContext.getCurrentTenant(),
                 projectId

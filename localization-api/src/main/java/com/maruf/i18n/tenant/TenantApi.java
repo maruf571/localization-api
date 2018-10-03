@@ -31,7 +31,7 @@ public class TenantApi {
     }
 
     @GetMapping("/{tenantId}")
-    public ResponseEntity findById(@PathVariable Long businessId){
+    public ResponseEntity findById(@PathVariable String businessId){
         return ResponseEntity.ok()
                 .body(tenantService.findById(businessId));
     }
@@ -49,7 +49,7 @@ public class TenantApi {
     }
 
     @DeleteMapping("/{tenantId}")
-    public void delete(@RequestParam Long businessId){
+    public void delete(@RequestParam String businessId){
         tenantService.delete(businessId);
     }
 

@@ -1,7 +1,7 @@
 package com.maruf.i18n.language.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.maruf.i18n.entity.BaseEntity;
+import com.maruf.i18n.entity.BaseTenantEntity;
 import com.maruf.i18n.project.entity.Project;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "LANGUAGE",
         indexes = {@Index(name = "idx_language", columnList = "project_id")})
-public class Language extends BaseEntity {
+public class Language extends BaseTenantEntity {
 
     private String name;
 
