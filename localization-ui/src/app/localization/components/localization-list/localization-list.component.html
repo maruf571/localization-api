@@ -1,5 +1,9 @@
 <section class="card">
     <div class="card-body">
+    <button type="button" *ngIf="language.project"
+            [routerLink]="['/language/language-list']"
+            [queryParams]="{projectId: language.project.id}"   
+            class="mr-2 btn btn-default">Back to {{language.name}}</button>
     <button type="button" class="btn btn-primary" (click)="addOrEdit()">Add new localization</button>
     <table class="table table-bordered table-hover mt-2">
         <thead class="thead-light">

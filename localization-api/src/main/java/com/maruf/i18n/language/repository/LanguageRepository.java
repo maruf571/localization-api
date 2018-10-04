@@ -16,12 +16,32 @@ public interface LanguageRepository extends JpaRepository<Language, String> {
             " l.id=?2")
     Optional<Language> findById(String tenant, String languageId);
 
-    List<Language> findByProjectId(String projectId);
 
-    List<Language> findByProjectName(String projectName);
+    @Query("SELECT l from Language l " +
+            " LEFT JOIN FETCH l.project lp " +
+            " WHERE l.tenant=?1 " +
+            " AND " +
+            " lp.id=?2")
+    List<Language> findByProjectId(String tenant, String projectId);
 
-    @Query("SELECT l FROM Language l WHERE l.code=?1")
-    Optional<Language> findByCode(String code);
+
+    @Query("SELECT l FROM Language l  " +
+            " WHERE " +
+            " l.tenant=?1 " +
+            " AND " +
+            " l.project.name=?2 ")
+    List<Language> findByProjectName(String tenant, String projectName);
+
+
+    /**
+     * will use in Public api, so no tenant check here
+     */
+    @Query("SELECT l FROM Language l " +
+            " WHERE " +
+            " l.project.name=?1 " +
+            " AND " +
+            "l.code=?2")
+    Optional<Language> findByProjectNameAndLanguageCode(String projectId, String code);
 
 
 }

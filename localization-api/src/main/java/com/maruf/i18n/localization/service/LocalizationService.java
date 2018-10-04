@@ -22,7 +22,7 @@ public interface LocalizationService {
 
     Map<String, Object> findLocalizationByProjectNameAndLanguageCode(String projectName, String languageCode);
 
-    Map<String, Object> findLocalizationByProjectIdAndLanguageCode(String  projectId, String languageId);
+    Map<String, Object> findLocalizationByProjectIdAndLanguageCode(String languageId);
 
     List<String> findLocalizationKeyByProject(String projectName);
 

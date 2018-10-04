@@ -3,6 +3,7 @@ package com.maruf.i18n.language.service;
 import com.maruf.i18n.language.entity.Language;
 import com.maruf.i18n.language.repository.LanguageRepository;
 import com.maruf.i18n.tenant.TenantContext;
+import com.maruf.i18n.tenant.entity.Tenant;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -47,7 +48,10 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public List<Language> findAll(String projectId) {
-        return languageRepository.findByProjectId(projectId);
+        return languageRepository.findByProjectId(
+                TenantContext.getCurrentTenant(),
+                projectId
+        );
     }
 
     @Override
@@ -58,6 +62,9 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public List<Language> findLanguageByProject(String projectName) {
-        return languageRepository.findByProjectName(projectName);
+        return languageRepository.findByProjectName(
+                TenantContext.getCurrentTenant(),
+                projectName
+        );
     }
 }

@@ -28,36 +28,38 @@ public class LocalizationPublicApi {
         );
     }
 
-    @GetMapping("/api/project-id/{projectId}/language-id/{languageId}")
-    public ResponseEntity getAllLocalizationByProjectIdAndCode(@PathVariable String projectId, @PathVariable String languageId){
-        log.debug("projectId: {}, languageId: {}", projectId, languageId);
+    @GetMapping("/api/language-id/{languageId}")
+    public ResponseEntity getAllLocalizationByProjectIdAndCode(@PathVariable String languageId){
+        log.debug("languageId: {}", languageId);
         return ResponseEntity.ok().body(
-                localizationService.findLocalizationByProjectIdAndLanguageCode(projectId, languageId)
+                localizationService.findLocalizationByProjectIdAndLanguageCode(languageId)
         );
     }
 
 
-    @GetMapping("/api/project-name/{projectName}/languages")
-    public ResponseEntity getAllLanguage(@PathVariable String projectName){
-        log.debug("projectName: {}", projectName);
-        return ResponseEntity.ok().body(
-                languageService.findLanguageByProject(projectName)
-        );
-    }
+//    @GetMapping("/api/project-name/{projectName}/languages")
+//    public ResponseEntity getAllLanguage(@PathVariable String projectName){
+//        log.debug("projectName: {}", projectName);
+//        return ResponseEntity.ok().body(
+//                languageService.findLanguageByProject(projectName)
+//        );
+//    }
+//
+//    @GetMapping("/api/project-name/{projectName}/language-keys")
+//    public ResponseEntity getAllKeys(@PathVariable String projectName){
+//        log.debug("projectName: {}", projectName);
+//        return ResponseEntity.ok().body(
+//                localizationService.findLocalizationKeyByProject(projectName)
+//        );
+//    }
+//
+//    @GetMapping("/api/project-name/{projectName}/language-keys/{languageKey}")
+//    public ResponseEntity getAllLocalizationByKey(@PathVariable String projectName, @PathVariable String languageKey){
+//        log.debug("projectName: {}, languageKey: {}", projectName, languageKey);
+//        return ResponseEntity.ok().body(
+//                localizationService.findLocalizationValueByKey(projectName, languageKey)
+//        );
+//    }
 
-    @GetMapping("/api/project-name/{projectName}/language-keys")
-    public ResponseEntity getAllKeys(@PathVariable String projectName){
-        log.debug("projectName: {}", projectName);
-        return ResponseEntity.ok().body(
-                localizationService.findLocalizationKeyByProject(projectName)
-        );
-    }
 
-    @GetMapping("/api/project-name/{projectName}/language-keys/{languageKey}")
-    public ResponseEntity getAllLocalizationByKey(@PathVariable String projectName, @PathVariable String languageKey){
-        log.debug("projectName: {}, languageKey: {}", projectName, languageKey);
-        return ResponseEntity.ok().body(
-                localizationService.findLocalizationValueByKey(projectName, languageKey)
-        );
-    }
 }

@@ -10,9 +10,16 @@
                                 Name*
                             </label>
                             <input type="text" [(ngModel)]="project.name" class="form-control" />
-                            <small>Do not use exising project name.</small>
                         </div>
 
+                        <div class="form-group">
+                            <label>
+                                Code*
+                            </label>
+                            <input type="text" [(ngModel)]="project.code" class="form-control" />
+                            <small>Do not use exising project code. Code must be unique, sort, no space.</small>
+                        </div>
+                        
                         <div class="form-group">
                             <label>
                                 Description
@@ -20,6 +27,8 @@
                             <textarea [(ngModel)]="project.description" class="form-control">
                             </textarea>               
                         </div>
+
+          
 
 
                         <div class="form-group">

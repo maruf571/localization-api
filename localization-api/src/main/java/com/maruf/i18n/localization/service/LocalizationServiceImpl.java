@@ -41,28 +41,70 @@ public class LocalizationServiceImpl implements LocalizationService {
     }
 
 
-    @Override
-    public List<Map<String, Object>> findAll( String languageId) {
-
-        return  localizationDao.findAllLocalizationByProjectIdAndLanguageId(languageId);
-    }
-
+    /**
+     * This method will return all the key/value pair in public api, so no tenant here
+     *
+     *  @param projectName
+     * @param languageCode
+     * @return
+     */
     @Override
     public Map<String, Object> findLocalizationByProjectNameAndLanguageCode(String projectName, String languageCode) {
         log.debug("projectName: {}, languageCode: {}", projectName, languageCode);
 
-        Language language = languageRepository.findByCode(languageCode).orElseThrow(() -> new EntityNotFoundException("language not found"));
-        Project project = projectRepository.findByName(TenantContext.getCurrentTenant(), projectName).orElseThrow(() ->new EntityNotFoundException("Project name not found"));
-        return findLocalizationByProjectIdAndLanguageCode(project.getId(), language.getId());
+        Language language = languageRepository.findByProjectNameAndLanguageCode(
+                projectName,
+                languageCode
+        ).orElseThrow(() -> new EntityNotFoundException("language not found"));
+
+        return  localizationDao.findLocalization(language.getProject().getId(), language.getId());
     }
 
 
+    /**
+     * This method will return all the key/value pair in public api, so no tenant here
+     *
+     * @param languageId
+     * @return
+     */
     @Override
-    public Map<String, Object> findLocalizationByProjectIdAndLanguageCode(String  projectId, String languageId) {
-        log.debug("projectName: {}, languageCode: {}", projectId, languageId);
-         return  localizationDao.findLocalization(projectId, languageId);
+    public Map<String, Object> findLocalizationByProjectIdAndLanguageCode(String languageId) {
+        log.debug("languageCode: {}", languageId);
+
+        Language language = languageRepository.findById(
+                languageId
+        ).orElseThrow(() -> new EntityNotFoundException("language not found"));
+
+        return  localizationDao.findLocalization(language.getProject().getId(), language.getId());
     }
 
+
+    /**
+     * This method will return all the localization keys and if there are any value for a specific language.
+     *
+     * @param languageId
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> findAll( String languageId) {
+        log.debug("languageId: {}", languageId);
+
+        Language language = languageRepository.findById(
+                TenantContext.getCurrentTenant(),
+                languageId
+        ).orElseThrow(() -> new EntityNotFoundException("language not found"));
+
+        return  localizationDao.findAllLocalizationByProjectIdAndLanguageId(language.getProject().getId(), language.getId());
+    }
+
+
+    /**
+     * This method will return localization key and if there is any value
+     *
+     * @param localizationId
+     * @param languageId
+     * @return
+     */
     @Override
     public LocalizationDto findOne(String localizationId, String languageId) {
         log.debug("localization: {}", localizationId);
@@ -85,6 +127,13 @@ public class LocalizationServiceImpl implements LocalizationService {
                 .build();
     }
 
+
+    /**
+     * create new localization key with or without value
+     *
+     * @param localizationDto
+     * @return
+     */
     @Override
     public LocalizationDto create(LocalizationDto localizationDto) {
 
@@ -119,6 +168,12 @@ public class LocalizationServiceImpl implements LocalizationService {
     }
 
 
+    /**
+     * Update a localization key with or without value
+     *
+     * @param localizationDto
+     * @return
+     */
     @Override
     public LocalizationDto update(LocalizationDto localizationDto) {
         LocalizationKey localizationKey = localizationKeyRepository.findById(localizationDto.getId()).orElseThrow(() -> new EntityNotFoundException("localizationKey not found"));
@@ -150,6 +205,11 @@ public class LocalizationServiceImpl implements LocalizationService {
                 .build();
     }
 
+    /**
+     * Delete localization key
+     *
+     * @param localizationId
+     */
     @Override
     public void delete(String localizationId) {
         log.debug("localizationId: {}", localizationId);
@@ -169,6 +229,12 @@ public class LocalizationServiceImpl implements LocalizationService {
         return null; //localizationKeyRepository.findByProjectNameAndKey(projectName, key);
     }
 
+
+    /**
+     * import from excel file to localization table
+     *
+     * @param localizationDtoList
+     */
     @Override
     public void importToLocalization(List<LocalizationDto> localizationDtoList) {
 

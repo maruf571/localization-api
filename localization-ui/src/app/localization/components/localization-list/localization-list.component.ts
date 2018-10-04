@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalizationService } from '../../localization.service';
+import { LanguageService } from '../../../language/language.service';
 
 @Component({
   selector: 'localization-list',
@@ -10,17 +11,22 @@ import { LocalizationService } from '../../localization.service';
 export class LocalizationListComponent implements OnInit {
 
   localizations = [];
-  projectId = '';
+  language = [];
   languageId = '';
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute, 
-    private localizationService: LocalizationService
+    private localizationService: LocalizationService,
+    private languageService: LanguageService
   ) {}
 
   ngOnInit() {
     this.languageId = this.activeRoute.snapshot.queryParamMap.get('languageId');
-    this.projectId = this.activeRoute.snapshot.queryParamMap.get('projectId');
+  
+    this.languageService.findOne(this.languageId).subscribe(resp => {
+      console.log(resp);
+      this.language = resp;
+    })
     this.localizationService.findAll("language/" + this.languageId).subscribe(resp => { 
       console.log(resp);
       this.localizations = resp;
@@ -30,12 +36,12 @@ export class LocalizationListComponent implements OnInit {
 
 
   addOrEdit(localizationId) {
+    console.log();
     this.router.navigate(
       ['/localization/localization-single'], {
         queryParams: {
           localizationId: localizationId,
           languageId: this.languageId,
-          projectId: this.projectId
         }
       }
     );

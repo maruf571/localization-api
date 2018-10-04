@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from '../../language.service';
+import { environment } from '../../../../environments/environment';
+
 
 @Component({
   selector: 'language-list',
@@ -11,6 +13,8 @@ export class LanguageListComponent implements OnInit {
 
   languages = [];
   projectId = '';
+  api = environment.REST_API_URL;
+  
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,

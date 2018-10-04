@@ -7,6 +7,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Project name</th>
+                <th scope="col">Code</th>
                 <th scope="col">Description</th>
                 <th scope="col">URL </th>
                 <th scope="col"></th>
@@ -17,8 +18,10 @@
             <tr *ngFor="let project of projects; let i=index">
                 <td scope="row">{{i + 1}}</td>
                 <td scope="row">
-                <a (click)="navigateToLanguage(project.id)" [routerLink]=""> {{project.name}}</a></td>
-                <td innerHTML="{{project.description}}"></td>
+                    <a (click)="navigateToLanguage(project.id)" [routerLink]=""> {{project.name}}</a>
+                </td>
+                <td> {{project.code}}</td>
+                <td>{{project.description}}</td>
                 <td>{{project.url}}</td>
                 <td>
                     <button class="btn btn-primary" (click)="addOrEdit(project.id)" >Edit</button>

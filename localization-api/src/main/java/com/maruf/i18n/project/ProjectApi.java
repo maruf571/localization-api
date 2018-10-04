@@ -39,8 +39,7 @@ public class ProjectApi {
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Project project, @AuthenticationPrincipal UserContext userContext){
-        project.setTenant(userContext.getTenant());
+    public ResponseEntity create(@RequestBody Project project){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(projectService.create(project));
     }

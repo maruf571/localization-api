@@ -14,8 +14,8 @@ public interface ProjectRepository extends JpaRepository<Project, String> {
     @Query("SELECT p FROM Project p WHERE p.tenant=?1 AND p.id=?2")
     Optional<Project> findById(String tenant, String id);
 
-    @Query("SELECT p FROM Project p WHERE p.tenant=?1 AND p.name=?2")
-    Optional<Project> findByName(String tenant, String name);
+    @Query("SELECT p FROM Project p WHERE p.name=?1")
+    Optional<Project> findByName(String name);
 
     @Query("SELECT p FROM Project p WHERE p.tenant=?1")
     Page<Project> findAll(String tenant, Pageable pageable);
