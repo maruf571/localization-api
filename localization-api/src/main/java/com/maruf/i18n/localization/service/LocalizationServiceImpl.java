@@ -239,8 +239,11 @@ public class LocalizationServiceImpl implements LocalizationService {
     public void importToLocalization(List<LocalizationDto> localizationDtoList) {
 
         //check if key exist or not
-        Project project = projectRepository.findById(localizationDtoList.get(0).getProjectId()).orElseThrow(EntityNotFoundException::new);
-        Language language = languageRepository.findById(localizationDtoList.get(0).getLanguageId()).orElseThrow(EntityNotFoundException::new);
+        Language language = languageRepository.findById(
+                TenantContext.getCurrentTenant(),
+                localizationDtoList.get(0).getLanguageId()
+        ).orElseThrow(EntityNotFoundException::new);
+        Project project = language.getProject();
 
         for(LocalizationDto localizationDto: localizationDtoList) {
             Optional<LocalizationKey> localizationKey = localizationKeyRepository.findByProjectIdAndKey(localizationDto.getProjectId(), localizationDto.getLangKey());

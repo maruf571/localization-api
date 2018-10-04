@@ -3,6 +3,7 @@ package com.maruf.i18n.localization;
 import com.maruf.i18n.localization.dto.LocalizationDto;
 import com.maruf.i18n.localization.excelbuilder.LocalizationExcelBuilder;
 import com.maruf.i18n.localization.service.LocalizationService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.InputStream;
 import java.util.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/protected/localizations")
 public class LocalizationApi {
@@ -65,6 +68,7 @@ public class LocalizationApi {
 
     @GetMapping("/language/{languageId}/export")
     public ModelAndView exportLocalization(@PathVariable String languageId){
+        log.debug("languageId {}", languageId);
 
         List<Map<String, Object>> localizationList = localizationService.findAll(languageId);
         Map<String, Object> data = new HashMap<>();
@@ -73,9 +77,10 @@ public class LocalizationApi {
     }
 
 
-    @PostMapping("/project/{projectId}/language/{languageId}/import")
-    public ResponseEntity importLocalization(@PathVariable String projectId, @PathVariable String languageId, MultipartFile file){
+    @PostMapping("/language/{languageId}/import")
+    public ResponseEntity importLocalization(@PathVariable String languageId, MultipartFile file){
 
+        System.out.println(file);
         try {
             InputStream in = file.getInputStream();
             Workbook workbook = new XSSFWorkbook(in);
@@ -99,7 +104,7 @@ public class LocalizationApi {
                                 .langKey(currentRow.getCell(0).getStringCellValue())
                                 .value(currentRow.getCell(1).getStringCellValue())
                                 .languageId(languageId)
-                                .projectId(projectId)
+                                .projectId(null)
                                 .build()
                 );
             }

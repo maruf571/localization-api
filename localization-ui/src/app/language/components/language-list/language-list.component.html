@@ -3,7 +3,7 @@
     <button type="button" 
             [routerLink]="['/project/project-list']"
             class="mr-2 btn btn-default">Back to project</button>
-    <button type="button" class="btn btn-primary" (click)="addOrEdit()">Add new language</button>
+    <button type="button" class="btn btn-primary" (click)="naviagetToSongle()">Add new language</button>
     <table class="table table-bordered table-hover mt-2">
         <thead class="thead-light">
             <tr>
@@ -22,7 +22,7 @@
                 <td>{{language.code}}</td>
                 <td>{{language.isRtl}}</td>
                 <td>
-                    <a class="mr-2 btn btn-primary" [routerLink]="" (click)="addOrEdit(language.id)">Edit</a>
+                    <a class="mr-2 btn btn-primary" [routerLink]="" (click)="naviagetToSongle(language.id)">Edit</a>
                     <a class="btn btn-primary" target="_blank" href="{{api}}language-id/{{language.id}}" >PUBLIC API</a>
                 </td>
             </tr>

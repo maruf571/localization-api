@@ -1,7 +1,7 @@
 <section class="card">
 
     <div class="card-body">
-    <button type="button" class="btn btn-primary" (click)="addOrEdit()" >Add New Project</button>
+    <button type="button" class="btn btn-primary" (click)="navigateToSingle()" >Add New Project</button>
     <table class="table table-bordered table-hover mt-2">
         <thead class="thead-light">
             <tr>
@@ -24,7 +24,7 @@
                 <td>{{project.description}}</td>
                 <td>{{project.url}}</td>
                 <td>
-                    <button class="btn btn-primary" (click)="addOrEdit(project.id)" >Edit</button>
+                    <button class="btn btn-primary" (click)="navigateToSingle(project.id)" >Edit</button>
                 </td>
             </tr>
         </tbody>

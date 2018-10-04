@@ -9,7 +9,7 @@ import { ProjectService } from '../../project.service';
 })
 export class ProjectListComponent implements OnInit {
 
-  private projects = [];
+  projects = [];
   constructor(
     private router: Router,
     private route: ActivatedRoute, 
@@ -23,7 +23,7 @@ export class ProjectListComponent implements OnInit {
   }
 
 
-  addOrEdit(projectId){    
+  navigateToSingle(projectId){    
     this.router.navigate(
       ['/project/project-single'], {
         queryParams:{ 

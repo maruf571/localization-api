@@ -4,7 +4,12 @@
             [routerLink]="['/language/language-list']"
             [queryParams]="{projectId: language.project.id}"   
             class="mr-2 btn btn-default">Back to {{language.name}}</button>
-    <button type="button" class="btn btn-primary" (click)="addOrEdit()">Add new localization</button>
+    <button class="mr-2 btn btn-primary" type="button" (click)="addOrEdit()">Add new localization</button>
+    <button class="mr-2 btn btn-primary" type="button" (click)="export(language.id)">Export</button>
+        <label for="file">Import</label>
+        <input  type="file" id="file" 
+                class="mr-2" 
+                (change)="uploadFile($event)" />
     <table class="table table-bordered table-hover mt-2">
         <thead class="thead-light">
             <tr>

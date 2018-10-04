@@ -35,16 +35,4 @@ export class ProjectSingleComponent implements OnInit {
     })
   }   
 
-  addOrEdit(projectId){
-    this.router.navigate(
-      ['/project/project-single'], {
-        queryParams:{ 
-          projectId: projectId,
-        }
-      }
-    );
-  }
-
-
-
 }

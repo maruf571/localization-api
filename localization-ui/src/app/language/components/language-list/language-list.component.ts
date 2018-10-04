@@ -34,7 +34,7 @@ export class LanguageListComponent implements OnInit {
   }
 
 
-  addOrEdit(languageId) {
+  naviagetToSongle(languageId) {
     this.router.navigate(
       ['/language/language-single'], {
         queryParams: {
