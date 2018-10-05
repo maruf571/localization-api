@@ -14,10 +14,10 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    <!--this.languageService.findAll("").subscribe(resp => {
-      console.log(resp);
-      this.languages = resp;
-    })-->
+    // this.languageService.findAll("").subscribe(resp => {
+    //   console.log(resp);
+    //   this.languages = resp;
+    // })
   }
 
 }
