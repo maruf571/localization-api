@@ -11,7 +11,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class LanguageListComponent implements OnInit {
 
-  languages = [];
+  languages:any = [];
   projectId = '';
   api = environment.REST_API_URL;
   

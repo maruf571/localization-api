@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.maruf</groupId>
-	<artifactId>parent</artifactId>
+	<artifactId>localization-parent</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>localization</name>
+	<name>localization-parent</name>
 	<description>Localization project for multilingual application</description>
 
 	<parent>
