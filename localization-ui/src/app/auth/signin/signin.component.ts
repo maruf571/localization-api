@@ -23,11 +23,15 @@ export class SigninComponent implements OnInit {
 
     ngOnInit() {
   
-        // reset login status
-        this.authenticationService.logout();
-
         // get return url from route parameters or default to '/'
-        this.returnUrl = this.activeRoute.snapshot.queryParams['returnUrl'] || '/dashboard';
+        this.returnUrl = this.activeRoute.snapshot.queryParams['returnUrl'] || '/dashboard';      
+        if(this.authenticationService.isLoggedIn()){
+            this.router.navigate([this.returnUrl]);   
+            return;
+        }
+        
+        // reset login status
+         this.authenticationService.logout();
     }
 
 

@@ -60,32 +60,17 @@ export class LocalizationListComponent implements OnInit {
      })
   }
 
-  selectFile(event) {
-    this.uploadFile(event.target.files);
-  }
-
   uploadFile(files: FileList) {
     if (files.length == 0) {
       console.log("No file selected!");
       return
     }
-    let file: File = files[0];
 
-    this.localizationService.uploadFile(this.languageId, file)
-      .subscribe(
-        event => {
-          if (event.type == HttpEventType.UploadProgress) {
-            const percentDone = Math.round(100 * event.loaded / event.total);
-            console.log(`File is ${percentDone}% loaded.`);
-          } else if (event instanceof HttpResponse) {
-            console.log('File is completely loaded!');
-          }
-        },
-        (err) => {
-          console.log("Upload Error:", err);
-        }, () => {
-          console.log("Upload done");
-        }
-      )
+    let file: File = files[0];
+    console.log(file);
+    this.localizationService.uploadFile(this.languageId, file).subscribe(resp => {
+      location.reload();
+    });
   }
+
 }

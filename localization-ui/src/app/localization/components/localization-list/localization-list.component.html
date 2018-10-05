@@ -6,10 +6,13 @@
             class="mr-2 btn btn-default">Back to {{language.name}}</button>
     <button class="mr-2 btn btn-primary" type="button" (click)="addOrEdit()">Add new localization</button>
     <button class="mr-2 btn btn-primary" type="button" (click)="export(language.id)">Export</button>
-        <label for="file">Import</label>
+    
+    <label class="mr-2 btn btn-primary" for="file" style="margin-bottom:0">
         <input  type="file" id="file" 
-                class="mr-2" 
-                (change)="uploadFile($event)" />
+                style="display:none;"
+                (change)="uploadFile($event.target.files)" />
+                Import 
+    </label>
     <table class="table table-bordered table-hover mt-2">
         <thead class="thead-light">
             <tr>

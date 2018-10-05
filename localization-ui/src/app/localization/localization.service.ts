@@ -35,15 +35,10 @@ export class LocalizationService {
 
   uploadFile(languageId, file: File): Observable<any>{
     
+    console.log(file);
     let formData = new FormData();
-    formData.append('file', file);
-    let headers = new HttpHeaders();
-    headers.set('Content-Type', '');
-    headers.set('Accept', "multipart/form-data");
-
-    return this.http.post(this.api + "language/"+languageId+"/import", formData, {
-      headers
-    });
+    formData.append('file', file, file.name);
+    return this.http.post(this.api + "language/"+languageId+"/import", formData);
   }
     
 }

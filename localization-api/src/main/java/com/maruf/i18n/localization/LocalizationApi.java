@@ -78,9 +78,9 @@ public class LocalizationApi {
 
 
     @PostMapping("/language/{languageId}/import")
-    public ResponseEntity importLocalization(@PathVariable String languageId, MultipartFile file){
+    public ResponseEntity importLocalization(@PathVariable String languageId, @RequestParam("file") MultipartFile file){
 
-        System.out.println(file);
+        System.out.println(file.getName());
         try {
             InputStream in = file.getInputStream();
             Workbook workbook = new XSSFWorkbook(in);
@@ -102,9 +102,8 @@ public class LocalizationApi {
                 localizationDtoList.add(
                         LocalizationDto.builder()
                                 .langKey(currentRow.getCell(0).getStringCellValue())
-                                .value(currentRow.getCell(1).getStringCellValue())
+                                .value(currentRow.getCell(1) == null ? "" : currentRow.getCell(1).getStringCellValue())
                                 .languageId(languageId)
-                                .projectId(null)
                                 .build()
                 );
             }
