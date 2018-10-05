@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.maruf</groupId>
-	<artifactId>i18n</artifactId>
+	<artifactId>localization-api</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>localization</name>
-	<description>Localization project for multilingual application</description>
+	<name>localization-api</name>
+	<description>Localization AP for multilingual application</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -129,6 +129,28 @@
 					</profiles>
 				</configuration>
 			</plugin>
+
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals><goal>copy-resources</goal></goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/classes/static/</outputDirectory >
+							<resources>
+								<resource>
+									<directory>${basedir}/../localization-ui/dist/</directory >
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
 		</plugins>
 	</build>
 

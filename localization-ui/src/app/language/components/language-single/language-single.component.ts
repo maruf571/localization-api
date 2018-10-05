@@ -13,7 +13,7 @@ export class LanguageSingleComponent implements OnInit {
   @ViewChild('languageName')
   private elementRef: ElementRef;
 
-  language = {};
+  language:any = {};
   projectId = "";
   constructor(
     private router: Router,
@@ -39,11 +39,11 @@ export class LanguageSingleComponent implements OnInit {
   submit(entity) {
     //add project id
     entity.project = {id: this.projectId};
-    
+
     console.log(entity);
     this.languageService.submit(entity).subscribe(resp => {
       this.router.navigate(
-        ['/language/language-list'], 
+        ['/language/language-list'],
         {
           queryParams:{projectId: this.projectId}
         }

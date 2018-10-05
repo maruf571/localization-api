@@ -14,8 +14,8 @@ export class LocalizationSingleComponent implements OnInit {
   @ViewChild('customerName')
   private elementRef: ElementRef;
 
-  localization = {};
-  language = {};
+  localization:any = {};
+  language:any = {};
   projectId = null;
   languageId = null;
   localizationId = '';
@@ -33,7 +33,7 @@ export class LocalizationSingleComponent implements OnInit {
     this.languageId = this.activeRoute.snapshot.queryParamMap.get('languageId');
     console.log(this.localizationId);
     console.log(this.languageId);
-    
+
     if(this.languageId){
       this.languageService.findOne(this.languageId)
       .subscribe(resp => {
@@ -41,7 +41,7 @@ export class LocalizationSingleComponent implements OnInit {
         this.language = resp
       })
     }
-    
+
     if (this.localizationId) {
       this.localizationService.findOne(this.localizationId + "/language/"+ this.languageId).subscribe(resp => {
         console.log(resp);
@@ -51,7 +51,7 @@ export class LocalizationSingleComponent implements OnInit {
   }
 
   submit(entity) {
-    
+
     entity.languageId = this.language['id'];
     entity.projectId = this.language['project'].id;
 

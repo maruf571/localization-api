@@ -1,15 +1,14 @@
 package com.maruf.i18n.localization.service;
 
+import com.maruf.i18n.language.entity.Language;
+import com.maruf.i18n.language.repository.LanguageRepository;
 import com.maruf.i18n.localization.dao.LocalizationDao;
 import com.maruf.i18n.localization.dto.LocalizationDto;
-import com.maruf.i18n.language.entity.Language;
 import com.maruf.i18n.localization.entity.LocalizationKey;
 import com.maruf.i18n.localization.entity.LocalizationValue;
-import com.maruf.i18n.project.entity.Project;
-import com.maruf.i18n.language.repository.LanguageRepository;
 import com.maruf.i18n.localization.repository.LocalizationKeyRepository;
 import com.maruf.i18n.localization.repository.LocalizationValueRepository;
-import com.maruf.i18n.project.repository.ProjectRepository;
+import com.maruf.i18n.project.entity.Project;
 import com.maruf.i18n.tenant.TenantContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,17 +26,14 @@ public class LocalizationServiceImpl implements LocalizationService {
     private final LocalizationValueRepository localizationValueRepository;
     private final LanguageRepository languageRepository;
     private final LocalizationDao localizationDao;
-    private final ProjectRepository projectRepository;
     public LocalizationServiceImpl(LocalizationKeyRepository localizationKeyRepository,
                                    LocalizationValueRepository localizationValueRepository,
                                    LanguageRepository languageRepository,
-                                   LocalizationDao localizationDao,
-                                   ProjectRepository projectRepository) {
+                                   LocalizationDao localizationDao) {
         this.localizationValueRepository = localizationValueRepository;
         this.localizationKeyRepository = localizationKeyRepository;
         this.languageRepository = languageRepository;
         this.localizationDao = localizationDao;
-        this.projectRepository = projectRepository;
     }
 
 

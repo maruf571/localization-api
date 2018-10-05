@@ -14,6 +14,8 @@ import java.util.Map;
 
 public class LocalizationExcelBuilder extends AbstractXlsxView {
 
+    public static final String KEY_COLUMN_NAME = "Language Key";
+    public static final String VALUE_COLUMN_NAME = "Language Value";
 
     @Override
     @SuppressWarnings(value="unchecked")
@@ -39,8 +41,8 @@ public class LocalizationExcelBuilder extends AbstractXlsxView {
         // excel header row
         int cellNumber = 0;
         Row header = sheet.createRow(0);
-        header.createCell(cellNumber++).setCellValue("Language Key");
-        header.createCell(cellNumber).setCellValue("Language Value");
+        header.createCell(cellNumber++).setCellValue(KEY_COLUMN_NAME);
+        header.createCell(cellNumber).setCellValue(VALUE_COLUMN_NAME);
 
 
 

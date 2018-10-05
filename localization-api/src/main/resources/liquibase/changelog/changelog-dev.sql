@@ -1,121 +1,110 @@
 --liquibase formatted sql
 
 --changeset MHASSAN:initian-test-data-1
-INSERT INTO `ROLE` (`id`,`name`) VALUES
-(1,'ROLE_SUPER_ADMIN'),
-(2,'ROLE_ADMIN'),
-(3,'ROLE_MANAGER'),
-(4,'ROLE_USER');
+INSERT INTO `ROLE` (`id`,`name`) VALUES ('68877ff031cb4b5d9e0909bf5b61a2ec','ROLE_SUPER_ADMIN');
+INSERT INTO `ROLE` (`id`,`name`) VALUES ('ce5c58ce8f574a23bfca67674ea3827e','ROLE_ADMIN');
+INSERT INTO `ROLE` (`id`,`name`) VALUES ('85b625e02a824eccbd54a6fa833df314','ROLE_TRANSLATOR');
+INSERT INTO `ROLE` (`id`,`name`) VALUES ('d4823fa455224acfacd4ddf337805104','ROLE_USER');
 
-INSERT INTO `TENANT` (`id`,`name`,`url`) VALUES
-(1,'super admin',NULL),
-(2,'admin one',NULL),
-(3,'admin two',NULL);
+INSERT INTO `TENANT` (`id`,`name`,`url`) VALUES ('41c342a0d68442edb01dd0b16a4c6245','Tenant Super Admin',NULL);
+INSERT INTO `TENANT` (`id`,`name`,`url`) VALUES ('ff8081816642db91016642debd690000','Project Admin',NULL);
 
-INSERT INTO `USER` (`id`,`tenant`,`email`,`ENABLED`,`firstName`,`lastName`,`lastPasswordResetDate`,`password`) VALUES
-(1,1,'superadmin@tailor.com',NULL,'super','admin',NULL,'$2a$10$T/iRpIkyOkjnUX2dmx6v2.XQGe5WvyhpjiZTjHoTWbRcP57ctP02q'),
-(2,2,'admin1@tailor.com',NULL,'admin',NULL,NULL,'$2a$10$TtkRs2XU3aAf0d8kMKO4COXlOqFzNM5vpvWeqdAkuzmxwswVuJHaC'),
-(3,3,'admin2@gmail.com',NULL,'admin','two',NULL,'$2a$10$Yf4mkZQjTTeY3ixmkIWP9.8fQqJpKtyy7qblBNN/MJt3dDeYVnl6i');
+INSERT INTO `USER` (`id`,`tenant`,`email`,`ENABLED`,`firstName`,`lastName`,`lastPasswordResetDate`,`password`) VALUES ('5463a897ba23420cb0100378d11e8631','41c342a0d68442edb01dd0b16a4c6245','superadmin@gmail.com',NULL,'super','admin',NULL,'$2a$10$T/iRpIkyOkjnUX2dmx6v2.XQGe5WvyhpjiZTjHoTWbRcP57ctP02q');
+INSERT INTO `USER` (`id`,`tenant`,`email`,`ENABLED`,`firstName`,`lastName`,`lastPasswordResetDate`,`password`) VALUES ('ff80818166430f7401664315d70e0001','ff8081816642db91016642debd690000','admin@localization.com',NULL,'Project','Admin',NULL,'$2a$10$rYaDdLJn2/7vOo6V8cfLW.mIWzkGEk5sz/1dUW54QbyNgha2poetm');
 
-INSERT INTO `USER_ROLE` (`USER_ID`,`ROLE_ID`) VALUES
-(1,1),
-(2,2),
-(3,2);
+INSERT INTO `USER_ROLE` (`USER_ID`,`ROLE_ID`) VALUES ('5463a897ba23420cb0100378d11e8631','68877ff031cb4b5d9e0909bf5b61a2ec');
+INSERT INTO `USER_ROLE` (`USER_ID`,`ROLE_ID`) VALUES ('ff80818166430f7401664315d70e0001','ce5c58ce8f574a23bfca67674ea3827e');
 
---INSERT INTO `PROJECT` (`id`,`name`,`url`) VALUES
---(1,'sendai','https://sendaimonitortra,ining.unisdr.org'),
---(2,'chumbok','https://chumbok.com/'),
---(3,'businessrunner','http://business.chumbok.com'),
---(4,'businessrunnerdev','http://dev.chumbok.com:7070/#!/');
---
---INSERT INTO `LANGUAGE` (`id`,`code`,`isActive`,`isRtl`,`name`,`project_id`) VALUES
---(1,'en',NULL,NULL,'English',1),
---(2,'fr',NULL,NULL,'Français',1),
---(3,'es',NULL,NULL,'Español',1),
---(4,'ar',NULL,NULL,'العربية',1),
---(5,'ru',NULL,NULL,'Русский',1),
---(6,'zh',NULL,NULL,'中文',1),
---(7,'bn',NULL,NULL,'বাংলা',1);
---
---INSERT INTO `LOCALIZATION_KEY` (`id`,`langKey`,`project_id`) VALUES
---(1,'action.addMore',1),
---(2,'action.back',1),
---(3,'action.backToLogin',1),
---(4,'action.calculate.compound',1),
---(5,'action.cancel',1),
---(6,'action.close',1),
---(7,'action.confirm',1),
---(8,'action.done',1),
---(9,'action.download',1),
---(10,'action.exit',1);
---
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (1,'ADD MORE',1,1);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (2,'BACK',1,2);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (3,'GO BACK TO LOGIN PAGE',1,3);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (4,'Calculate compound indicator',1,4);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (5,'CANCEL',1,5);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (6,'CLOSE',1,6);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (7,'CONFIRM',1,7);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (8,'DONE',1,8);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (9,'Download',1,9);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (19,'Télécharger',2,9);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (10,'EXIT',1,10);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (11,'Ajouter',2,1);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (12,'Retour',2,2);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (13,'Retourner à la page d\'accueil',2,3);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (14,'Calcul l\'indicateur composé',2,4);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (15,'Annuler',2,5);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (16,'Fermer',2,6);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (17,'Confirmer',2,7);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (18,'Effectué',2,8);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (20,'Quitter',2,10);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (21,'AÑADIR MÁS',3,1);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (22,'VOLVER',3,2);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (23,'VOLVER A LA PÁGINA INICIO SESIÓN',3,3);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (24,'Calcular el indicador compuesto',3,4);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (25,'BORRAR',3,5);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (26,'CERRAR',3,6);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (27,'CONFIRMAR',3,7);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (28,'HECHO',3,8);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (29,'Descargar',3,9);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (30,'SALIR',3,10);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (31,'أضف المزيد',4,1);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (32,'رجوع',4,2);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (33,'عد إلى صفحة الدخول',4,3);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (34,'احسب المؤشر المركب',4,4);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (35,'الغاء',4,5);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (36,'إغلاق',4,6);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (37,'تأكيد',4,7);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (38,'تم',4,8);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (39,'تنزيل',4,9);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (40,'خروج',4,10);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (41,'ДОБАВИТЬ ЕЩЁ',5,1);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (42,'НАЗАД',5,2);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (43,'ВЕРНУТЬСЯ на страницу авторизации',5,3);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (44,'Рассчитать составной индикатор {{indicatorName}}',5,4);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (45,'ОТМЕНИТЬ',5,5);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (46,'ЗАКРЫТЬ',5,6);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (47,'ПОДТВЕРДИТЬ',5,7);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (48,'ГОТОВО',5,8);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (49,'Скачать',5,9);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (50,'ВЫХОД',5,10);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (51,'添加更多',6,1);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (52,'返回',6,2);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (53,'返回至登录页面',6,3);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (54,'计算复合指标',6,4);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (55,'取消',6,5);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (56,'关闭',6,6);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (57,'确认',6,7);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (58,'完成',6,8);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (59,'下载',6,9);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (60,'退出',6,10);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (61,'আরো যোগ করুন',7,1);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (62,'পিছনে যান',7,2);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (63,'লগইন পেজে যান',7,3);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (64,'ক্যালকুলেট জটিল',7,4);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (65,'বাতিল',7,5);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (66,'বন্ধ',7,6);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (67,'কনফার্ম',7,7);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (68,'শেষ',7,8);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (69,'ডাউনলোড',7,9);
---INSERT INTO `LOCALIZATION_VALUE` (`id`,`value`,`language_id`,`localizationKey_id`) VALUES (70,'বাহির',7,10);
+INSERT INTO `PROJECT` (`id`,`tenant`,`code`,`description`,`name`,`url`) VALUES ('ff80818166430f74016643164dc60002','ff8081816642db91016642debd690000','sfm',NULL,'Sendai Framework Monitor','https://sendaimonitortra,ining.unisdr.org');
+INSERT INTO `PROJECT` (`id`,`tenant`,`code`,`description`,`name`,`url`) VALUES ('ff80818166430f7401664316b9a40003','ff8081816642db91016642debd690000','vc',NULL,'Voluntary Commitment',NULL);
+
+INSERT INTO `LANGUAGE` (`id`,`tenant`,`code`,`isActive`,`isRtl`,`name`,`project_id`) VALUES ('ff80818166430f74016643170eb50004','ff8081816642db91016642debd690000','en',NULL,NULL,'English','ff80818166430f74016643164dc60002');
+INSERT INTO `LANGUAGE` (`id`,`tenant`,`code`,`isActive`,`isRtl`,`name`,`project_id`) VALUES ('ff80818166430f740166431734140005','ff8081816642db91016642debd690000','fr',NULL,NULL,'Français','ff80818166430f74016643164dc60002');
+INSERT INTO `LANGUAGE` (`id`,`tenant`,`code`,`isActive`,`isRtl`,`name`,`project_id`) VALUES ('ff80818166430f740166431756a90006','ff8081816642db91016642debd690000','es',NULL,NULL,'Español','ff80818166430f74016643164dc60002');
+INSERT INTO `LANGUAGE` (`id`,`tenant`,`code`,`isActive`,`isRtl`,`name`,`project_id`) VALUES ('ff80818166430f740166431779d30007','ff8081816642db91016642debd690000','ar',NULL,NULL,'العربية','ff80818166430f74016643164dc60002');
+INSERT INTO `LANGUAGE` (`id`,`tenant`,`code`,`isActive`,`isRtl`,`name`,`project_id`) VALUES ('ff80818166430f74016643179c250008','ff8081816642db91016642debd690000','ru',NULL,NULL,'Русский','ff80818166430f74016643164dc60002');
+INSERT INTO `LANGUAGE` (`id`,`tenant`,`code`,`isActive`,`isRtl`,`name`,`project_id`) VALUES ('ff80818166430f7401664317b79d0009','ff8081816642db91016642debd690000','zh',NULL,NULL,'中文','ff80818166430f74016643164dc60002');
+INSERT INTO `LANGUAGE` (`id`,`tenant`,`code`,`isActive`,`isRtl`,`name`,`project_id`) VALUES ('ff80818166430f7401664317d4d4000a','ff8081816642db91016642debd690000','bn',NULL,NULL,'বাংলা','ff80818166430f74016643164dc60002');
+
+INSERT INTO `LOCALIZATION_KEY` (`id`,`tenant`,`langKey`,`project_id`) VALUES ('ff80818166430f7401664318b5d2000b','ff8081816642db91016642debd690000','addMore','ff80818166430f74016643164dc60002');
+INSERT INTO `LOCALIZATION_KEY` (`id`,`tenant`,`langKey`,`project_id`) VALUES ('ff80818166430f7401664318c9ab000c','ff8081816642db91016642debd690000','back','ff80818166430f74016643164dc60002');
+INSERT INTO `LOCALIZATION_KEY` (`id`,`tenant`,`langKey`,`project_id`) VALUES ('ff80818166430f7401664318dcb7000d','ff8081816642db91016642debd690000','backToLogin','ff80818166430f74016643164dc60002');
+INSERT INTO `LOCALIZATION_KEY` (`id`,`tenant`,`langKey`,`project_id`) VALUES ('ff80818166430f7401664318f172000e','ff8081816642db91016642debd690000','calculate','ff80818166430f74016643164dc60002');
+INSERT INTO `LOCALIZATION_KEY` (`id`,`tenant`,`langKey`,`project_id`) VALUES ('ff80818166430f74016643190660000f','ff8081816642db91016642debd690000','cancel','ff80818166430f74016643164dc60002');
+INSERT INTO `LOCALIZATION_KEY` (`id`,`tenant`,`langKey`,`project_id`) VALUES ('ff80818166430f740166431921a00010','ff8081816642db91016642debd690000','close','ff80818166430f74016643164dc60002');
+INSERT INTO `LOCALIZATION_KEY` (`id`,`tenant`,`langKey`,`project_id`) VALUES ('ff80818166430f740166431933a00011','ff8081816642db91016642debd690000','confirm','ff80818166430f74016643164dc60002');
+INSERT INTO `LOCALIZATION_KEY` (`id`,`tenant`,`langKey`,`project_id`) VALUES ('ff80818166430f74016643194ceb0012','ff8081816642db91016642debd690000','done','ff80818166430f74016643164dc60002');
+INSERT INTO `LOCALIZATION_KEY` (`id`,`tenant`,`langKey`,`project_id`) VALUES ('ff80818166430f74016643195db10013','ff8081816642db91016642debd690000','download','ff80818166430f74016643164dc60002');
+INSERT INTO `LOCALIZATION_KEY` (`id`,`tenant`,`langKey`,`project_id`) VALUES ('ff80818166430f74016643196eb80014','ff8081816642db91016642debd690000','exit','ff80818166430f74016643164dc60002');
+
+
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664319ab430015','ff8081816642db91016642debd690000','ADD MORE','ff80818166430f74016643170eb50004','ff80818166430f7401664318b5d2000b');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664319bed60016','ff8081816642db91016642debd690000','BACK','ff80818166430f74016643170eb50004','ff80818166430f7401664318c9ab000c');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664319dc3e0017','ff8081816642db91016642debd690000','GO BACK TO LOGIN PAGE','ff80818166430f74016643170eb50004','ff80818166430f7401664318dcb7000d');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431a02120018','ff8081816642db91016642debd690000','Calculate ','ff80818166430f74016643170eb50004','ff80818166430f7401664318f172000e');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431a14510019','ff8081816642db91016642debd690000','CANCEL','ff80818166430f74016643170eb50004','ff80818166430f74016643190660000f');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431a28f1001a','ff8081816642db91016642debd690000','CLOSE','ff80818166430f74016643170eb50004','ff80818166430f740166431921a00010');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431a3f07001b','ff8081816642db91016642debd690000','CONFIRM','ff80818166430f74016643170eb50004','ff80818166430f740166431933a00011');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431a5582001c','ff8081816642db91016642debd690000','DONE','ff80818166430f74016643170eb50004','ff80818166430f74016643194ceb0012');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431a6ff8001d','ff8081816642db91016642debd690000','Download','ff80818166430f74016643170eb50004','ff80818166430f74016643195db10013');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431a9389001e','ff8081816642db91016642debd690000','EXIT','ff80818166430f74016643170eb50004','ff80818166430f74016643196eb80014');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431b25cc001f','ff8081816642db91016642debd690000','Ajouter','ff80818166430f740166431734140005','ff80818166430f7401664318b5d2000b');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431c2ed90020','ff8081816642db91016642debd690000','Retour','ff80818166430f740166431734140005','ff80818166430f7401664318c9ab000c');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431cd0ca0021','ff8081816642db91016642debd690000','Retourner à la page d \'accueil','ff80818166430f740166431734140005','ff80818166430f7401664318dcb7000d');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431ced1f0022','ff8081816642db91016642debd690000','Calcul','ff80818166430f740166431734140005','ff80818166430f7401664318f172000e');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431d05360023','ff8081816642db91016642debd690000','Annuler','ff80818166430f740166431734140005','ff80818166430f74016643190660000f');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431d17e50024','ff8081816642db91016642debd690000','Fermer','ff80818166430f740166431734140005','ff80818166430f740166431921a00010');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431d2dec0025','ff8081816642db91016642debd690000','Confirmer','ff80818166430f740166431734140005','ff80818166430f740166431933a00011');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431d41f00026','ff8081816642db91016642debd690000','Effectué','ff80818166430f740166431734140005','ff80818166430f74016643194ceb0012');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431d563b0027','ff8081816642db91016642debd690000','Télécharger','ff80818166430f740166431734140005','ff80818166430f74016643195db10013');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431d6a660028','ff8081816642db91016642debd690000','Quitter','ff80818166430f740166431734140005','ff80818166430f74016643196eb80014');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431f52680029','ff8081816642db91016642debd690000','AÑADIR','ff80818166430f740166431756a90006','ff80818166430f7401664318b5d2000b');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431f67d1002a','ff8081816642db91016642debd690000','VOLVER','ff80818166430f740166431756a90006','ff80818166430f7401664318c9ab000c');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431f8ab6002b','ff8081816642db91016642debd690000','VOLVER A LA PÁGINA INICIO SESIÓN','ff80818166430f740166431756a90006','ff80818166430f7401664318dcb7000d');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431fa109002c','ff8081816642db91016642debd690000','Calcular','ff80818166430f740166431756a90006','ff80818166430f7401664318f172000e');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431fb8c2002d','ff8081816642db91016642debd690000','BORRAR','ff80818166430f740166431756a90006','ff80818166430f74016643190660000f');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431fcd70002e','ff8081816642db91016642debd690000','CERRAR','ff80818166430f740166431756a90006','ff80818166430f740166431921a00010');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431fdf6f002f','ff8081816642db91016642debd690000','CONFIRMAR','ff80818166430f740166431756a90006','ff80818166430f740166431933a00011');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166431ff42e0030','ff8081816642db91016642debd690000','HECHO','ff80818166430f740166431756a90006','ff80818166430f74016643194ceb0012');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f74016643200ed30031','ff8081816642db91016642debd690000','Descargar','ff80818166430f740166431756a90006','ff80818166430f74016643195db10013');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664320214f0032','ff8081816642db91016642debd690000','SALIR','ff80818166430f740166431756a90006','ff80818166430f74016643196eb80014');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664321598f0033','ff8081816642db91016642debd690000','أضف المزيد','ff80818166430f740166431779d30007','ff80818166430f7401664318b5d2000b');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166432177620034','ff8081816642db91016642debd690000','رجوع','ff80818166430f740166431779d30007','ff80818166430f7401664318c9ab000c');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664321a0330035','ff8081816642db91016642debd690000','عد إلى صفحة الدخول','ff80818166430f740166431779d30007','ff80818166430f7401664318dcb7000d');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664321c1300036','ff8081816642db91016642debd690000','احسب المؤشر المركب','ff80818166430f740166431779d30007','ff80818166430f7401664318f172000e');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664321dd340037','ff8081816642db91016642debd690000','الغاء','ff80818166430f740166431779d30007','ff80818166430f74016643190660000f');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664321f9750038','ff8081816642db91016642debd690000','إغلاق','ff80818166430f740166431779d30007','ff80818166430f740166431921a00010');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664322154c0039','ff8081816642db91016642debd690000','تأكيد','ff80818166430f740166431779d30007','ff80818166430f740166431933a00011');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f74016643223ec0003a','ff8081816642db91016642debd690000','تم','ff80818166430f740166431779d30007','ff80818166430f74016643194ceb0012');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f74016643225b39003b','ff8081816642db91016642debd690000','تنزيل','ff80818166430f740166431779d30007','ff80818166430f74016643195db10013');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f74016643229407003c','ff8081816642db91016642debd690000','خروج','ff80818166430f740166431779d30007','ff80818166430f74016643196eb80014');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664322c5d7003d','ff8081816642db91016642debd690000','ДОБАВИТЬ ЕЩЁ','ff80818166430f74016643179c250008','ff80818166430f7401664318b5d2000b');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664322d81a003e','ff8081816642db91016642debd690000','НАЗАД','ff80818166430f74016643179c250008','ff80818166430f7401664318c9ab000c');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664322f22a003f','ff8081816642db91016642debd690000','ВЕРНУТЬСЯ на страницу авторизации','ff80818166430f74016643179c250008','ff80818166430f7401664318dcb7000d');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166432349c40040','ff8081816642db91016642debd690000','Рассчитать составной ','ff80818166430f74016643179c250008','ff80818166430f7401664318f172000e');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166432360400041','ff8081816642db91016642debd690000','ОТМЕНИТЬ','ff80818166430f74016643179c250008','ff80818166430f74016643190660000f');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166432372f10042','ff8081816642db91016642debd690000','ЗАКРЫТЬ','ff80818166430f74016643179c250008','ff80818166430f740166431921a00010');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166432387000043','ff8081816642db91016642debd690000','ПОДТВЕРДИТЬ','ff80818166430f74016643179c250008','ff80818166430f740166431933a00011');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f74016643239f380044','ff8081816642db91016642debd690000','ГОТОВО','ff80818166430f74016643179c250008','ff80818166430f74016643194ceb0012');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664323b6d90045','ff8081816642db91016642debd690000','Скачать','ff80818166430f74016643179c250008','ff80818166430f74016643195db10013');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664323c9220046','ff8081816642db91016642debd690000','ВЫХОД','ff80818166430f74016643179c250008','ff80818166430f74016643196eb80014');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664323ee2f0047','ff8081816642db91016642debd690000','添加更多','ff80818166430f7401664317b79d0009','ff80818166430f7401664318b5d2000b');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664323ffd20048','ff8081816642db91016642debd690000','返回','ff80818166430f7401664317b79d0009','ff80818166430f7401664318c9ab000c');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166432412d50049','ff8081816642db91016642debd690000','返回至登录页面','ff80818166430f7401664317b79d0009','ff80818166430f7401664318dcb7000d');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f74016643242b9b004a','ff8081816642db91016642debd690000','计算复合指标','ff80818166430f7401664317b79d0009','ff80818166430f7401664318f172000e');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f74016643243ede004b','ff8081816642db91016642debd690000','取消','ff80818166430f7401664317b79d0009','ff80818166430f74016643190660000f');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f74016643244e3a004c','ff8081816642db91016642debd690000','关闭','ff80818166430f7401664317b79d0009','ff80818166430f740166431921a00010');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f74016643245f2d004d','ff8081816642db91016642debd690000','确认','ff80818166430f7401664317b79d0009','ff80818166430f740166431933a00011');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166432472a1004e','ff8081816642db91016642debd690000','完成','ff80818166430f7401664317b79d0009','ff80818166430f74016643194ceb0012');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166432484a2004f','ff8081816642db91016642debd690000','下载','ff80818166430f7401664317b79d0009','ff80818166430f74016643195db10013');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664324a27b0050','ff8081816642db91016642debd690000','下载','ff80818166430f7401664317b79d0009','ff80818166430f74016643196eb80014');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664324e9f80051','ff8081816642db91016642debd690000','আরো যোগ করুন','ff80818166430f7401664317d4d4000a','ff80818166430f7401664318b5d2000b');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166432504480052','ff8081816642db91016642debd690000','পিছনে যান','ff80818166430f7401664317d4d4000a','ff80818166430f7401664318c9ab000c');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f74016643251ff50053','ff8081816642db91016642debd690000','লগইন পেজে যান','ff80818166430f7401664317d4d4000a','ff80818166430f7401664318dcb7000d');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664325428b0054','ff8081816642db91016642debd690000','ক্যালকুলেট','ff80818166430f7401664317d4d4000a','ff80818166430f7401664318f172000e');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166432556ef0055','ff8081816642db91016642debd690000','বাতিল','ff80818166430f7401664317d4d4000a','ff80818166430f74016643190660000f');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166432568660056','ff8081816642db91016642debd690000','বন্ধ','ff80818166430f7401664317d4d4000a','ff80818166430f740166431921a00010');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f74016643257b670057','ff8081816642db91016642debd690000','কনফার্ম','ff80818166430f7401664317d4d4000a','ff80818166430f740166431933a00011');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f740166432590490058','ff8081816642db91016642debd690000','শেষ','ff80818166430f7401664317d4d4000a','ff80818166430f74016643194ceb0012');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664325a2540059','ff8081816642db91016642debd690000','ডাউনলোড','ff80818166430f7401664317d4d4000a','ff80818166430f74016643195db10013');
+INSERT INTO `LOCALIZATION_VALUE` (`id`,`tenant`,`value`,`language_id`,`localizationKey_id`) VALUES ('ff80818166430f7401664325b9dd005a','ff8081816642db91016642debd690000','বাহির','ff80818166430f7401664317d4d4000a','ff80818166430f74016643196eb80014');

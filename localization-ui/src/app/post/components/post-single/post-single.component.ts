@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PostSingleComponent implements OnInit {
 
-  private post = {};
+  post:any = {};
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,

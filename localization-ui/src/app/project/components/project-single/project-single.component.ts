@@ -8,8 +8,8 @@ import { OnInit, Component } from '@angular/core';
   styleUrls: ['./project-single.component.css']
 })
 export class ProjectSingleComponent implements OnInit {
-  
-  project = {};
+
+  project:any = {};
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -18,7 +18,7 @@ export class ProjectSingleComponent implements OnInit {
 
 
   ngOnInit() {
-    
+
     const projectId = this.activeRoute.snapshot.queryParamMap.get('projectId');
     if (projectId != null) {
       console.log(projectId);
@@ -27,12 +27,12 @@ export class ProjectSingleComponent implements OnInit {
       });
     }
   }
-  
+
   submit(project) {
     console.log(project);
     this.service.submit(project).subscribe(resp => {
       this.router.navigate(['/project/project-list']);
     })
-  }   
+  }
 
 }

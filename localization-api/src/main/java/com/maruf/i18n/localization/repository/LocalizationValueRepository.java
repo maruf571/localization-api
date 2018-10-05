@@ -4,7 +4,6 @@ import com.maruf.i18n.language.entity.Language;
 import com.maruf.i18n.localization.entity.LocalizationKey;
 import com.maruf.i18n.localization.entity.LocalizationValue;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 public interface LocalizationValueRepository extends JpaRepository<LocalizationValue, String> {
 

@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
 })
 export class SignupComponent {
    
-    private user = {};
+    user:any = {};
     constructor(
         private route: ActivatedRoute,
         private router: Router,

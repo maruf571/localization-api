@@ -3,7 +3,6 @@ package com.maruf.i18n.language.service;
 import com.maruf.i18n.language.entity.Language;
 import com.maruf.i18n.language.repository.LanguageRepository;
 import com.maruf.i18n.tenant.TenantContext;
-import com.maruf.i18n.tenant.entity.Tenant;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;

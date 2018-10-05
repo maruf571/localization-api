@@ -92,8 +92,8 @@ public class LocalizationApi {
             Cell languageKeyHeader =  headerCellIterator.next();
             Cell languageKeyValueValue =  headerCellIterator.next();
 
-            if(!languageKeyHeader.getStringCellValue().equals("Language Key") || !languageKeyValueValue.getStringCellValue().equals("Language Value")){
-                throw new Exception("Header is not matched");
+            if(!languageKeyHeader.getStringCellValue().equals(LocalizationExcelBuilder.KEY_COLUMN_NAME) || !languageKeyValueValue.getStringCellValue().equals(LocalizationExcelBuilder.VALUE_COLUMN_NAME)){
+                throw new Exception("Header name is not matched");
             }
 
             List<LocalizationDto> localizationDtoList = new ArrayList<>();

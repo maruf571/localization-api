@@ -19,8 +19,9 @@ public class LocalizationDaoImpl implements LocalizationDao  {
 
     /**
      * Use for protected api
+     *
      * @param languageId
-     * @return
+     * @return List<Map<String, Object>>
      */
     @Override
     public List<Map<String, Object>> findAllLocalizationByProjectIdAndLanguageId(String projectId, String languageId) {
@@ -44,7 +45,7 @@ public class LocalizationDaoImpl implements LocalizationDao  {
      *
      * @param projectId
      * @param languageId
-     * @return
+     * @return Map<String, Object>
      */
     public Map<String, Object> findLocalization(String projectId, String languageId){
 

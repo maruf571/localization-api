@@ -1,6 +1,5 @@
 package com.maruf.i18n.localization;
 
-import com.maruf.i18n.language.service.LanguageService;
 import com.maruf.i18n.localization.service.LocalizationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LocalizationPublicApi {
 
-    private final LanguageService languageService;
     private final LocalizationService localizationService;
-    public LocalizationPublicApi(LanguageService languageService,
-                                 LocalizationService localizationService) {
-        this.languageService = languageService;
+    public LocalizationPublicApi(LocalizationService localizationService) {
         this.localizationService = localizationService;
     }
 
@@ -35,31 +31,5 @@ public class LocalizationPublicApi {
                 localizationService.findLocalizationByProjectIdAndLanguageCode(languageId)
         );
     }
-
-
-//    @GetMapping("/api/project-name/{projectName}/languages")
-//    public ResponseEntity getAllLanguage(@PathVariable String projectName){
-//        log.debug("projectName: {}", projectName);
-//        return ResponseEntity.ok().body(
-//                languageService.findLanguageByProject(projectName)
-//        );
-//    }
-//
-//    @GetMapping("/api/project-name/{projectName}/language-keys")
-//    public ResponseEntity getAllKeys(@PathVariable String projectName){
-//        log.debug("projectName: {}", projectName);
-//        return ResponseEntity.ok().body(
-//                localizationService.findLocalizationKeyByProject(projectName)
-//        );
-//    }
-//
-//    @GetMapping("/api/project-name/{projectName}/language-keys/{languageKey}")
-//    public ResponseEntity getAllLocalizationByKey(@PathVariable String projectName, @PathVariable String languageKey){
-//        log.debug("projectName: {}, languageKey: {}", projectName, languageKey);
-//        return ResponseEntity.ok().body(
-//                localizationService.findLocalizationValueByKey(projectName, languageKey)
-//        );
-//    }
-
 
 }

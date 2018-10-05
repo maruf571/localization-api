@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
     styleUrls: ['signin.component.css']
 })
 export class SigninComponent implements OnInit {
-    user = {};
+    user:any = {};
     loading = false;
     submitted = false;
     returnUrl: string;

@@ -12,9 +12,9 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 })
 export class LocalizationListComponent implements OnInit {
 
-  localizations = [];
-  language = [];
-  languageId = '';
+  localizations:any = [];
+  language:any = [];
+  languageId:string = '';
   fileToUpload: File = null;
   constructor(
     private router: Router,

@@ -1,9 +1,11 @@
 <section class="card">
+        <div class="card-header text-center" *ngIf="languages.length > 0">{{languages[0].project.name}}</div>
+    
     <div class="card-body">
-    <button type="button" 
+        <button type="button" 
             [routerLink]="['/project/project-list']"
-            class="mr-2 btn btn-default">Back to project</button>
-    <button type="button" class="btn btn-primary" (click)="naviagetToSongle()">Add new language</button>
+            class="mr-2 btn btn-default">Back</button>
+    <button type="button" class="btn btn-primary" (click)="naviagetToSongle('')">Add new language</button>
     <table class="table table-bordered table-hover mt-2">
         <thead class="thead-light">
             <tr>
@@ -22,8 +24,10 @@
                 <td>{{language.code}}</td>
                 <td>{{language.isRtl}}</td>
                 <td>
-                    <a class="mr-2 btn btn-primary" [routerLink]="" (click)="naviagetToSongle(language.id)">Edit</a>
-                    <a class="btn btn-primary" target="_blank" href="{{api}}language-id/{{language.id}}" >PUBLIC API</a>
+                    <div class="float-right">
+                        <a class="mr-2 btn btn-primary" [routerLink]="" (click)="naviagetToSongle(language.id)">Edit</a>
+                        <a class="btn btn-primary" target="_blank" href="{{api}}language-id/{{language.id}}" >PUBLIC API</a>
+                    </div>
                 </td>
             </tr>
         </tbody>
