@@ -18,7 +18,6 @@ public class LanguageServiceImpl implements LanguageService {
 
     @Override
     public Language create(Language language) {
-        language.setTenant(TenantContext.getCurrentTenant());
         return languageRepository.save(language);
     }
 

@@ -248,11 +248,9 @@ public class LocalizationServiceImpl implements LocalizationService {
                     localizationDto.getLangKey()
             );
             if (localizationKey.isPresent()) {
-                //update existing value
                 LocalizationValue localizationValue = localizationValueRepository.findByLanguageAndLocalizationKey(language, localizationKey.get());
                 if(localizationValue == null){
                     localizationValue = new LocalizationValue();
-                    localizationValue.setTenant(TenantContext.getCurrentTenant());
                     localizationValue.setLanguage(language);
                     localizationValue.setLocalizationKey(localizationKey.get());
                 }
@@ -260,15 +258,13 @@ public class LocalizationServiceImpl implements LocalizationService {
                 localizationValueRepository.save(localizationValue);
 
             } else {
-                //add new key and value
+
                 LocalizationKey newKey = new LocalizationKey();
-                newKey.setTenant(TenantContext.getCurrentTenant());
                 newKey.setLangKey(localizationDto.getLangKey());
                 newKey.setProject(project);
                 localizationKeyRepository.save(newKey);
 
                 LocalizationValue newValue = new LocalizationValue();
-                newValue.setTenant(TenantContext.getCurrentTenant());
                 newValue.setLanguage(language);
                 newValue.setLocalizationKey(newKey);
                 newValue.setValue(localizationDto.getValue());

@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'post-single',
   templateUrl: './post-single.component.html',
-  styleUrls: ['./post-single.component.scss']
+  styleUrls: ['./post-single.component.css']
 })
 export class PostSingleComponent implements OnInit {
 

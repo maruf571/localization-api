@@ -5,7 +5,7 @@ import { LanguageService } from '../../language.service';
 @Component({
   selector: 'language-single',
   templateUrl: './language-single.component.html',
-  styleUrls: ['./language-single.component.scss']
+  styleUrls: ['./language-single.component.css']
 })
 
 export class LanguageSingleComponent implements OnInit {

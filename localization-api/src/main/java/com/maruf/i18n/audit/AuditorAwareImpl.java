@@ -6,9 +6,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
-/*import org.springframework.entity.core.Authentication;
-import org.springframework.entity.core.context.SecurityContextHolder;
-import org.un.oict.sfm.entity.model.UserContext;*/
 
 /**
  * This is a Audit Java class that provides a way to get logged in user information.

@@ -6,7 +6,7 @@ import { LanguageService } from '../../../language/language.service';
 @Component({
   selector: 'localization-single',
   templateUrl: './localization-single.component.html',
-  styleUrls: ['./localization-single.component.scss']
+  styleUrls: ['./localization-single.component.css']
 })
 
 export class LocalizationSingleComponent implements OnInit {

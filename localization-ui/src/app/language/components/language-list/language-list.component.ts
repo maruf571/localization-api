@@ -7,7 +7,7 @@ import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'language-list',
   templateUrl: './language-list.component.html',
-  styleUrls: ['./language-list.component.scss']
+  styleUrls: ['./language-list.component.css']
 })
 export class LanguageListComponent implements OnInit {
 

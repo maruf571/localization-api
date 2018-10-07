@@ -8,7 +8,7 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'localization-list',
   templateUrl: './localization-list.component.html',
-  styleUrls: ['./localization-list.component.scss']
+  styleUrls: ['./localization-list.component.css']
 })
 export class LocalizationListComponent implements OnInit {
 

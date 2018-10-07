@@ -3,12 +3,14 @@ package com.maruf.i18n.project.service;
 import com.maruf.i18n.project.entity.Project;
 import com.maruf.i18n.project.repository.ProjectRepository;
 import com.maruf.i18n.tenant.TenantContext;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 
+@Slf4j
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
@@ -19,7 +21,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project create(Project project) {
-        project.setTenant(TenantContext.getCurrentTenant());
         return projectRepository.save(project);
     }
 
