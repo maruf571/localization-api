@@ -20,7 +20,7 @@ public class TenantAspect {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Around("execution(public * org.springframework.data.jpa.repository.*.*(..))")
+    @Around("execution(public * org.springframework.data.repository.Repository+.*(..))")
     public Object enableOwnerFilter(ProceedingJoinPoint joinPoint) throws Throwable{
 
         if(TenantContext.getCurrentTenant() == null || TenantContext.getCurrentTenant().isEmpty()){
@@ -36,11 +36,12 @@ public class TenantAspect {
             log.error("Error enabling ownerFilter : Reason -" +ex.getMessage());
         }
 
-        Object obj  = joinPoint.proceed();
+        return joinPoint.proceed();
+
+        /*Object obj  = joinPoint.proceed();
         if ( session != null ) {
             session.disableFilter("tenantFilter");
-        }
+        }*/
 
-        return obj;
     }
 }
