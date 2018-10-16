@@ -131,11 +131,34 @@
 
 
 			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>auto-clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>${basedir}/src/main/resources/static</directory>
+									<includes>
+										<include>**/*</include>
+									</includes>
+								</fileset>
+							</filesets>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<executions>
 					<execution>
 						<id>copy-resources</id>
-						<phase>validate</phase>
+						<phase>package</phase>
 						<goals><goal>copy-resources</goal></goals>
 						<configuration>
 							<outputDirectory>${basedir}/src/main/resources/static/</outputDirectory >
