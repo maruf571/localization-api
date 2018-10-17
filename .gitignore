@@ -22,7 +22,6 @@ build/
 nbbuild/
 dist/
 nbdist/
-target/
 .nb-gradle/
 
 ### VS Code ###

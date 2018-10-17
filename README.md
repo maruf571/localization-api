@@ -1,4 +1,4 @@
-# localization
+# localization-api
 Internationalization (i18n) is very and common & important feature in software projects. The purpose of this project 
 is to separate localization's from the main applicatoin and add more fredom to maintain localization of a projects.
   
