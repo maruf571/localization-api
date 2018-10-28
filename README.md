@@ -1,8 +1,8 @@
 # localization-api
-Internationalization (i18n) is very and common & important feature in software projects. The purpose of this project 
-is to separate localization's from the main applicatoin and add more fredom to maintain localization of a projects.
+Internationalization (i18n) is very common & important feature in a software. The purpose of this project 
+is to separate localization's from the main applicatoin and add more fredom to maintain localization separately.
   
-  # Feature
+# Feature
   As a localization app, I tried to solve the common problems. 
 
 - Add multiple project
