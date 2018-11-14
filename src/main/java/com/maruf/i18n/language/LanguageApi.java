@@ -50,7 +50,7 @@ public class LanguageApi {
     }
 
     @DeleteMapping("/{languageId}")
-    public void delete(@RequestParam String languageId){
+    public void delete(@PathVariable String languageId){
         languageService.delete(languageId);
     }
 

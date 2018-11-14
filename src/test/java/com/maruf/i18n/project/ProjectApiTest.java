@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ProjectApiTest extends AbstractTest {
 
-    private static final String api = "/api/protected/projects/";
+    public static final String api = "/api/protected/projects/";
 
     @Before
     public void init() throws Exception {
@@ -65,7 +65,7 @@ public class ProjectApiTest extends AbstractTest {
 
     @Test
     @Transactional
-    public void shouldFindAll() throws Exception{
+    public void shouldFindAllProject() throws Exception{
         shouldCreateProject();
         this.mvc.perform(
                 get("/api/protected/projects")
