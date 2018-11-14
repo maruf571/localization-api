@@ -1,5 +1,5 @@
 /target
-src/main/resources/liquibase/generated/
+##src/main/resources/liquibase/generated/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###

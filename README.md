@@ -48,6 +48,13 @@ java -jar localization-ui/target/localization-api-<version>.jar
 ```
 
 
+## Test
+# generate schema from existing database
+
+```sh
+$ mvn liquibase:generateChangeLog
+```
+
 ## Built With
 * [Spring boot 2.0.X](https://projects.spring.io/spring-boot/) -Backed Framework
 * [Maven](https://maven.apache.org/) - Dependency Management
