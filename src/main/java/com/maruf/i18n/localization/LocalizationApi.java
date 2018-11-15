@@ -42,6 +42,7 @@ public class LocalizationApi {
                 .body(localizationService.findAll(languageId));
     }
 
+
     @GetMapping("/{localizationId}/language/{languageId}")
     public ResponseEntity findOne(@PathVariable String languageId, @PathVariable String localizationId){
         return ResponseEntity.ok()

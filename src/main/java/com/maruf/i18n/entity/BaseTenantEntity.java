@@ -18,9 +18,9 @@ import javax.validation.constraints.NotEmpty;
  */
 @Setter
 @Getter
-@MappedSuperclass
 @FilterDef(name = "tenantFilter", parameters = @ParamDef(name = "tenant", type = "string"))
 @Filter( name = "tenantFilter", condition = "tenant = :tenant ")
+@MappedSuperclass
 public class BaseTenantEntity extends BaseEntity{
 
     @NotBlank
@@ -31,7 +31,9 @@ public class BaseTenantEntity extends BaseEntity{
 
     @PrePersist
     public void onPrePersist() {
-        if(TenantContext.getCurrentTenant() != null && !TenantContext.getCurrentTenant().isEmpty())
+
+        if(TenantContext.getCurrentTenant() != null && !TenantContext.getCurrentTenant().isEmpty()) {
             this.tenant = TenantContext.getCurrentTenant();
+        }
     }
 }

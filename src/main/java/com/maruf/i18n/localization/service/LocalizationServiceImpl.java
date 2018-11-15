@@ -67,9 +67,7 @@ public class LocalizationServiceImpl implements LocalizationService {
     public Map<String, Object> findLocalizationByProjectIdAndLanguageCode(String languageId) {
         log.debug("languageCode: {}", languageId);
 
-        Language language = languageRepository.findById(
-                languageId
-        ).orElseThrow(() -> new EntityNotFoundException("language not found"));
+        Language language = languageRepository.findByLanguageId(languageId).orElseThrow(() -> new EntityNotFoundException("language not found"));
 
         return  localizationDao.findLocalization(language.getProject().getId(), language.getId());
     }
@@ -85,10 +83,7 @@ public class LocalizationServiceImpl implements LocalizationService {
     public List<Map<String, Object>> findAll( String languageId) {
         log.debug("languageId: {}", languageId);
 
-        Language language = languageRepository.findById(
-                TenantContext.getCurrentTenant(),
-                languageId
-        ).orElseThrow(() -> new EntityNotFoundException("language not found"));
+        Language language = languageRepository.findByLanguageId(languageId).orElseThrow(() -> new EntityNotFoundException("language not found"));
 
         return  localizationDao.findAllLocalizationByProjectIdAndLanguageId(language.getProject().getId(), language.getId());
     }
@@ -105,10 +100,7 @@ public class LocalizationServiceImpl implements LocalizationService {
     public LocalizationDto findOne(String localizationId, String languageId) {
         log.debug("localization: {}", localizationId);
 
-        LocalizationKey lk = localizationKeyRepository.findById(
-                TenantContext.getCurrentTenant(),
-                localizationId
-        );
+        LocalizationKey lk = localizationKeyRepository.findByLocalizationId(localizationId);
         String value = "";
         for(LocalizationValue lv : lk.getLocalizationValues()){
             if(lv.getLanguage().getId().equals(languageId)){
@@ -123,7 +115,6 @@ public class LocalizationServiceImpl implements LocalizationService {
                 .build();
     }
 
-
     /**
      * create new localization key with or without value
      *
@@ -133,16 +124,11 @@ public class LocalizationServiceImpl implements LocalizationService {
     @Override
     public LocalizationDto create(LocalizationDto localizationDto) {
 
-        String tenant = TenantContext.getCurrentTenant();
-        Language language = languageRepository.findById(
-                tenant,
-                localizationDto.getLanguageId()
-        ).orElseThrow(()-> new EntityNotFoundException("language not found"));
+        Language language = languageRepository.findByLanguageId(localizationDto.getLanguageId()).orElseThrow(()-> new EntityNotFoundException("language not found"));
 
         LocalizationKey localizationKey = new LocalizationKey();
         localizationKey.setLangKey(localizationDto.getLangKey());
         localizationKey.setProject(language.getProject());
-        localizationKey.setTenant(tenant);
         localizationKeyRepository.save(localizationKey);
 
         LocalizationValue localizationValue = new LocalizationValue();
@@ -150,7 +136,6 @@ public class LocalizationServiceImpl implements LocalizationService {
             localizationValue.setValue(localizationDto.getValue());
             localizationValue.setLocalizationKey(localizationKey);
             localizationValue.setLanguage(language);
-            localizationValue.setTenant(tenant);
             localizationValueRepository.save(localizationValue);
         }
 
@@ -185,8 +170,8 @@ public class LocalizationServiceImpl implements LocalizationService {
         LocalizationValue localizationValue = localizationValueRepository.findByLanguageAndLocalizationKey(language, localizationKey);
         if(localizationValue == null) {
             localizationValue = new LocalizationValue();
-            localizationValue.setTenant(TenantContext.getCurrentTenant());
         }
+
         localizationValue.setLocalizationKey(localizationKey);
         localizationValue.setLanguage(language);
         localizationValue.setValue(localizationDto.getValue());
@@ -200,6 +185,9 @@ public class LocalizationServiceImpl implements LocalizationService {
                 .languageId(language.getId())
                 .build();
     }
+
+
+
 
     /**
      * Delete localization key
@@ -235,15 +223,11 @@ public class LocalizationServiceImpl implements LocalizationService {
     public void importToLocalization(List<LocalizationDto> localizationDtoList) {
 
         //check if key exist or not
-        Language language = languageRepository.findById(
-                TenantContext.getCurrentTenant(),
-                localizationDtoList.get(0).getLanguageId()
-        ).orElseThrow(EntityNotFoundException::new);
+        Language language = languageRepository.findByLanguageId(localizationDtoList.get(0).getLanguageId()).orElseThrow(EntityNotFoundException::new);
         Project project = language.getProject();
 
         for(LocalizationDto localizationDto: localizationDtoList) {
             Optional<LocalizationKey> localizationKey = localizationKeyRepository.findByProjectIdAndKey(
-                    TenantContext.getCurrentTenant(),
                     project.getId(),
                     localizationDto.getLangKey()
             );

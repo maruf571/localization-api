@@ -29,6 +29,10 @@ public class LanguageApiTest extends AbstractTest {
 
     public static final String api = "/api/protected/languages/";
 
+    private Project project;
+
+    private Language language;
+
     @Before
     public void init() throws Exception{
         this.token= obtainAccessToken("admin@localization.com", "123456");
@@ -37,28 +41,14 @@ public class LanguageApiTest extends AbstractTest {
     @Test
     @Transactional
     public void shouldCreate() throws Exception{
-        // First create project
-        Project project = new Project();
-        project.setName("tets project");
-        project.setDescription("project description");
-        project.setUrl("test-project.com");
-        project.setCode("prj01");
-        this.mvc.perform(
-                post(ProjectApiTest.api)
-                        .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(getObjectAsString(project))
-        ).andReturn();
-
-        Page<Project> projects = objectMapper.readValue(getResponseAsString(ProjectApiTest.api), new TypeReference<CustomPageImpl<Project>>(){});
-        Project existingProject = projects.getContent().get(0);
-
+        createProject();
 
         Language language = new Language();
         language.setCode("ln1");
         language.setName("language 1");
-        language.setProject(existingProject);
+        language.setProject(this.project);
 
+        String languageStr =
         this.mvc.perform(
                 post(LanguageApiTest.api)
                         .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
@@ -66,19 +56,23 @@ public class LanguageApiTest extends AbstractTest {
                         .content(getObjectAsString(language))
         )
                 .andExpect(jsonPath("$.id").isNotEmpty())
-                .andExpect(jsonPath("$.code").value("ln1"));
+                .andExpect(jsonPath("$.code").value("ln1"))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        this.language = objectMapper.readValue(languageStr, Language.class);
+
     }
 
     @Test
     @Transactional
     public void shouldUpdate() throws Exception{
         shouldCreate();
-        Page<Project> projects = objectMapper.readValue(getResponseAsString(ProjectApiTest.api), new TypeReference<CustomPageImpl<Project>>(){});
-        Project existingProject = projects.getContent().get(0);
 
-        List<Language> languages = objectMapper.readValue(getResponseAsString(LanguageApiTest.api + "?projectId=" + existingProject.getId()), new TypeReference<List<Language>>(){});
-        Language language = languages.get(0);
+        Language language = objectMapper.readValue(getResponseAsString("/api/protected/languages/" + this.language.getId()), Language.class);
         language.setCode("ln2");
+
         this.mvc.perform(
                 put(LanguageApiTest.api)
                         .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
@@ -93,9 +87,21 @@ public class LanguageApiTest extends AbstractTest {
     @Transactional
     public void shouldFindById() throws Exception{
         shouldCreate();
-        Page<Project> projects = objectMapper.readValue(getResponseAsString(ProjectApiTest.api), new TypeReference<CustomPageImpl<Project>>(){});
-        Project existingProject = projects.getContent().get(0);
-        List<Language> languages = objectMapper.readValue(getResponseAsString(LanguageApiTest.api + "?projectId=" + existingProject.getId()), new TypeReference<List<Language>>(){});
+
+        this.mvc.perform(
+                get(LanguageApiTest.api + this.language.getId())
+                        .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
+                        .contentType(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(jsonPath("$.id").value(this.language.getId()));
+    }
+
+
+    @Test
+    @Transactional
+    public void shouldFindAll() throws Exception{
+        shouldCreate();
+        List<Language> languages = objectMapper.readValue(getResponseAsString(LanguageApiTest.api + "?projectId=" + this.project.getId()), new TypeReference<List<Language>>(){});
 
         this.mvc.perform(
                 get(LanguageApiTest.api + languages.get(0).getId())
@@ -106,19 +112,40 @@ public class LanguageApiTest extends AbstractTest {
     }
 
 
+
     @Test
     @Transactional
     public void shouldDelete() throws Exception{
         shouldCreate();
-        Page<Project> projects = objectMapper.readValue(getResponseAsString(ProjectApiTest.api), new TypeReference<CustomPageImpl<Project>>(){});
-        Project existingProject = projects.getContent().get(0);
-        List<Language> languages = objectMapper.readValue(getResponseAsString(LanguageApiTest.api + "?projectId=" + existingProject.getId()), new TypeReference<List<Language>>(){});
-
         this.mvc.perform(
-                delete(LanguageApiTest.api + languages.get(0).getId())
+                delete(LanguageApiTest.api + this.language.getId())
                         .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                         .contentType(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().isOk());
+    }
+
+
+    private void createProject() throws Exception{
+
+        // First create project
+        Project project = new Project();
+        project.setName("test project");
+        project.setDescription("project description");
+        project.setUrl("test-project.com");
+        project.setCode("prj01");
+
+        String projectStr =
+        this.mvc.perform(
+                post(ProjectApiTest.api)
+                        .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(getObjectAsString(project))
+        )
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        this.project = objectMapper.readValue(projectStr, Project.class);
     }
 }

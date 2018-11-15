@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.hibernate.Filter;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
@@ -20,13 +21,16 @@ public class TenantAspect {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Around("execution(public * org.springframework.data.repository.Repository+.*(..))")
+    @Pointcut("execution(public * org.springframework.data.repository.Repository+.*(..))")
+    protected void ownerAwareRepositoryMethod(){ }
+
+    @Around(value = "ownerAwareRepositoryMethod()")
     public Object enableOwnerFilter(ProceedingJoinPoint joinPoint) throws Throwable{
 
-        if(TenantContext.getCurrentTenant() == null || TenantContext.getCurrentTenant().isEmpty()){
+        if(TenantContext.getCurrentTenant() == null){
             return joinPoint.proceed();
         }
-
+        log.info("initializing tenant filter");
         Session session = null;
         try {
             session = entityManager.unwrap(Session.class);
@@ -35,13 +39,8 @@ public class TenantAspect {
         } catch (Exception ex) {
             log.error("Error enabling ownerFilter : Reason -" +ex.getMessage());
         }
-
         return joinPoint.proceed();
 
-        /*Object obj  = joinPoint.proceed();
-        if ( session != null ) {
-            session.disableFilter("tenantFilter");
-        }*/
-
     }
+
 }
