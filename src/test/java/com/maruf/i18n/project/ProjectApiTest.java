@@ -1,13 +1,10 @@
 package com.maruf.i18n.project;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.maruf.i18n.AbstractTest;
-import com.maruf.i18n.CustomPageImpl;
-import com.maruf.i18n.project.entity.Project;
+import com.maruf.i18n.entity.Project;
 import com.maruf.i18n.security.config.WebSecurityConfig;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 
