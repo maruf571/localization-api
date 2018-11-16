@@ -24,32 +24,32 @@ public class ProjectApi {
         this.projectService = projectService;
     }
 
-    @GetMapping
-    public ResponseEntity findAllProject(Pageable pageable){
-        return ResponseEntity.ok()
-                .body(projectService.findAll(pageable));
-    }
-
-    @GetMapping("/{projectId}")
-    public ResponseEntity findProjectById(@PathVariable String projectId){
-        return ResponseEntity.ok()
-                .body(projectService.findById(projectId));
-    }
-
     @PostMapping
-    public ResponseEntity createProject(@RequestBody Project project){
+    public ResponseEntity<Project> create(@RequestBody Project project){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(projectService.create(project));
     }
 
     @PutMapping
-    public ResponseEntity updateProject(@RequestBody Project project){
+    public ResponseEntity update(@RequestBody Project project){
         return ResponseEntity.ok()
                 .body(projectService.update(project));
     }
 
+    @GetMapping("/{projectId}")
+    public ResponseEntity findById(@PathVariable String projectId){
+        return ResponseEntity.ok()
+                .body(projectService.findById(projectId));
+    }
+
+    @GetMapping
+    public ResponseEntity findAll(Pageable pageable){
+        return ResponseEntity.ok()
+                .body(projectService.findAll(pageable));
+    }
+
     @DeleteMapping("/{projectId}")
-    public void deleteProject(@PathVariable String projectId){
+    public void delete(@PathVariable String projectId){
         projectService.delete(projectId);
     }
 

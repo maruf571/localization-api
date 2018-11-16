@@ -3,6 +3,7 @@ package com.maruf.i18n.localization.repository;
 import com.maruf.i18n.localization.entity.LocalizationKey;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,29 +11,34 @@ import java.util.Optional;
 public interface LocalizationKeyRepository extends CrudRepository<LocalizationKey, String> {
 
 
-    @Query("SELECT l FROM LocalizationKey l " +
-            " LEFT JOIN FETCH l.localizationValues lv" +
-            " WHERE l.id=?1 ")
-    LocalizationKey findByLocalizationId(String localizationId);
-
-    @Query("SELECT l FROM LocalizationKey l " +
-            " LEFT JOIN FETCH l.localizationValues lv " +
-            " WHERE l.project.id=?1  AND l.id=?2")
-    LocalizationKey findByProjectIdAndLocalizationId(String projectId, String localizationId);
-
-    @Query("SELECT l FROM LocalizationKey l " +
-            " LEFT JOIN FETCH l.localizationValues " +
+    @Query("SELECT lk FROM LocalizationKey lk " +
+            " LEFT JOIN FETCH lk.localizationValues lv" +
             " WHERE " +
-            " l.project.id=?1 " +
+            " lk.id=:localizationId ")
+    Optional<LocalizationKey> findByLocalizationId(@Param("localizationId") String localizationId);
+
+
+    @Query("SELECT lk FROM LocalizationKey lk " +
+            " LEFT JOIN FETCH lk.localizationValues lv " +
+            " WHERE " +
+            " lk.project.id=:projectId  " +
             " AND " +
-            " l.langKey=?2")
-    Optional<LocalizationKey> findByProjectIdAndKey(String projectId, String key);
+            " lk.id=:localizationId ")
+    LocalizationKey findByProjectIdAndLocalizationId(@Param("projectId") String projectId, @Param("localizationId") String localizationId);
+
+    @Query("SELECT lk FROM LocalizationKey lk " +
+            " LEFT JOIN FETCH lk.localizationValues " +
+            " WHERE " +
+            " lk.project.id=:projectId " +
+            " AND " +
+            " lk.langKey=:key ")
+    Optional<LocalizationKey> findByProjectIdAndKey(@Param("projectId")  String projectId, @Param("key")  String key);
 
 
     @Query(value = "SELECT l.langKey from LOCALIZATION_KEY l" +
             " LEFT JOIN PROJECT p  ON p.id=l.project_id " +
-            " WHERE p.name=?1 ",
+            " WHERE p.name=:projectName ",
             nativeQuery = true)
-    List<String> getAllKeysByProject(String projectName);
+    List<String> getAllKeysByProject(@Param("projectName") String projectName);
 
 }

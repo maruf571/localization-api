@@ -25,18 +25,6 @@ public class LanguageApi {
         this.languageService = languageService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Language>> findAll(@RequestParam String projectId){
-        return ResponseEntity.ok()
-                .body(languageService.findAll(projectId));
-    }
-
-    @GetMapping("/{languageId}")
-    public ResponseEntity<Language> findById(@PathVariable String languageId){
-        return ResponseEntity.ok()
-                .body(languageService.findById(languageId));
-    }
-
     @PostMapping
     public ResponseEntity<Language> create(@RequestBody Language language){
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -47,6 +35,18 @@ public class LanguageApi {
     public ResponseEntity<Language> update(@RequestBody Language language){
         return ResponseEntity.ok()
                 .body(languageService.update(language));
+    }
+
+    @GetMapping("/{languageId}")
+    public ResponseEntity<Language> findById(@PathVariable String languageId){
+        return ResponseEntity.ok()
+                .body(languageService.findById(languageId));
+    }
+
+    @GetMapping("/projects/{projectId}")
+    public ResponseEntity<List<Language>> findAll(@PathVariable String projectId){
+        return ResponseEntity.ok()
+                .body(languageService.findAll(projectId));
     }
 
     @DeleteMapping("/{languageId}")

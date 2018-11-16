@@ -36,19 +36,6 @@ public class LocalizationApi {
         this.localizationService = localizationService;
     }
 
-    @GetMapping("/language/{languageId}")
-    public ResponseEntity<List<Map<String, Object>>> findAll(@PathVariable String languageId){
-        return ResponseEntity.ok()
-                .body(localizationService.findAll(languageId));
-    }
-
-
-    @GetMapping("/{localizationId}/language/{languageId}")
-    public ResponseEntity findOne(@PathVariable String languageId, @PathVariable String localizationId){
-        return ResponseEntity.ok()
-                .body(localizationService.findOne(localizationId, languageId));
-    }
-
     @PostMapping
     public ResponseEntity<LocalizationDto> create(@RequestBody LocalizationDto localizationDto){
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -60,6 +47,19 @@ public class LocalizationApi {
         return ResponseEntity.ok()
                 .body(localizationService.update(localizationDto));
     }
+
+    @GetMapping("/{localizationId}/language/{languageId}")
+    public ResponseEntity<LocalizationDto> findById(@PathVariable String localizationId, @PathVariable String languageId){
+        return ResponseEntity.ok()
+                .body(localizationService.findOne(localizationId, languageId));
+    }
+
+    @GetMapping("/language/{languageId}")
+    public ResponseEntity<List<Map<String, Object>>> findAll(@PathVariable String languageId){
+        return ResponseEntity.ok()
+                .body(localizationService.findAll(languageId));
+    }
+
 
     @DeleteMapping("/{localizationId}")
     public void delete(@PathVariable String localizationId){

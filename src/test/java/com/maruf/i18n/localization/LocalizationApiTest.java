@@ -3,7 +3,6 @@ package com.maruf.i18n.localization;
 import com.maruf.i18n.AbstractTest;
 import com.maruf.i18n.language.LanguageApiTest;
 import com.maruf.i18n.language.entity.Language;
-import com.maruf.i18n.localization.dao.LocalizationDao;
 import com.maruf.i18n.localization.dto.LocalizationDto;
 import com.maruf.i18n.project.ProjectApiTest;
 import com.maruf.i18n.project.entity.Project;
@@ -39,7 +38,7 @@ public class LocalizationApiTest extends AbstractTest {
         localizationDto.setLangKey("key.hello");
         localizationDto.setValue("Hello");
         localizationDto.setLanguageId(this.language.getId());
-        localizationDto.setProjectId(this.project.getId());
+        // Project is not required for localization
 
         String localizationDtoStr =
         this.mvc.perform(
@@ -49,11 +48,15 @@ public class LocalizationApiTest extends AbstractTest {
                         .content(getObjectAsString(localizationDto))
                 )
                 .andExpect(jsonPath("$.id").isNotEmpty())
+                .andExpect(jsonPath("$.langKey").value("key.hello"))
+                .andExpect(jsonPath("$.value").value("Hello"))
+                .andExpect(jsonPath("$.languageId").value(this.language.getId()))
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
 
         this.localizationDto = objectMapper.readValue(localizationDtoStr, LocalizationDto.class);
+
     }
 
 
@@ -62,16 +65,20 @@ public class LocalizationApiTest extends AbstractTest {
     public void shouldUpdate()throws Exception{
         shouldCreate();
 
-        LocalizationDto localizationDto = objectMapper.readValue(getResponseAsString("/api/protected/localizations/" + this.localizationDto.getId()), LocalizationDto.class);
+        LocalizationDto localizationDto = objectMapper.readValue(
+                getResponseAsString("/api/protected/localizations/" + this.localizationDto.getId() + "/language/" + this.language.getId()),
+                LocalizationDto.class
+        );
+        localizationDto.setLangKey("key.hello123");
         localizationDto.setValue("Hello123");
-
         this.mvc.perform(
                 put("/api/protected/localizations")
                         .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(getObjectAsString(localizationDto))
-        )
-                .andExpect(jsonPath("$.id").isNotEmpty())
+                )
+                .andExpect(jsonPath("$.id").value(localizationDto.getId()))
+                .andExpect(jsonPath("$.langKey").value("key.hello123"))
                 .andExpect(jsonPath("$.value").value("Hello123"));
     }
 

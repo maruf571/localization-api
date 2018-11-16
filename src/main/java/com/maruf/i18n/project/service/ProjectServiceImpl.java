@@ -26,39 +26,24 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project update(Project project) {
-        projectRepository
-                .findById(
-                        TenantContext.getCurrentTenant(),
-                        project.getId()
-                )
-                .orElseThrow(() -> new EntityNotFoundException("project not found"));
-
+        projectRepository.findByProjectId(project.getId()).orElseThrow(() -> new EntityNotFoundException("project not found"));
         return projectRepository.save(project);
     }
 
     @Override
     public Project findById(String projectId) {
         return projectRepository
-                .findById(
-                        TenantContext.getCurrentTenant(),
-                        projectId
-                )
+                .findByProjectId(projectId)
                 .orElseThrow(() -> new EntityNotFoundException("project not found"));
     }
 
     @Override
     public Page<Project> findAll(Pageable pageable) {
-        return projectRepository.findAll(
-                TenantContext.getCurrentTenant(),
-                pageable
-        );
+        return projectRepository.findAllProject(pageable);
     }
 
     @Override
     public void delete(String projectId) {
-        projectRepository.deleteById(
-                TenantContext.getCurrentTenant(),
-                projectId
-        );
+        projectRepository.deleteByProjectId(projectId);
     }
 }

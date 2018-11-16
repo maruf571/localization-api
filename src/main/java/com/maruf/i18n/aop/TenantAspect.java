@@ -30,7 +30,8 @@ public class TenantAspect {
         if(TenantContext.getCurrentTenant() == null){
             return joinPoint.proceed();
         }
-        log.info("initializing tenant filter");
+
+        log.debug("initializing tenant filter");
         Session session = null;
         try {
             session = entityManager.unwrap(Session.class);
