@@ -1,6 +1,5 @@
-package com.maruf.i18n.project;
+package com.maruf.i18n.api;
 
-import com.maruf.i18n.AbstractTest;
 import com.maruf.i18n.entity.Project;
 import com.maruf.i18n.security.config.WebSecurityConfig;
 import org.junit.Before;

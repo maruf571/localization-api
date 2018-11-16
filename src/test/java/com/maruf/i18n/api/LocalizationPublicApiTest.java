@@ -1,6 +1,5 @@
-package com.maruf.i18n.localization;
+package com.maruf.i18n.api;
 
-import com.maruf.i18n.AbstractTest;
 import org.junit.Test;
 
 public class LocalizationPublicApiTest extends AbstractTest {

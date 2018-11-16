@@ -1,10 +1,7 @@
-package com.maruf.i18n.localization;
+package com.maruf.i18n.api;
 
-import com.maruf.i18n.AbstractTest;
-import com.maruf.i18n.language.LanguageApiTest;
 import com.maruf.i18n.entity.Language;
 import com.maruf.i18n.api.dto.LocalizationDto;
-import com.maruf.i18n.project.ProjectApiTest;
 import com.maruf.i18n.entity.Project;
 import com.maruf.i18n.security.config.WebSecurityConfig;
 import org.junit.Before;

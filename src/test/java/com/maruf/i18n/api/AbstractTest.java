@@ -1,4 +1,4 @@
-package com.maruf.i18n;
+package com.maruf.i18n.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maruf.i18n.security.auth.ajax.LoginRequest;
