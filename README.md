@@ -11,7 +11,6 @@ is to separate localization's from the main applicatoin and add more fredom to m
 - Import localization from excel file
 - Export all the translation as excel 
 - Public API
-- Admin Panel
 - Multi tenant 
 
 ## Requirements
@@ -31,15 +30,10 @@ environment:
 ## Quick Start
 ```sh
 
-# run backend api
+# run api
 cd localization-api
 mvn spring-boot:run
 mvn liquibase:update
-
-# run front end ui
-cd localization-ui
-npm install
-ng serve
 
 # build as a standalone project
 cd localization
@@ -49,11 +43,15 @@ java -jar localization-ui/target/localization-api-<version>.jar
 
 
 ## Test
-# generate schema from existing database
+## generate schema from existing database
 
 ```sh
 $ mvn liquibase:generateChangeLog
 ```
+```sh
+$ mvn test
+```
+
 
 ## Built With
 * [Spring boot 2.0.X](https://projects.spring.io/spring-boot/) -Backed Framework
