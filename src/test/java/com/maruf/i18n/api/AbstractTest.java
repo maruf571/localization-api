@@ -3,6 +3,11 @@ package com.maruf.i18n.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maruf.i18n.security.auth.ajax.LoginRequest;
 import com.maruf.i18n.security.auth.jwt.extractor.JwtHeaderTokenExtractor;
+import liquibase.Liquibase;
+import liquibase.database.Database;
+import liquibase.database.DatabaseFactory;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.resource.FileSystemResourceAccessor;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +23,10 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.sql.DataSource;
+import java.io.File;
+import java.sql.Connection;
+
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -31,13 +40,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public abstract class AbstractTest {
 
     @Autowired
-    public WebApplicationContext wac;
-
-    @Autowired
-    public FilterChainProxy springSecurityFilterChain;
+    private WebApplicationContext wac;
 
     @Autowired
     public ObjectMapper objectMapper;
+
+    @Autowired
+    private DataSource dataSource;
 
     public JacksonJsonParser jsonParser;
 
@@ -54,6 +63,7 @@ public abstract class AbstractTest {
                 .build();
 
         jsonParser = new JacksonJsonParser();
+        updateDb("/src/main/resources/liquibase/changelog/changelog-test.sql");
     }
 
     public String obtainAccessToken(String username, String password) throws Exception {
@@ -88,5 +98,17 @@ public abstract class AbstractTest {
 
     public String getBearer(String token){
         return JwtHeaderTokenExtractor.HEADER_PREFIX + token;
+    }
+
+    private void updateDb(String changeLog){
+        try {
+            String filePath = System.getProperty("user.dir") + changeLog;
+            Connection c = dataSource.getConnection();
+            Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(c));
+            Liquibase liquibase = new Liquibase(new File(filePath).getAbsolutePath(), new FileSystemResourceAccessor(),  database);
+            liquibase.update("");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

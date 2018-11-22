@@ -91,7 +91,7 @@ public class LocalizationApiTest extends AbstractTest {
 
         String languageStr =
                 this.mvc.perform(
-                        post(LanguageApiTest.api)
+                        post("/api/protected/languages/")
                                 .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(getObjectAsString(language))
@@ -117,7 +117,7 @@ public class LocalizationApiTest extends AbstractTest {
 
         String projectStr =
                 this.mvc.perform(
-                        post(ProjectApiTest.api)
+                        post("/api/protected/projects/")
                                 .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(getObjectAsString(project))

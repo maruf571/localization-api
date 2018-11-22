@@ -21,8 +21,10 @@ import javax.persistence.Table;
         indexes = {@Index(name = "idx_language", columnList = "project_id")})
 public class Language extends BaseTenantEntity {
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String code;
 
     @Column(columnDefinition = "TINYINT", length = 1)
