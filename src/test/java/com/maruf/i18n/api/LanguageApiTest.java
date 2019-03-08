@@ -18,8 +18,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class LanguageApiTest extends AbstractTest {
 
-    public static final String api = "/api/protected/languages/";
-
     private Project project;
 
     private Language language;
@@ -74,7 +72,7 @@ public class LanguageApiTest extends AbstractTest {
 
 
         this.mvc.perform(
-                put(LanguageApiTest.api)
+                put("/api/protected/languages/")
                         .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(getObjectAsString(language))
@@ -91,7 +89,7 @@ public class LanguageApiTest extends AbstractTest {
         shouldCreate();
 
         this.mvc.perform(
-                get(LanguageApiTest.api + this.language.getId())
+                get("/api/protected/languages/" + this.language.getId())
                         .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -110,7 +108,7 @@ public class LanguageApiTest extends AbstractTest {
         //List<Language> languages = objectMapper.readValue(getResponseAsString(LanguageApiTest.api + "?projectId=" + this.project.getId()), new TypeReference<List<Language>>(){});
 
         this.mvc.perform(
-                get(LanguageApiTest.api + "/projects/" + this.project.getId())
+                get("/api/protected/languages" + "/projects/" + this.project.getId())
                         .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                         .contentType(MediaType.APPLICATION_JSON)
         )
@@ -129,7 +127,7 @@ public class LanguageApiTest extends AbstractTest {
     public void shouldDelete() throws Exception{
         shouldCreate();
         this.mvc.perform(
-                delete(LanguageApiTest.api + this.language.getId())
+                delete("/api/protected/languages/" + this.language.getId())
                         .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                         .contentType(MediaType.APPLICATION_JSON)
         )
@@ -148,7 +146,7 @@ public class LanguageApiTest extends AbstractTest {
 
         String projectStr =
         this.mvc.perform(
-                post(ProjectApiTest.api)
+                post("/api/protected/projects/")
                         .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(getObjectAsString(project))

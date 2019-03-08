@@ -16,8 +16,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ProjectApiTest extends AbstractTest {
 
-    public static final String api = "/api/protected/projects/";
-
     private Project project;
 
     @Before
@@ -36,7 +34,7 @@ public class ProjectApiTest extends AbstractTest {
 
         String projectStr =
         this.mvc.perform(
-                post(api)
+                post("/api/protected/projects/")
                         .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(getObjectAsString(project))
@@ -65,7 +63,7 @@ public class ProjectApiTest extends AbstractTest {
         project.setUrl("test-project1.com");
 
         this.mvc.perform(
-                put(api)
+                put("/api/protected/projects/")
                 .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(getObjectAsString(project))
@@ -83,7 +81,7 @@ public class ProjectApiTest extends AbstractTest {
     public void shouldFindById()throws Exception{
         shouldCreate();
         this.mvc.perform(
-                get(api + "/" + this.project.getId())
+                get("/api/protected/projects/" + this.project.getId())
                         .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                         .contentType(MediaType.APPLICATION_JSON)
         )
@@ -119,12 +117,11 @@ public class ProjectApiTest extends AbstractTest {
         shouldCreate();
         //Page<Project> projects = objectMapper.readValue(getResponseAsString(api), new TypeReference<CustomPageImpl<Project>>(){});
         this.mvc.perform(
-                delete(api  + this.project.getId())
+                delete("/api/protected/projects/"  + this.project.getId())
                         .header(WebSecurityConfig.JWT_TOKEN_HEADER_PARAM, getBearer(token))
                         .contentType(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().isOk());
-
     }
 
 }

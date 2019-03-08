@@ -1,4 +1,4 @@
-package com.maruf.i18n.api;
+package com.maruf.i18n.healper;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -19,13 +20,15 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Transactional
     public Project create(Project project) {
         return projectRepository.save(project);
     }
 
     @Override
     public Project update(Project project) {
-        projectRepository.findByProjectId(project.getId()).orElseThrow(() -> new EntityNotFoundException("project not found"));
+        projectRepository.findByProjectId(project.getId())
+                .orElseThrow(() -> new EntityNotFoundException("project not found"));
         return projectRepository.save(project);
     }
 
