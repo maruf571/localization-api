@@ -2,6 +2,7 @@ package com.maruf.i18n.api;
 
 import com.maruf.i18n.entity.Project;
 import com.maruf.i18n.service.ProjectService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,19 +31,19 @@ public class ProjectApi {
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody Project project){
+    public ResponseEntity<Project> update(@RequestBody Project project){
         return ResponseEntity.ok()
                 .body(projectService.update(project));
     }
 
     @GetMapping("/{projectId}")
-    public ResponseEntity findById(@PathVariable String projectId){
+    public ResponseEntity<Project> findById(@PathVariable String projectId){
         return ResponseEntity.ok()
                 .body(projectService.findById(projectId));
     }
 
     @GetMapping
-    public ResponseEntity findAll(Pageable pageable){
+    public ResponseEntity<Page<Project>> findAll(Pageable pageable){
         return ResponseEntity.ok()
                 .body(projectService.findAll(pageable));
     }

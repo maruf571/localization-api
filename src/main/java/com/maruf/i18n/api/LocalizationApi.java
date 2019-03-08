@@ -79,7 +79,7 @@ public class LocalizationApi {
 
 
     @PostMapping("/language/{languageId}/import")
-    public ResponseEntity importLocalization(@PathVariable String languageId, @RequestParam("file") MultipartFile file){
+    public ResponseEntity<List<LocalizationDto>> importLocalization(@PathVariable String languageId, @RequestParam("file") MultipartFile file){
 
         System.out.println(file.getName());
         try {

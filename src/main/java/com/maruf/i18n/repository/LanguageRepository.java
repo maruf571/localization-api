@@ -10,21 +10,21 @@ import java.util.Optional;
 
 public interface LanguageRepository extends JpaRepository<Language, String> {
 
-    @Query("SELECT l from Language l " +
+    @Query("SELECT l from LanguageProxy l " +
             " LEFT JOIN FETCH l.project lp" +
             " WHERE " +
             " l.id=:languageId")
     Optional<Language> findByLanguageId(@Param("languageId") String languageId);
 
 
-    @Query("SELECT l from Language l " +
+    @Query("SELECT l from LanguageProxy l " +
             " LEFT JOIN FETCH l.project lp " +
             " WHERE " +
             " lp.id=:projectId")
     List<Language> findByProjectId(@Param("projectId") String projectId);
 
 
-    @Query("SELECT l FROM Language l  " +
+    @Query("SELECT l FROM LanguageProxy l  " +
             " WHERE " +
             " l.project.name=:projectName ")
     List<Language> findByProjectName(@Param("projectName") String projectName);
@@ -33,7 +33,7 @@ public interface LanguageRepository extends JpaRepository<Language, String> {
     /**
      * will use in Public api, so no tenant check here
      */
-    @Query("SELECT l FROM Language l " +
+    @Query("SELECT l FROM LanguageProxy l " +
             " WHERE " +
             " l.project.name=:projectName " +
             " AND " +

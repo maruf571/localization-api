@@ -1,4 +1,4 @@
-package com.maruf.i18n.aop;
+package com.maruf.i18n.tenant.aop;
 
 import com.maruf.i18n.tenant.TenantContext;
 import lombok.extern.slf4j.Slf4j;

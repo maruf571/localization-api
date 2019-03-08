@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class LocalizationExcelBuilder extends AbstractXlsxView {
 
-    public static final String KEY_COLUMN_NAME = "Language Key";
-    public static final String VALUE_COLUMN_NAME = "Language Value";
+    public static final String KEY_COLUMN_NAME = "LanguageProxy Key";
+    public static final String VALUE_COLUMN_NAME = "LanguageProxy Value";
 
     @Override
     @SuppressWarnings(value="unchecked")
