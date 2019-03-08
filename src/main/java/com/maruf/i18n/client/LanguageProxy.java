@@ -15,7 +15,7 @@ public interface LanguageProxy {
     @PutMapping("/api/protected/languages")
     Language update(@RequestBody Language language);
 
-    @PutMapping("/api/protected/languages/{languageId}")
+    @GetMapping("/api/protected/languages/{languageId}")
     Language findById(@PathVariable String languageId);
 
     @GetMapping("/api/protected/languages/projects/{projectId}")
