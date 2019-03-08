@@ -105,7 +105,7 @@ public class LanguageApiTest extends AbstractTest {
     @Transactional
     public void shouldFindAll() throws Exception{
         shouldCreate();
-        //List<LanguageProxy> languages = objectMapper.readValue(getResponseAsString(LanguageApiTest.api + "?projectId=" + this.project.getId()), new TypeReference<List<LanguageProxy>>(){});
+        //List<Language> languages = objectMapper.readValue(getResponseAsString(LanguageApiTest.api + "?projectId=" + this.project.getId()), new TypeReference<List<LanguageProxy>>(){});
 
         this.mvc.perform(
                 get("/api/protected/languages" + "/projects/" + this.project.getId())
