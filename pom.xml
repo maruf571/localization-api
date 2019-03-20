@@ -21,6 +21,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<skipTests>false</skipTests>
+		<skip.surefire.tests>${skipTests}</skip.surefire.tests>
+		<skip.failsafe.tests>false</skip.failsafe.tests>
 	</properties>
 
 	<dependencies>
@@ -56,17 +59,6 @@
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -104,11 +96,25 @@
 			<version>0.9.0</version>
 		</dependency>
 
+		<!-- Runtime dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!--/ Runtime dependencies -->
 
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -116,7 +122,7 @@
 			<version>4.0.0</version>
 		</dependency>
 
-
+		<!-- Test dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -128,6 +134,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--/ Test dependencies -->
 
 	</dependencies>
 
@@ -159,48 +166,60 @@
 				</configuration>
 			</plugin>
 
+			<!-- Unit tests runner -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+				<configuration>
+					<skipTests>${skip.surefire.tests}</skipTests>
+					<excludes>
+						<exclude>**/*IT.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
 
-			<!--<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>${build-helper-maven-plugin.version}</version>
 				<executions>
 					<execution>
-						<id>auto-clean</id>
-						<phase>clean</phase>
+						<id>add-test-source</id>
+						<phase>process-resources</phase>
 						<goals>
-							<goal>clean</goal>
+							<goal>add-test-source</goal>
 						</goals>
 						<configuration>
-							<filesets>
-								<fileset>
-									<directory>${basedir}/src/main/resources/static</directory>
-									<includes>
-										<include>**/*</include>
-									</includes>
-								</fileset>
-							</filesets>
+							<sources>
+								<source>src/integration-test/java</source>
+							</sources>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>-->
+			</plugin>
 
-			<!--<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
+			<!-- Integration test runner (*IT.java) -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${maven-failsafe-plugin.version}</version>
 				<executions>
 					<execution>
-						<id>copy-resources</id>
-						<phase>validate</phase>
-						<goals><goal>copy-resources</goal></goals>
-						<configuration>
-							<outputDirectory>${basedir}/src/main/resources/static/</outputDirectory >
-							<resources>
-								<resource>
-									<directory>${basedir}/../localization-ui/dist</directory >
-								</resource>
-							</resources>
-						</configuration>
+						<id>failsafe-integration-tests</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
 					</execution>
 				</executions>
-			</plugin>-->
+				<configuration>
+					<skipTests>${skip.failsafe.tests}</skipTests>
+					<argLine>${itCoverageAgent}</argLine>
+				</configuration>
+			</plugin>
 
 		</plugins>
 	</build>

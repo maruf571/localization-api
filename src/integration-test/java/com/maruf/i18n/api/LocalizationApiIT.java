@@ -7,13 +7,15 @@ import com.maruf.i18n.security.config.WebSecurityConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-public class LocalizationApiTest extends AbstractTest {
+@ActiveProfiles("it")
+public class LocalizationApiIT extends AbstractIntegrationTest {
 
     private Project project;
 

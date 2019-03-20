@@ -36,8 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-@ActiveProfiles("it")
-public abstract class AbstractTest {
+public abstract class AbstractIntegrationTest {
 
     @Autowired
     private WebApplicationContext wac;
@@ -63,7 +62,7 @@ public abstract class AbstractTest {
                 .build();
 
         jsonParser = new JacksonJsonParser();
-        updateDb("/src/main/resources/liquibase/changelog/changelog-test.sql");
+        //updateDb("/src/main/resources/liquibase/changelog/changelog-test-data.sql");
     }
 
     public String obtainAccessToken(String username, String password) throws Exception {
@@ -100,6 +99,8 @@ public abstract class AbstractTest {
         return JwtHeaderTokenExtractor.HEADER_PREFIX + token;
     }
 
+/*
+    // Dn not delete this code
     private void updateDb(String changeLog){
         try {
             String filePath = System.getProperty("user.dir") + changeLog;
@@ -110,5 +111,5 @@ public abstract class AbstractTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

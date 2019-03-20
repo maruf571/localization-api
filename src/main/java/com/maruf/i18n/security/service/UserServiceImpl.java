@@ -6,6 +6,7 @@ import com.maruf.i18n.security.repository.RoleRepository;
 import com.maruf.i18n.security.repository.UserRepository;
 import com.maruf.i18n.tenant.entity.Tenant;
 import com.maruf.i18n.tenant.repository.TenantRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,21 +18,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
     private final RoleRepository roleRepository;
+
     private final TenantRepository tenantRepository;
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    public UserServiceImpl(UserRepository userRepository,
-                           RoleRepository roleRepository,
-                           TenantRepository tenantRepository,
-                           BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.tenantRepository = tenantRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
+
 
     @Override
     public User findUserByEmail(String email) {
