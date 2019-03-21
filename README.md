@@ -33,7 +33,6 @@ environment:
 # run api
 cd localization-api
 mvn spring-boot:run
-mvn liquibase:update
 
 # build as a standalone project
 cd localization
@@ -43,13 +42,15 @@ java -jar localization-ui/target/localization-api-<version>.jar
 
 
 ## Test
-## generate schema from existing database
 
-```sh
-$ mvn liquibase:generateChangeLog
-```
+Unit test
 ```sh
 $ mvn test
+```
+
+Integration test
+```sh
+$ mvn integration-test
 ```
 
 
