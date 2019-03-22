@@ -237,12 +237,8 @@
 				</executions>
 				<configuration>
 					<repository>maruf571/localization-api</repository>
-					<!--<tag>${project.version}</tag>-->
 					<tag>latest</tag>
 					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-					<buildArgs>
-						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-					</buildArgs>
 				</configuration>
 			</plugin>
 
