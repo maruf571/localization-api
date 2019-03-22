@@ -40,6 +40,7 @@ mvn clean package
 java -jar localization-ui/target/localization-api-<version>.jar
 ```
 
+
 ## Test
 
 Unit test
