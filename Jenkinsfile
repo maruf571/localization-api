@@ -1,8 +1,11 @@
 pipeline {
 
-    agent any
+    agent {
+
+    }
 
     stages {
+
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
@@ -18,6 +21,12 @@ pipeline {
         stage('Integration Test') {
             steps {
                 sh 'mvn verify'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'mvn dockerfile:push'
             }
         }
     }
