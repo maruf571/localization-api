@@ -50,7 +50,7 @@ $ mvn test
 
 Integration test
 ```sh
-$ mvn integration-test
+$ mvn verify
 ```
 
 
