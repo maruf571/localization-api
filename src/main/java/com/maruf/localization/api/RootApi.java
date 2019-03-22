@@ -10,6 +10,6 @@ public class RootApi {
 
     @GetMapping
     public String welcomeMessage(){
-        return "Welcome to Localization";
+        return "Welcome to Localization with k8";
     }
 }
