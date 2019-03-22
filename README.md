@@ -53,7 +53,6 @@ Integration test
 $ mvn integration-test
 ```
 
-
 ## Built With
 * [Spring boot 2.0.X](https://projects.spring.io/spring-boot/) -Backed Framework
 * [Maven](https://maven.apache.org/) - Dependency Management
