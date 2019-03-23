@@ -2,6 +2,10 @@ pipeline {
 
     agent any
 
+    environment {
+        VERSION = readMavenPom().getVersion()
+    }
+
     stages {
 
         stage('Build') {
@@ -32,13 +36,9 @@ pipeline {
         stage('Deploy Image') {
             when { branch 'master' }
             steps {
-                releasedVersion = getReleasedVersion()
-                sh 'kubectl set image deployments/localization-api localization-api=maruf571/localization-api:${ releasedVersion }'
+                sh 'kubectl set image deployments/localization-api localization-api=maruf571/localization-api:${ VERSION }'
             }
         }
     }
 }
 
-def getReleasedVersion() {
-    return (readFile('pom.xml') =~ '<version>(.+)-SNAPSHOT</version>')[0][1]
-}
