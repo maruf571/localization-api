@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy Image') {
             when { branch 'master' }
             steps {
-                sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl rolling-update localization-api --image=localization-api:1.0.3-SNAPSHOT'
             }
         }
     }
