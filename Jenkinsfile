@@ -2,10 +2,6 @@ pipeline {
 
     agent any
 
-    environment {
-        VERSION = readMavenPom().getVersion()
-    }
-
     stages {
 
         stage('Build') {
@@ -36,7 +32,7 @@ pipeline {
         stage('Deploy Image') {
             when { branch 'master' }
             steps {
-                sh 'kubectl set image deployments/localization-api localization-api=maruf571/localization-api:${ VERSION }'
+                sh 'kubectl set image deployments/localization-api localization-api=maruf571/localization-api:1.0.4'
             }
         }
     }
