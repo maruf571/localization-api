@@ -32,14 +32,8 @@ pipeline {
         stage('Deploy Image') {
             when { branch 'master' }
             steps {
-                sh 'kubectl set image deployments/localization-api localization-api=docker.io/maruf571/localization-api:${ version() }'
+                sh 'kubectl set image deployments/localization-api localization-api=docker.io/maruf571/localization-api:1.0.5'
             }
         }
     }
 }
-
-def version() {
-    def matcher = readFile('pom.xml') =~ '<version>(.+?)</version>'
-    return matcher ? matcher[0][1] : null
-}
-
