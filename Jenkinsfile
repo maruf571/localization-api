@@ -1,5 +1,7 @@
 pipeline {
 
+    pom = readMavenPom file: 'pom.xml'
+
     agent any
 
     stages {
@@ -32,7 +34,7 @@ pipeline {
         stage('Deploy Image') {
             when { branch 'master' }
             steps {
-                sh 'kubectl set image deployments/localization-api localization-api=maruf571/localization-api:latest'
+                sh 'kubectl set image deployments/localization-api localization-api=maruf571/localization-api:${ pom.version }'
             }
         }
     }

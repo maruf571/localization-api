@@ -5,7 +5,7 @@
 
 	<groupId>com.maruf</groupId>
 	<artifactId>localization-api</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4</version>
 	<packaging>jar</packaging>
 
 	<name>localization-api</name>
@@ -237,8 +237,7 @@
 				</executions>
 				<configuration>
 					<repository>maruf571/localization-api</repository>
-					<!--<tag>${project.version}</tag>-->
-					<tag>latest</tag>
+					<tag>${project.version}</tag>
 					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 					<buildArgs>
 						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
