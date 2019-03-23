@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy Image') {
             when { branch 'master' }
             steps {
-                sh 'kubectl set image deployments/localization-api localization-api=maruf571/localization-api:1.0.4-SNAPSHOT'
+                sh 'kubectl set image deployments/localization-api localization-api=maruf571/localization-api:Llatest'
             }
         }
     }
