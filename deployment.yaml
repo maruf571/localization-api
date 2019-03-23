@@ -31,7 +31,7 @@ spec:
         app: localization-api
     spec:
       containers:
-        - image: docker.io/maruf571/localization-api:1.0.1-SNAPSHOT
+        - image: docker.io/maruf571/localization-api:1.0.2-SNAPSHOT
           imagePullPolicy: Always
           name: localization-api
           resources: {}

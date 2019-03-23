@@ -22,9 +22,18 @@ pipeline {
             }
         }
 
+
         stage('Deploy') {
             steps {
                 sh 'mvn dockerfile:push'
+            }
+        }
+
+        stage('Deploy') {
+            when { branch 'master' }
+            steps {
+                sh 'mvn dockerfile:push'
+                sh 'kubectl apply -f deployment.yaml'
             }
         }
     }
