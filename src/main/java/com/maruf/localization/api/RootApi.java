@@ -10,6 +10,6 @@ public class RootApi {
 
     @GetMapping
     public String welcomeMessage(){
-        return "Welcome to Localization with 02";
+        return "Welcome to Localization with 03";
     }
 }
