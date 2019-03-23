@@ -1,9 +1,5 @@
 pipeline {
 
-
-    environment {
-        pom = readMavenPom file: 'pom.xml'
-    }
     agent any
 
     stages {
@@ -36,8 +32,13 @@ pipeline {
         stage('Deploy Image') {
             when { branch 'master' }
             steps {
-                sh 'kubectl set image deployments/localization-api localization-api=maruf571/localization-api:${ pom.version }'
+                sh 'kubectl set image deployments/localization-api localization-api=maruf571/localization-api:${ version() }'
             }
+        }
+
+        def version() {
+            def matcher = readFile('pom.xml') =~ '<version>(.+?)</version>'
+            matcher ? matcher[0][1] : null
         }
     }
 }
