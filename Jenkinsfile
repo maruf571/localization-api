@@ -35,10 +35,10 @@ pipeline {
                 sh 'kubectl set image deployments/localization-api localization-api=maruf571/localization-api:${ version() }'
             }
         }
-
-        def version() {
-            def matcher = readFile('pom.xml') =~ '<version>(.+?)</version>'
-            matcher ? matcher[0][1] : null
-        }
     }
+}
+
+ def version() {
+    def matcher = readFile('pom.xml') =~ '<version>(.+?)</version>'
+    matcher ? matcher[0][1] : null
 }
