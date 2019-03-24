@@ -1,6 +1,9 @@
 pipeline {
 
     agent any
+    environment {
+     image = "maruf571/localization-api:1.0.6"
+    }
 
     stages {
 
@@ -32,7 +35,7 @@ pipeline {
         stage('Deploy Image') {
             when { branch 'master' }
             steps {
-                sh 'kubectl set image deployments/localization-api localization-api=docker.io/maruf571/localization-api:1.0.5'
+                sh 'kubectl set image deployments/localization-api localization-api=docker.io/${image}'
             }
         }
     }
