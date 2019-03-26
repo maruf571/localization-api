@@ -26,7 +26,7 @@ spec:
       containers:
       - image: docker.io/maruf571/localization-api:1.0.6
         imagePullPolicy: Always
-        name: localization-ui
+        name: localization-api
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
