@@ -35,7 +35,8 @@ pipeline {
         stage('Deploy Image') {
             when { branch 'master' }
             steps {
-                sh 'kubectl set image deployments/localization-api localization-api=docker.io/${image}'
+                sh 'kubectl apply -f localization-api-deployment.yml'
+               // sh 'kubectl set image deployments/localization-api localization-api=docker.io/${image}'
             }
         }
     }
