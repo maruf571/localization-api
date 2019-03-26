@@ -45,6 +45,7 @@ spec:
   externalTrafficPolicy: Cluster
   ports:
   - port: 80
+    targetPort: 5001
     protocol: TCP
   selector:
     app: localization-api
