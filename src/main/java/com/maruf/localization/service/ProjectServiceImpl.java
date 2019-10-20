@@ -2,6 +2,7 @@ package com.maruf.localization.service;
 
 import com.maruf.localization.entity.Project;
 import com.maruf.localization.repository.ProjectRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,12 +13,10 @@ import javax.persistence.EntityNotFoundException;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
-    public ProjectServiceImpl(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
-    }
 
     @Override
     @Transactional

@@ -2,18 +2,19 @@ package com.maruf.localization.service;
 
 import com.maruf.localization.entity.Language;
 import com.maruf.localization.repository.LanguageRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
+@Slf4j
+@RequiredArgsConstructor
 @Service(value = "languageService")
 public class LanguageServiceImpl implements LanguageService {
 
     private final LanguageRepository languageRepository;
-    public LanguageServiceImpl(LanguageRepository languageRepository) {
-        this.languageRepository = languageRepository;
-    }
 
     @Override
     public Language create(Language language) {
@@ -37,7 +38,7 @@ public class LanguageServiceImpl implements LanguageService {
     public Language findById(String languageId) {
         return languageRepository
                 .findByLanguageId(languageId)
-                .orElseThrow(() -> new EntityNotFoundException("language not found for the id " + languageId));
+                .orElseThrow(() -> new EntityNotFoundException("language not found for the id: " + languageId));
     }
 
     @Override

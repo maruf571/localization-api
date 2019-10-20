@@ -9,6 +9,7 @@ import com.maruf.localization.entity.LocalizationValue;
 import com.maruf.localization.repository.LocalizationKeyRepository;
 import com.maruf.localization.repository.LocalizationValueRepository;
 import com.maruf.localization.entity.Project;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service(value = "localizationService")
 public class LocalizationServiceImpl implements LocalizationService {
 
@@ -26,16 +28,6 @@ public class LocalizationServiceImpl implements LocalizationService {
     private final LocalizationValueRepository localizationValueRepository;
     private final LanguageRepository languageRepository;
     private final LocalizationDao localizationDao;
-    public LocalizationServiceImpl(LocalizationKeyRepository localizationKeyRepository,
-                                   LocalizationValueRepository localizationValueRepository,
-                                   LanguageRepository languageRepository,
-                                   LocalizationDao localizationDao) {
-        this.localizationValueRepository = localizationValueRepository;
-        this.localizationKeyRepository = localizationKeyRepository;
-        this.languageRepository = languageRepository;
-        this.localizationDao = localizationDao;
-    }
-
 
     /**
      * This method will return all the key/value pair in public api, so no tenant here
@@ -48,10 +40,9 @@ public class LocalizationServiceImpl implements LocalizationService {
     public Map<String, Object> findLocalizationByProjectNameAndLanguageCode(String projectName, String languageCode) {
         log.debug("projectName: {}, languageCode: {}", projectName, languageCode);
 
-        Language language = languageRepository.findByProjectNameAndLanguageCode(
-                projectName,
-                languageCode
-        ).orElseThrow(() -> new EntityNotFoundException("language not found"));
+        Language language = languageRepository
+                .findByProjectNameAndLanguageCode(projectName, languageCode)
+                .orElseThrow(() -> new EntityNotFoundException("language not found"));
 
         return  localizationDao.findLocalization(language.getProject().getId(), language.getId());
     }
@@ -192,8 +183,6 @@ public class LocalizationServiceImpl implements LocalizationService {
                 .languageId(language.getId())
                 .build();
     }
-
-
 
 
     /**

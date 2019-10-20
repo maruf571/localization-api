@@ -2,6 +2,7 @@ package com.maruf.localization.api;
 
 import com.maruf.localization.entity.Language;
 import com.maruf.localization.service.LanguageService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,13 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/protected/languages")
 public class LanguageApi {
 
     private final LanguageService languageService;
-    public LanguageApi(LanguageService languageService) {
-        this.languageService = languageService;
-    }
 
     @PostMapping
     public ResponseEntity<Language> create(@RequestBody Language language){

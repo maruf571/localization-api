@@ -2,6 +2,7 @@ package com.maruf.localization.api;
 
 import com.maruf.localization.entity.Project;
 import com.maruf.localization.service.ProjectService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -16,13 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/protected/projects")
 public class ProjectApi {
 
     private final ProjectService projectService;
-    public ProjectApi(ProjectService projectService) {
-        this.projectService = projectService;
-    }
 
     @PostMapping
     public ResponseEntity<Project> create(@RequestBody Project project){

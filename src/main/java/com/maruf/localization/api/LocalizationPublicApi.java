@@ -1,6 +1,7 @@
 package com.maruf.localization.api;
 
 import com.maruf.localization.service.LocalizationService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,12 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 public class LocalizationPublicApi {
 
     private final LocalizationService localizationService;
-    public LocalizationPublicApi(LocalizationService localizationService) {
-        this.localizationService = localizationService;
-    }
+
 
     @GetMapping("/api/project-name/{projectName}/language-code/{languageCode}")
     public ResponseEntity getAllLocalizationByProjectNameAndCode(@PathVariable String projectName, @PathVariable String languageCode){

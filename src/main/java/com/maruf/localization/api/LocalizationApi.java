@@ -2,7 +2,9 @@ package com.maruf.localization.api;
 
 import com.maruf.localization.api.dto.LocalizationDto;
 import com.maruf.localization.excelbuilder.LocalizationExcelBuilder;
+import com.maruf.localization.service.ImportExportService;
 import com.maruf.localization.service.LocalizationService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -28,13 +30,12 @@ import java.util.*;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/protected/localizations")
 public class LocalizationApi {
 
     private final LocalizationService localizationService;
-    public LocalizationApi(LocalizationService localizationService) {
-        this.localizationService = localizationService;
-    }
+    private final ImportExportService importExportService;
 
     @PostMapping
     public ResponseEntity<LocalizationDto> create(@RequestBody LocalizationDto localizationDto){
@@ -71,18 +72,22 @@ public class LocalizationApi {
     public ModelAndView exportLocalization(@PathVariable String languageId){
         log.debug("languageId {}", languageId);
 
-        List<Map<String, Object>> localizationList = localizationService.findAll(languageId);
+        return importExportService.exportLocalization(languageId);
+
+        /*List<Map<String, Object>> localizationList = localizationService.findAll(languageId);
         Map<String, Object> data = new HashMap<>();
         data.put("localizationList", localizationList);
-        return new ModelAndView(new LocalizationExcelBuilder(), "data", data);
+        return new ModelAndView(new LocalizationExcelBuilder(), "data", data);*/
     }
 
 
     @PostMapping("/language/{languageId}/import")
-    public ResponseEntity<List<LocalizationDto>> importLocalization(@PathVariable String languageId, @RequestParam("file") MultipartFile file){
+    public ResponseEntity importLocalization(@PathVariable String languageId, @RequestParam("file") MultipartFile file){
 
-        System.out.println(file.getName());
-        try {
+        importExportService.importLocalization(languageId, file);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+
+        /*try {
             InputStream in = file.getInputStream();
             Workbook workbook = new XSSFWorkbook(in);
             Sheet dataSheet = workbook.getSheetAt(0);
@@ -113,8 +118,6 @@ public class LocalizationApi {
 
         }catch (Exception e){
             e.printStackTrace();
-        }
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        }*/
     }
 }
